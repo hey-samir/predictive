@@ -19,6 +19,18 @@ author = "agent"
 task = "workflow.run"
 args = "Streamlit Oscar Predictor"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Mkdir Command"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "List Database Directory"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Fix Database Directory"
+
 [[workflows.workflow]]
 name = "Streamlit Oscar Predictor"
 author = "agent"
@@ -33,6 +45,48 @@ task = "packager.installForAll"
 task = "shell.exec"
 args = "streamlit run main.py"
 waitForPort = 5000
+
+[[workflows.workflow]]
+name = "Mkdir Command"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "mkdir -p database"
+
+[[workflows.workflow]]
+name = "List Database Directory"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "ls -la database"
+
+[[workflows.workflow]]
+name = "Fix Database Directory"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "rm database && mkdir -p database"
 
 [[ports]]
 localPort = 5000
