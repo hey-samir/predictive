@@ -4,426 +4,476 @@ import numpy as np
 import matplotlib.pyplot as plt
 import plotly.express as px
 from datetime import datetime
+import os
+import random
+import time
 
-from data_collection.mock_data import generate_mock_historical_data, generate_mock_nominees_data, generate_mock_awards_data
-from data_collection.betting_scraper import get_betting_odds, get_predictive_markets
-from data_processing.data_processor import process_historical_data, get_current_nominees
+# Import project modules
+from utils.constants import (
+    AWARD_VENUES, OSCAR_CATEGORIES, NOMINATION_TYPES, 
+    CURRENT_OSCAR_YEAR, THEME_COLORS, APP_SECTIONS
+)
 from models.predictor import OscarPredictor
-from visualization.charts import plot_prediction_comparison, plot_venue_strength
-from utils.constants import OSCAR_CATEGORIES, AWARD_VENUES
+from visualization.charts import plot_prediction_comparison, plot_venue_strength, plot_historical_accuracy
+from data_collection.scraper import get_historical_data
+from data_collection.betting_scraper import get_betting_odds, get_predictive_markets
+from data_processing.data_processor import (
+    process_historical_data, get_current_nominees, merge_award_data
+)
+from database.operations import (
+    get_nominations_dataframe, get_model_weights_dataframe
+)
 
-# Set page configuration
+# Set page config
 st.set_page_config(
-    page_title="Predictive",
+    page_title="Oscar Predictor",
     page_icon="🎬",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for styling
-st.markdown("""
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+# Apply custom CSS
+def apply_custom_css():
+    """Apply custom CSS to the app."""
+    st.markdown("""
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     
     html, body, [class*="css"] {
         font-family: 'Inter', sans-serif;
     }
     
-    /* Theme colors */
-    :root {
-        --purple-primary: #6b46c1;
-        --purple-secondary: #9f7aea;
-        --purple-light: #d6bcfa;
-    }
-    
-    /* Header styling */
-    .main-header {
-        background: linear-gradient(90deg, #6b46c1 0%, #9f7aea 100%);
-        padding: 1rem;
-        border-radius: 10px;
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
-    }
-    
-    .logo-container {
-        margin-right: 15px;
-    }
-    
-    .logo {
-        background: linear-gradient(135deg, #6b46c1 0%, #9f7aea 100%);
-        width: 50px;
-        height: 50px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .title-container {
-        color: white;
-    }
-    
-    /* Navigation bar */
-    .nav-container {
-        display: flex;
-        justify-content: space-between;
-        padding: 0.5rem 0;
-        border-bottom: 1px solid #e2e8f0;
-        margin-bottom: 1rem;
-    }
-    
-    .nav-item {
-        padding: 0.5rem 1rem;
-        margin: 0 0.25rem;
-        border-radius: 5px;
-        cursor: pointer;
-        text-decoration: none;
-        color: #4a5568;
-        font-weight: 500;
-    }
-    
-    .nav-item:hover {
-        background-color: #f7fafc;
-    }
-    
-    .nav-item.active {
-        background-color: var(--purple-light);
-        color: var(--purple-primary);
-    }
-    
-    /* Award card styling */
-    .award-card {
-        background-color: white;
-        border-radius: 10px;
-        padding: 1rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        margin-bottom: 1rem;
-        border-left: 4px solid var(--purple-primary);
-    }
-    
-    .award-category {
-        color: #4a5568;
-        font-size: 0.9rem;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-    }
-    
-    .winner-name {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: #1a202c;
-        margin-bottom: 0.5rem;
-    }
-    
-    .likelihood {
-        color: var(--purple-primary);
-        font-weight: 600;
-        font-size: 1.1rem;
-    }
-    
-    /* Tab styling for Award/Venue sections */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 1rem;
+        gap: 10px;
     }
     
     .stTabs [data-baseweb="tab"] {
-        height: 3rem;
+        height: 50px;
         white-space: pre-wrap;
-        background-color: white;
-        border-radius: 4px 4px 0 0;
-        gap: 1rem;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        border-left: 1px solid #e2e8f0;
-        border-right: 1px solid #e2e8f0;
-        border-top: 1px solid #e2e8f0;
-        border-bottom: 1px solid transparent;
+        border-radius: 4px 4px 0px 0px;
+        gap: 1px;
+        padding: 10px 20px;
+        font-weight: 600;
     }
     
     .stTabs [aria-selected="true"] {
+        background-color: rgba(156, 39, 176, 0.1);
+        color: rgb(156, 39, 176);
+    }
+    
+    .category-card {
+        border: 1px solid #E0E0E0;
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 16px;
         background-color: white;
-        border-bottom: 2px solid var(--purple-primary);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
     
-    /* Button styling */
-    .stButton>button {
-        background-color: var(--purple-primary);
-        color: white;
+    .nominee-card {
+        border-left: 4px solid #9C27B0;
+        background-color: rgba(156, 39, 176, 0.05);
+        padding: 10px;
+        margin-top: 8px;
         border-radius: 4px;
-        padding: 0.5rem 1rem;
+    }
+    
+    .winner-card {
+        border-left: 4px solid #4CAF50;
+        background-color: rgba(76, 175, 80, 0.05);
+    }
+    
+    .stProgress > div > div > div {
+        background-color: #9C27B0;
+    }
+    
+    section[data-testid="stSidebar"] {
+        background-color: #F5F5F5;
+    }
+    
+    .prediction-header {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #212121;
+    }
+    
+    .prediction-subheader {
+        font-size: 16px;
         font-weight: 500;
+        margin-bottom: 16px;
+        color: #616161;
     }
     
-    .stButton>button:hover {
-        background-color: var(--purple-secondary);
+    .top-margin {
+        margin-top: 20px;
     }
     
-    /* Footer styling */
-    .footer {
-        margin-top: 2rem;
-        padding-top: 1rem;
-        border-top: 1px solid #e2e8f0;
-        text-align: center;
-        color: #718096;
-        font-size: 0.9rem;
+    .nomination-type-header {
+        background-color: #F5F5F5;
+        padding: 10px 16px;
+        border-radius: 4px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        color: #212121;
     }
     
-    /* Progress bar colors */
-    .stProgress > div > div {
-        background-color: var(--purple-primary);
-    }
-</style>
-""", unsafe_allow_html=True)
+    </style>
+    """, unsafe_allow_html=True)
 
-# Custom header with logo
-st.markdown("""
-<div class="main-header">
-    <div class="logo-container">
-        <div class="logo">
-            <span style="font-size: 24px; color: white;">🎬</span>
-        </div>
-    </div>
-    <div class="title-container">
-        <h1 style="margin: 0; font-size: 24px;">Predictive</h1>
-    </div>
-</div>
-""", unsafe_allow_html=True)
+apply_custom_css()
 
-# App description
-st.markdown("""
-Predictive uses sophisticated algorithms to predict the top Academy Award winners.
-""")
+# Define nomination type descriptions for the UI
+NOMINATION_TYPE_DESCRIPTIONS = {
+    "Performer": "🎭 Performance categories for acting roles",
+    "Creator": "🎬 Creative direction and writing categories",
+    "Maker": "🏆 Film production and overall achievement categories",
+    "Crafter": "🎨 Technical and artistic craft categories"
+}
 
-# Settings in the sidebar (always visible)
-with st.sidebar:
-    st.header("Settings")
+@st.cache_data(ttl=3600)
+def load_historical_data(recent_years=None):
+    """Load historical data with caching."""
+    # Try to get from database first
+    df = get_nominations_dataframe()
     
-    # Year selection
-    current_year = datetime.now().year
-    prediction_year = st.selectbox(
-        "Select prediction year:",
-        range(current_year, current_year + 2),
-        index=0
+    # If database is empty, get from scraper
+    if df.empty:
+        df = get_historical_data(recent_years)
+    
+    return df
+
+@st.cache_data(ttl=3600)
+def load_current_nominees():
+    """Load current Oscar nominees with caching."""
+    return get_current_nominees(CURRENT_OSCAR_YEAR)
+
+@st.cache_data(ttl=3600)
+def load_awards_data():
+    """Load awards data from other venues with caching."""
+    # In a real application, this would scrape from various sources
+    from data_collection.mock_data import generate_mock_awards_data
+    return generate_mock_awards_data(CURRENT_OSCAR_YEAR)
+
+@st.cache_data(ttl=3600)
+def load_betting_data():
+    """Load betting odds data with caching."""
+    return get_betting_odds(CURRENT_OSCAR_YEAR)
+
+@st.cache_data(ttl=3600)
+def load_predictive_markets_data():
+    """Load predictive markets data with caching."""
+    return get_predictive_markets(CURRENT_OSCAR_YEAR)
+
+def format_likelihood(value):
+    """Format likelihood value with color coding."""
+    color = "#4CAF50" if value >= 70 else "#FF9800" if value >= 40 else "#F44336"
+    return f'<span style="color:{color};font-weight:600;">{value:.1f}%</span>'
+
+def show_nominee_card(nominee, predictions_df=None, is_winner=False):
+    """Display a nominee card with prediction data if available."""
+    card_class = "nominee-card winner-card" if is_winner else "nominee-card"
+    
+    with st.container():
+        st.markdown(f'<div class="{card_class}">', unsafe_allow_html=True)
+        cols = st.columns([4, 2, 2, 2])
+        
+        with cols[0]:
+            st.markdown(f"**{nominee['nominee_name']}**")
+            if 'film_title' in nominee and nominee['film_title'] != nominee['nominee_name']:
+                st.caption(f"*{nominee['film_title']}*")
+        
+        if predictions_df is not None:
+            # Find prediction for this nominee
+            category = nominee['category']
+            name = nominee['nominee_name']
+            prediction = predictions_df[
+                (predictions_df['Award Category'] == category) & 
+                (predictions_df['Nominee Name'] == name)
+            ]
+            
+            if not prediction.empty:
+                with cols[1]:
+                    likelihood = prediction['Model Likelihood'].values[0]
+                    st.markdown(f"Likelihood: {format_likelihood(likelihood)}", unsafe_allow_html=True)
+                
+                with cols[2]:
+                    if 'Betting Odds' in prediction.columns:
+                        betting = prediction['Betting Odds'].values[0]
+                        st.markdown(f"Betting: {format_likelihood(betting)}", unsafe_allow_html=True)
+                
+                with cols[3]:
+                    if 'Awards Venue Support' in prediction.columns:
+                        support = prediction['Awards Venue Support'].values[0]
+                        if support != "None":
+                            venues = support.split(", ")
+                            venue_str = ", ".join(venues[:2])
+                            if len(venues) > 2:
+                                venue_str += f" +{len(venues)-2}"
+                            st.markdown(f"Support: **{venue_str}**")
+        
+        st.markdown('</div>', unsafe_allow_html=True)
+
+def show_category_card(category, nominees, predictions_df=None):
+    """Display a category card with all its nominees."""
+    with st.container():
+        st.markdown(f'<div class="category-card">', unsafe_allow_html=True)
+        st.markdown(f"### {category}")
+        
+        # Sort nominees by prediction likelihood if available
+        if predictions_df is not None:
+            category_predictions = predictions_df[predictions_df['Award Category'] == category]
+            if not category_predictions.empty:
+                # Create a mapping of nominee names to likelihoods
+                likelihood_map = {}
+                for _, row in category_predictions.iterrows():
+                    likelihood_map[row['Nominee Name']] = row['Model Likelihood']
+                
+                # Sort nominees by likelihood
+                sorted_nominees = sorted(
+                    nominees, 
+                    key=lambda x: likelihood_map.get(x['nominee_name'], 0), 
+                    reverse=True
+                )
+            else:
+                sorted_nominees = nominees
+        else:
+            sorted_nominees = nominees
+        
+        # Display nominees
+        for i, nominee in enumerate(sorted_nominees):
+            show_nominee_card(
+                nominee, 
+                predictions_df=predictions_df,
+                is_winner=(i == 0 and predictions_df is not None)
+            )
+        
+        st.markdown('</div>', unsafe_allow_html=True)
+
+def run_predictions():
+    """Run predictions using the model."""
+    # Create progress bar
+    progress_bar = st.progress(0)
+    status_text = st.empty()
+    
+    # Load data
+    status_text.text("Loading historical data...")
+    historical_data = load_historical_data()
+    progress_bar.progress(20)
+    
+    status_text.text("Processing historical data...")
+    processed_data = process_historical_data(historical_data)
+    progress_bar.progress(30)
+    
+    status_text.text("Loading current nominees...")
+    nominees_data = load_current_nominees()
+    progress_bar.progress(40)
+    
+    status_text.text("Loading awards data from other venues...")
+    awards_data = load_awards_data()
+    progress_bar.progress(50)
+    
+    status_text.text("Merging awards data with nominees...")
+    merged_data = merge_award_data(nominees_data, awards_data)
+    progress_bar.progress(60)
+    
+    status_text.text("Training prediction model...")
+    predictor = OscarPredictor()
+    predictor.train(processed_data)
+    progress_bar.progress(70)
+    
+    status_text.text("Making predictions...")
+    predictions = predictor.predict(merged_data, awards_data)
+    progress_bar.progress(80)
+    
+    status_text.text("Loading betting data...")
+    betting_odds = load_betting_data()
+    predictive_markets = load_predictive_markets_data()
+    progress_bar.progress(90)
+    
+    status_text.text("Merging betting data with predictions...")
+    merged_predictions = predictor.merge_with_betting_data(
+        predictions, betting_odds, predictive_markets
+    )
+    progress_bar.progress(100)
+    status_text.empty()
+    
+    return merged_predictions, predictor.analyze_venue_strength(processed_data)
+
+def predictions_section():
+    """Display the predictions section."""
+    st.title("Oscar Predictions 2025")
+    st.markdown("""
+    Our model analyzes past award shows to predict Oscar winners. 
+    We compare our predictions with betting odds and predictive markets to give you the most accurate forecast.
+    """)
+    
+    # Add prediction refresh button
+    col1, col2 = st.columns([5, 1])
+    with col1:
+        st.subheader("Nominee Predictions")
+    with col2:
+        refresh = st.button("Refresh Data")
+    
+    if refresh:
+        # Clear cached data
+        load_historical_data.clear()
+        load_current_nominees.clear()
+        load_awards_data.clear()
+        load_betting_data.clear()
+        load_predictive_markets_data.clear()
+    
+    # Run predictions
+    with st.spinner("Running predictions..."):
+        predictions, venue_strength = run_predictions()
+    
+    # Create tabs for each nomination type
+    tabs = st.tabs([NOMINATION_TYPE_DESCRIPTIONS[n_type] for n_type in NOMINATION_TYPES.keys()])
+    
+    # Load nominees data
+    nominees_data = load_current_nominees()
+    
+    # Populate tabs with nominees
+    for i, (n_type, categories) in enumerate(NOMINATION_TYPES.items()):
+        with tabs[i]:
+            # Group nominees by category
+            for category in categories:
+                category_nominees = nominees_data[nominees_data['category'] == category]
+                
+                if not category_nominees.empty:
+                    show_category_card(category, category_nominees.to_dict('records'), predictions)
+    
+    # Show prediction comparison chart
+    st.subheader("Prediction Comparison")
+    st.markdown("Compare our model's predictions with betting odds and predictive markets.")
+    comparison_chart = plot_prediction_comparison(predictions)
+    st.plotly_chart(comparison_chart, use_container_width=True)
+    
+    # Show venue strength analysis
+    st.subheader("Award Venue Predictive Strength")
+    st.markdown("Analyze which award shows are the best predictors for each Oscar category.")
+    venue_chart = plot_venue_strength(venue_strength)
+    st.plotly_chart(venue_chart, use_container_width=True)
+
+def history_section():
+    """Display the history section."""
+    st.title("Historical Analysis")
+    st.markdown("""
+    Explore the historical accuracy of various award shows in predicting Oscar winners.
+    See trends and patterns over time to understand which venues are the most reliable predictors.
+    """)
+    
+    # Load historical data
+    historical_data = load_historical_data()
+    
+    # Select venue for analysis
+    venue = st.selectbox("Select Award Venue to Analyze", AWARD_VENUES)
+    
+    # Show historical accuracy chart
+    st.subheader(f"Historical Accuracy: {venue}")
+    st.markdown(f"Analyze how well {venue} has predicted Oscar winners over time.")
+    history_chart = plot_historical_accuracy(historical_data, venue)
+    st.plotly_chart(history_chart, use_container_width=True)
+    
+    # Show raw historical data
+    st.subheader("Historical Data")
+    st.markdown("Browse raw historical data for Oscar nominees and winners.")
+    
+    # Select year to filter
+    years = sorted(historical_data['year'].unique(), reverse=True)
+    if years:
+        selected_year = st.selectbox("Select Year", years)
+        year_data = historical_data[historical_data['year'] == selected_year]
+        
+        # Display data for selected year
+        st.dataframe(year_data, use_container_width=True)
+    else:
+        st.info("No historical data available.")
+
+def about_section():
+    """Display the about section."""
+    st.title("About Oscar Predictor")
+    
+    st.markdown("""
+    ## How It Works
+    
+    Our Oscar prediction model analyzes past award ceremonies to find patterns and correlations 
+    between various industry awards and the Academy Awards. By examining historical data, we 
+    can identify which award venues are the best predictors for different Oscar categories.
+    
+    ### The Model
+    
+    1. **Historical Analysis**: We analyze years of historical data from the Oscars and other 
+       award shows to identify patterns.
+    
+    2. **Venue Weighting**: Each award venue (BAFTA, Golden Globes, etc.) is assigned a weight 
+       based on its historical accuracy in predicting Oscar winners.
+    
+    3. **Category-Specific Modeling**: We create separate models for each Oscar category, 
+       recognizing that different award shows may be better predictors for different categories.
+    
+    4. **Integration with Betting Markets**: We compare our predictions with betting odds and 
+       predictive markets to provide a comprehensive view.
+    
+    ### Nomination Types
+    
+    We group Oscar categories into four main types:
+    
+    - **Performers**: Acting categories (Lead/Supporting Actor/Actress)
+    - **Creators**: Direction and writing categories
+    - **Makers**: Overall film achievement categories
+    - **Crafters**: Technical categories (Cinematography, Editing, etc.)
+    
+    ### Data Sources
+    
+    - Historical Oscar winners and nominees
+    - Major award shows: BAFTA, Golden Globes, SAG, Critics Choice, etc.
+    - Betting odds from major bookmakers
+    - Predictive markets data
+    
+    ## Technical Implementation
+    
+    This application is built with:
+    
+    - **Python**: Core programming language
+    - **Streamlit**: Web application framework
+    - **Pandas & NumPy**: Data processing
+    - **Plotly**: Interactive visualizations
+    - **SQLAlchemy**: Database ORM
+    - **PostgreSQL**: Database
+    """)
+    
+    # Show team info
+    st.subheader("The Team")
+    st.markdown("""
+    This project was developed by analytics experts passionate about film and data science. 
+    Our goal is to bring transparency to the Oscar prediction process by combining historical 
+    data analysis with modern machine learning techniques.
+    """)
+
+def main():
+    """Main function to run the Streamlit app."""
+    # Sidebar navigation
+    st.sidebar.image("generated-icon.png", width=100)
+    st.sidebar.title("Oscar Predictor")
+    
+    navigation = st.sidebar.radio(
+        "Navigation",
+        list(APP_SECTIONS.values())
     )
     
-    # Time span for historical data analysis
-    st.subheader("Historical Data Range")
-    use_recent = st.checkbox("Use recent years only", value=True)
+    # Show selected section
+    if navigation == APP_SECTIONS["predictions"]:
+        predictions_section()
+    elif navigation == APP_SECTIONS["history"]:
+        history_section()
+    elif navigation == APP_SECTIONS["about"]:
+        about_section()
     
-    if use_recent:
-        recent_years = st.slider(
-            "Number of recent years to consider:",
-            min_value=5,
-            max_value=20,
-            value=10,
-            step=1
-        )
-    
-    # Model settings
-    st.subheader("Model Settings")
-    include_critics = st.checkbox("Include critics scores", value=True)
-    include_audience = st.checkbox("Include audience scores", value=True)
-    
-    # Refresh data
-    if st.button("Refresh Data"):
-        st.cache_data.clear()
+    # Footer
+    st.sidebar.markdown("---")
+    st.sidebar.caption("© 2025 Oscar Predictor")
+    st.sidebar.caption("Data updated: February 2025")
 
-# Navigation tabs
-nav_options = ["Predictive 25", "History", "About"]
-nav = st.radio("Navigation", nav_options, horizontal=True, label_visibility="collapsed")
-
-# Main content based on navigation
-if nav == "Predictive 25":
-    # Predictive 25 page with sliding tabs
-    predict_tabs = st.tabs(["Award Predictive", "Venue Predictive"])
-    
-    # Award Predictive tab
-    with predict_tabs[0]:
-        st.header("Award Predictions for 2025")
-        
-        with st.spinner("Loading data and generating predictions..."):
-            try:
-                # Get historical data
-                historical_data = generate_mock_historical_data(recent_years if use_recent else None)
-                
-                # Get current nominees
-                current_nominees = generate_mock_nominees_data(prediction_year)
-                
-                # Get betting odds and predictive markets
-                betting_odds = get_betting_odds(prediction_year)
-                predictive_markets = get_predictive_markets(prediction_year)
-                
-                # Get awards data for current year
-                awards_data = generate_mock_awards_data(prediction_year)
-                
-                # Process data
-                processed_data = process_historical_data(
-                    historical_data, 
-                    include_critics=include_critics,
-                    include_audience=include_audience
-                )
-                
-                # Initialize and train the model
-                predictor = OscarPredictor()
-                predictor.train(processed_data)
-                
-                # Generate predictions
-                predictions = predictor.predict(
-                    current_nominees, 
-                    awards_data,
-                    recent_only=use_recent,
-                    recent_years=recent_years if use_recent else None
-                )
-                
-                # Merge predictions with betting data
-                merged_predictions = predictor.merge_with_betting_data(
-                    predictions, 
-                    betting_odds, 
-                    predictive_markets
-                )
-                
-                # Display award cards for top categories
-                cols = st.columns(3)
-                top_categories = ["Best Picture", "Actor in a Leading Role", "Actress in a Leading Role", 
-                                 "Directing", "Actor in a Supporting Role", "Actress in a Supporting Role"]
-                
-                col_idx = 0
-                for category in top_categories:
-                    category_preds = merged_predictions[merged_predictions["Award Category"] == category]
-                    
-                    if not category_preds.empty:
-                        # Get the top prediction
-                        top_pred = category_preds.sort_values("Model Likelihood", ascending=False).iloc[0]
-                        
-                        with cols[col_idx % 3]:
-                            st.markdown(f"""
-                            <div class="award-card">
-                                <div class="award-category">{category}</div>
-                                <div class="winner-name">{top_pred["Recent Years Winner"]}</div>
-                                <div class="likelihood">{top_pred["Model Likelihood"]:.1f}% likelihood</div>
-                            </div>
-                            """, unsafe_allow_html=True)
-                        
-                        col_idx += 1
-                
-                # Display full predictions table
-                st.subheader("Complete Predictions")
-                st.dataframe(
-                    merged_predictions,
-                    column_config={
-                        "Award Category": st.column_config.TextColumn("Award Category"),
-                        "Nominees": st.column_config.TextColumn("Nominees"),
-                        "Recent Years Winner": st.column_config.TextColumn("Recent Years Winner"),
-                        "All-time Winner": st.column_config.TextColumn("All-time Winner"),
-                        "Awards Venue Support": st.column_config.TextColumn("Awards Venue Support"),
-                        "Critics Score": st.column_config.NumberColumn("Critics Score", format="%.1f"),
-                        "Audience Score": st.column_config.NumberColumn("Audience Score", format="%.1f"),
-                        "Model Likelihood": st.column_config.ProgressColumn("Model Likelihood", format="%.1f%%", min_value=0, max_value=100),
-                        "Betting Odds": st.column_config.ProgressColumn("Betting Odds", format="%.1f%%", min_value=0, max_value=100),
-                        "Predictive Markets": st.column_config.ProgressColumn("Predictive Markets", format="%.1f%%", min_value=0, max_value=100)
-                    },
-                    use_container_width=True,
-                    hide_index=True
-                )
-                
-                # Visual comparison
-                st.subheader("Visual Comparison: Model vs. Markets")
-                comparison_fig = plot_prediction_comparison(merged_predictions)
-                st.plotly_chart(comparison_fig, use_container_width=True)
-                
-            except Exception as e:
-                st.error(f"Error generating predictions: {str(e)}")
-                st.exception(e)
-    
-    # Venue Predictive tab
-    with predict_tabs[1]:
-        st.header("Award Venue Predictive Strength")
-        
-        with st.spinner("Analyzing award venue predictive strength..."):
-            try:
-                if 'predictor' in locals() and 'processed_data' in locals():
-                    # Get venue strength analysis
-                    venue_strength = predictor.analyze_venue_strength(processed_data)
-                    
-                    # Display venue strength table
-                    st.dataframe(
-                        venue_strength,
-                        column_config={
-                            "Award Category": st.column_config.TextColumn("Award Category"),
-                            **{venue: st.column_config.ProgressColumn(venue, format="%.1f%%", min_value=0, max_value=100) 
-                               for venue in AWARD_VENUES}
-                        },
-                        use_container_width=True,
-                        hide_index=True
-                    )
-                    
-                    # Visual representation of venue strength
-                    st.subheader("Visual Representation of Venue Strength")
-                    venue_fig = plot_venue_strength(venue_strength)
-                    st.plotly_chart(venue_fig, use_container_width=True)
-                else:
-                    st.warning("Please generate predictions first to see venue analysis.")
-                    
-            except Exception as e:
-                st.error(f"Error analyzing venue strength: {str(e)}")
-                st.exception(e)
-
-elif nav == "History":
-    st.header("Historical Oscar Predictions")
-    st.info("Historical data analysis will be shown here.")
-    # Add historical prediction analysis here
-    
-elif nav == "About":
-    st.header("About Predictive")
-    
-    st.markdown("""
-    Predictive is an advanced analytics tool that forecasts Academy Award winners 
-    using data from historical Oscar ceremonies, other award shows, and market predictions.
-    """)
-    
-    st.subheader("Data Collection")
-    st.markdown("""
-    This application collects data from multiple sources:
-    
-    1. **Historical Oscar Data**: Winners and nominees from previous years
-    2. **Other Award Shows**: Results from BAFTA, Golden Globes, Critics Choice, SAG, PGA, DGA, and film festivals
-    3. **Critics and Audience Scores**: Aggregated ratings from review sites
-    4. **Betting Odds**: Current betting odds from major bookmakers
-    5. **Predictive Markets**: Odds from prediction markets
-    
-    Data is collected through targeted web scraping of publicly available information.
-    """)
-    
-    st.subheader("Prediction Model")
-    st.markdown("""
-    The prediction model uses a weighted ensemble approach:
-    
-    1. **Historical Correlation**: Each award venue is weighted based on its historical correlation with Oscar winners
-    2. **Recency Bias**: Recent years can be given higher importance to account for changing Academy voting patterns
-    3. **Critical Reception**: Critics and audience scores are incorporated as additional factors
-    4. **Feature Importance**: The model calculates the predictive strength of each award venue for each Oscar category
-    
-    The final prediction is a probability score indicating the likelihood of each nominee winning.
-    """)
-    
-    st.subheader("Limitations")
-    st.markdown("""
-    The model has some inherent limitations:
-    
-    1. **Industry Changes**: The film industry and Academy demographics change over time
-    2. **Limited Sample Size**: There's only one Oscar ceremony per year, limiting the training data
-    3. **Outliers**: Occasional surprise winners that defy predictions
-    4. **Data Availability**: Betting and predictive market data may be incomplete for some categories
-    
-    This tool is intended for informational purposes and entertainment only.
-    """)
-
-# Footer
-st.markdown("""
-<div class="footer">
-    Built by <a href="https://samir.xyz" target="_blank">Interspace Ventures</a> for personal use using 
-    <a href="https://replit.com" target="_blank">Replit AI</a> and 
-    <a href="https://streamlit.io" target="_blank">Streamlit</a>
-</div>
-""", unsafe_allow_html=True)
+if __name__ == "__main__":
+    main()

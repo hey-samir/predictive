@@ -1,4 +1,4 @@
-modules = ["python-3.11"]
+modules = ["python-3.11", "python3"]
 
 [nix]
 channel = "stable-24_05"
@@ -30,6 +30,14 @@ args = "List Database Directory"
 [[workflows.workflow.tasks]]
 task = "workflow.run"
 args = "Fix Database Directory"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Initialize Database"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Check Database Init Status"
 
 [[workflows.workflow]]
 name = "Streamlit Oscar Predictor"
@@ -86,7 +94,35 @@ task = "packager.installForAll"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "rm database && mkdir -p database"
+args = "rm -f database && mkdir -p database"
+
+[[workflows.workflow]]
+name = "Initialize Database"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python -m database.db_init_script"
+
+[[workflows.workflow]]
+name = "Check Database Init Status"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python -c \"from database.db_setup import get_session; print('Database connection test:', get_session())\""
 
 [[ports]]
 localPort = 5000
