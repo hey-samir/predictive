@@ -31,8 +31,12 @@ def get_website_text_content(url: str) -> str:
     # Send a request to the website
     headers = {'User-Agent': get_user_agent()}
     try:
-        downloaded = trafilatura.fetch_url(url, headers=headers)
-        text = trafilatura.extract(downloaded)
+        # Use requests to fetch the url with headers
+        response = requests.get(url, headers=headers, timeout=10)
+        response.raise_for_status()
+        
+        # Extract text from HTML content
+        text = trafilatura.extract(response.text)
         return text if text else ""
     except Exception as e:
         print(f"Error fetching {url}: {str(e)}")

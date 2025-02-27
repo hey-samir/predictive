@@ -118,15 +118,10 @@ def get_current_nominees(year: int) -> pd.DataFrame:
     Returns:
         DataFrame with current nominees
     """
-    from data_collection.scraper import get_nominees_data
+    from data_collection.mock_data import generate_mock_nominees_data
     
     # Get nominees data
-    nominees_data = get_nominees_data(year)
-    
-    # Add critics and audience scores
-    if not nominees_data.empty:
-        nominees_data['critics_score'] = np.random.uniform(60, 95, size=len(nominees_data))
-        nominees_data['audience_score'] = np.random.uniform(50, 90, size=len(nominees_data))
+    nominees_data = generate_mock_nominees_data(year)
     
     return nominees_data
 
