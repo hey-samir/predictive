@@ -9,8 +9,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        app: {
+          background: '#1e2638',
+          card: '#2a3548',
+          purple: '#8A3FFC',
+        },
         primary: {
-          DEFAULT: '#9C27B0', // Purple
+          DEFAULT: '#8A3FFC', // Purple
           50: '#FCE4FF',
           100: '#F3B7FF',
           200: '#E48AFF',

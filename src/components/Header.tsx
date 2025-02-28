@@ -18,13 +18,12 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           {/* Logo and Brand */}
           <div className="flex items-center">
             <div className="w-8 h-8 mr-3 overflow-hidden cursor-pointer" onClick={() => setActiveSection('predictive25')}>
-              <Image 
-                src="/images/logo.png" 
-                alt="Predictive Logo" 
-                width={32} 
-                height={32} 
-                className="rounded-md" 
-              />
+              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-500 rounded-md flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                  <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
+                </svg>
+              </div>
             </div>
             <div 
               className={`text-white font-medium cursor-pointer ${activeSection === 'predictive25' ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}

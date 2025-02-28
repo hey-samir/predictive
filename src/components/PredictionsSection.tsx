@@ -278,10 +278,10 @@ const VenueStrengthCard: React.FC<{
   
   return (
     <div 
-      className="shadow rounded-xl overflow-hidden"
+      className="bg-[#2a3548] shadow rounded-xl overflow-hidden transition-all duration-200 hover:shadow-lg p-5 flex flex-col justify-between h-full"
       style={{ backgroundColor: cardBackground }}
     >
-      <div className="p-5">
+      <div>
         <div className="flex items-start">
           <div className="text-purple-400 mr-3">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -297,17 +297,20 @@ const VenueStrengthCard: React.FC<{
               ></div>
             </div>
             <p className="text-sm text-gray-400 mb-3">Predictive strength: {(venue.strength * 100).toFixed(1)}%</p>
-            <div className="flex flex-wrap gap-2">
-              {venue.categories.map(category => (
-                <span 
-                  key={category} 
-                  className="px-2 py-1 text-xs rounded-full bg-purple-900 text-purple-300"
-                >
-                  {category}
-                </span>
-              ))}
-            </div>
           </div>
+        </div>
+      </div>
+      
+      <div className="mt-2">
+        <div className="flex flex-wrap gap-2">
+          {venue.categories.map(category => (
+            <span 
+              key={category} 
+              className="px-2 py-1 text-xs rounded-full bg-purple-900 text-purple-300"
+            >
+              {category}
+            </span>
+          ))}
         </div>
       </div>
     </div>
@@ -465,9 +468,9 @@ const PredictionsSection: React.FC = () => {
             ))}
           </div>
           
-          {/* Award Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredCategories.map(category => (
+          {/* Award Cards Grid - Fixed to 3x3 layout */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {filteredCategories.slice(0, 9).map(category => (
               topNomineesMap[category] && (
                 <AwardCard 
                   key={category}
@@ -477,6 +480,15 @@ const PredictionsSection: React.FC = () => {
               )
             ))}
           </div>
+          
+          {/* Pagination if more than 9 categories */}
+          {filteredCategories.length > 9 && (
+            <div className="flex justify-center mt-8">
+              <button className="px-4 py-2 bg-purple-700 text-white rounded-md hover:bg-purple-600 transition-colors">
+                View More Categories
+              </button>
+            </div>
+          )}
         </div>
       )}
       
@@ -490,7 +502,7 @@ const PredictionsSection: React.FC = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {venueStrengths.sort((a, b) => b.strength - a.strength).map(venue => (
               <VenueStrengthCard key={venue.venue} venue={venue} />
             ))}
@@ -506,11 +518,11 @@ const PredictionsSection: React.FC = () => {
             Our algorithm's strongest predictions across all categories
           </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {Object.entries(topNomineesMap)
               .filter(([_, nominee]) => (nominee.likelihood || 0) > 75)
               .sort(([_, a], [__, b]) => (b.likelihood || 0) - (a.likelihood || 0))
-              .slice(0, 6)
+              .slice(0, 9)
               .map(([category, nominee]) => (
                 <AwardCard 
                   key={category}
