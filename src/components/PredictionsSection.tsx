@@ -36,6 +36,8 @@ const mockNominees: NomineeData[] = [
 ];
 
 const PredictionsSection: React.FC = () => {
+  // Tab navigation state
+  const [activeTab, setActiveTab] = useState<string>('awards');
   const [predictions, setPredictions] = useState<Record<string, NomineeData[]>>({});
   const [loading, setLoading] = useState<boolean>(true);
   const [refreshing, setRefreshing] = useState<boolean>(false);
@@ -92,7 +94,7 @@ const PredictionsSection: React.FC = () => {
   if (loading && !refreshing) {
     return (
       <div className="flex flex-col justify-center items-center py-16">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#9C27B0]"></div>
         <p className="mt-4 text-gray-600">Loading prediction algorithms...</p>
       </div>
     );
@@ -100,11 +102,11 @@ const PredictionsSection: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
         <div>
-          <h1 className="text-3xl font-bold mb-2 text-primary-800">Predictive {CURRENT_OSCAR_YEAR}</h1>
+          <h1 className="text-3xl font-bold mb-2 text-[#9C27B0]">Predictive {CURRENT_OSCAR_YEAR}</h1>
           <p className="text-gray-600">
-            Our sophisticated algorithms predict this year's Academy Award winners
+            Sophisticated algorithms to predict the top Academy Award winners
           </p>
           {lastUpdated && (
             <p className="text-xs text-gray-500 mt-1">Last updated: {lastUpdated}</p>
@@ -115,7 +117,7 @@ const PredictionsSection: React.FC = () => {
           onClick={refreshPredictions}
           disabled={refreshing}
           className={`mt-4 sm:mt-0 px-4 py-2 rounded-full text-sm font-medium 
-            ${refreshing ? 'bg-gray-300 text-gray-600' : 'bg-primary-600 text-white hover:bg-primary-700'} 
+            ${refreshing ? 'bg-gray-300 text-gray-600' : 'bg-[#9C27B0] text-white hover:bg-[#7B1FA2]'} 
             transition-colors flex items-center shadow-sm`}
         >
           {refreshing ? (
@@ -137,29 +139,166 @@ const PredictionsSection: React.FC = () => {
         </button>
       </div>
       
-      {Object.entries(NOMINATION_TYPES).map(([type, categories]) => (
-        <div key={type} className="mb-10">
-          <div className="bg-gray-100 px-4 py-3 rounded-lg font-semibold mb-4 text-gray-800 flex items-center">
-            <span className="text-primary-700">{type}</span>
-            <span className="text-sm ml-3 font-normal text-gray-600">
-              {NOMINATION_TYPE_DESCRIPTIONS[type]}
-            </span>
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {categories.map(category => (
-              <CategoryCard 
-                key={category}
-                category={category}
-                nominees={predictions[category] || []}
-              />
-            ))}
-          </div>
+      {/* Prediction Tabs */}
+      <div className="mb-6">
+        <div className="flex border-b border-gray-200">
+          <button
+            onClick={() => setActiveTab('awards')}
+            className={`px-4 py-2 font-medium text-sm -mb-px
+              ${activeTab === 'awards' 
+                ? 'border-b-2 border-[#9C27B0] text-[#9C27B0]' 
+                : 'text-gray-600 hover:text-[#9C27B0]'
+              }`}
+          >
+            Award Predictive
+          </button>
+          <button
+            onClick={() => setActiveTab('venues')}
+            className={`px-4 py-2 font-medium text-sm -mb-px
+              ${activeTab === 'venues' 
+                ? 'border-b-2 border-[#9C27B0] text-[#9C27B0]' 
+                : 'text-gray-600 hover:text-[#9C27B0]'
+              }`}
+          >
+            Venue Predictive
+          </button>
+          <button
+            onClick={() => setActiveTab('market')}
+            className={`px-4 py-2 font-medium text-sm -mb-px
+              ${activeTab === 'market' 
+                ? 'border-b-2 border-[#9C27B0] text-[#9C27B0]' 
+                : 'text-gray-600 hover:text-[#9C27B0]'
+              }`}
+          >
+            Market Comparison
+          </button>
         </div>
-      ))}
+      </div>
       
-      <div className="bg-primary-50 border border-primary-100 rounded-lg p-4 mt-8 mb-4 text-sm text-gray-700">
-        <p className="font-medium text-primary-800 mb-2">How predictions work</p>
+      {/* Tab Content */}
+      <div className="tab-content">
+        {/* Award Predictive Tab */}
+        {activeTab === 'awards' && (
+          <>
+            {Object.entries(NOMINATION_TYPES).map(([type, categories]) => (
+              <div key={type} className="mb-10">
+                <div className="bg-[#F3E5F5] px-4 py-3 rounded-lg font-semibold mb-4 text-[#6A1B9A] flex items-center">
+                  <span>{type}</span>
+                  <span className="text-sm ml-3 font-normal text-gray-600">
+                    {NOMINATION_TYPE_DESCRIPTIONS[type]}
+                  </span>
+                </div>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {categories.map(category => (
+                    <CategoryCard 
+                      key={category}
+                      category={category}
+                      nominees={predictions[category] || []}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </>
+        )}
+        
+        {/* Venue Predictive Tab */}
+        {activeTab === 'venues' && (
+          <div className="bg-white rounded-xl shadow p-6 border border-[#EEEEEE]">
+            <h2 className="text-xl font-semibold mb-4 text-[#9C27B0]">Award Venue Analysis</h2>
+            <p className="mb-6 text-gray-600">
+              This section analyzes how predictive each award venue is for Oscar success across different categories.
+            </p>
+            
+            <div className="space-y-6">
+              {/* Mock venue strength data */}
+              {AWARD_VENUES.map((venue, index) => (
+                <div key={venue} className="border-b pb-4 border-gray-100 last:border-0">
+                  <div className="flex justify-between items-center mb-2">
+                    <h3 className="font-medium text-gray-800">{venue}</h3>
+                    <span className="font-semibold text-[#9C27B0]">
+                      {(85 - index * 7).toFixed(1)}% Overall
+                    </span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2.5">
+                    <div 
+                      className="bg-[#9C27B0] h-2.5 rounded-full" 
+                      style={{ width: `${85 - index * 7}%` }}
+                    ></div>
+                  </div>
+                  <div className="mt-2 text-xs text-gray-500">
+                    Strongest for: {index % 2 === 0 ? 'Acting Categories' : 'Technical Categories'}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        
+        {/* Market Comparison Tab */}
+        {activeTab === 'market' && (
+          <div className="bg-white rounded-xl shadow p-6 border border-[#EEEEEE]">
+            <h2 className="text-xl font-semibold mb-4 text-[#9C27B0]">Market Comparison</h2>
+            <p className="mb-6 text-gray-600">
+              This section compares our algorithmic predictions with betting odds and predictive markets.
+            </p>
+            
+            <div className="space-y-6">
+              {/* Mock market comparison data */}
+              {Object.keys(predictions).slice(0, 5).map((category) => {
+                const nominees = predictions[category];
+                if (!nominees || nominees.length === 0) return null;
+                
+                const sortedNominees = [...nominees].sort((a, b) => {
+                  if (a.likelihood === undefined && b.likelihood === undefined) return 0;
+                  if (a.likelihood === undefined) return 1;
+                  if (b.likelihood === undefined) return -1;
+                  return b.likelihood - a.likelihood;
+                });
+                
+                return (
+                  <div key={category} className="border-b pb-4 border-gray-100 last:border-0">
+                    <h3 className="font-medium text-gray-800 mb-2">{category}</h3>
+                    
+                    <div className="space-y-3">
+                      {sortedNominees.slice(0, 3).map((nominee) => (
+                        <div key={nominee.id} className="flex justify-between items-center">
+                          <div>
+                            <span className="font-medium">{nominee.nomineeName}</span>
+                            {nominee.filmTitle && (
+                              <span className="text-sm text-gray-500 ml-1">({nominee.filmTitle})</span>
+                            )}
+                          </div>
+                          <div className="flex space-x-4 text-sm">
+                            <div>
+                              <span className="text-gray-500 mr-1">Model:</span>
+                              <span className={nominee.likelihood && nominee.likelihood > 70 ? 'text-[#2E7D32] font-semibold' : ''}>
+                                {nominee.likelihood?.toFixed(1)}%
+                              </span>
+                            </div>
+                            <div>
+                              <span className="text-gray-500 mr-1">Market:</span>
+                              <span>{nominee.marketProbability?.toFixed(1)}%</span>
+                            </div>
+                            <div>
+                              <span className="text-gray-500 mr-1">Odds:</span>
+                              <span>{nominee.bettingOdds}</span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+      
+      <div className="bg-[#F3E5F5] border border-[#E1BEE7] rounded-lg p-4 mt-8 mb-4 text-sm text-gray-700">
+        <p className="font-medium text-[#9C27B0] mb-2">How predictions work</p>
         <p>
           Predictions are calculated using historical data from {CURRENT_OSCAR_YEAR - 2000}+ years of Academy Award ceremonies, 
           combined with current season awards data, betting odds, and predictive markets. Each category uses a specialized 

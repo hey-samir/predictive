@@ -3,11 +3,28 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import React from 'react';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 export const metadata: Metadata = {
-  title: 'Oscar Predictor | The Predictive 25',
-  description: 'A data science application that predicts Oscar winners based on performance at other award shows and compares predictions with betting markets',
+  title: 'Predictive | Academy Awards Forecast',
+  description: 'Sophisticated algorithms to predict the top Academy Award winners',
+  icons: {
+    icon: [
+      {
+        url: '/favicon.ico',
+        sizes: '32x32',
+      },
+      {
+        url: '/icon.png',
+        sizes: '192x192',
+      }
+    ],
+    apple: '/apple-icon.png',
+  },
 };
 
 export default function RootLayout({
@@ -17,7 +34,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
+      <body className={`${inter.className} font-sans`}>
         <main className="min-h-screen bg-gray-50">
           {children}
         </main>

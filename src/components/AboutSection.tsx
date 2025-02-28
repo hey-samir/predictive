@@ -5,14 +5,14 @@ const AboutSection: React.FC = () => {
   return (
     <div>
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-2 text-primary-800">About Predictive</h1>
+        <h1 className="text-3xl font-bold mb-2 text-[#9C27B0]">About Predictive</h1>
         <p className="text-lg text-gray-600 mb-8">
-          Using sophisticated algorithms to predict Academy Award winners
+          Predictive uses sophisticated algorithms to predict the top Academy Award winners
         </p>
         
-        <div className="bg-white shadow rounded-xl p-6 mb-8 border border-gray-100">
-          <h2 className="text-xl font-semibold mb-4 text-primary-700 flex items-center">
-            <span className="bg-primary-100 p-2 rounded-full mr-3 text-primary-600">🧠</span>
+        <div className="bg-white shadow rounded-xl p-6 mb-8 border border-[#EEEEEE]">
+          <h2 className="text-xl font-semibold mb-4 text-[#9C27B0] flex items-center">
+            <span className="bg-[#F3E5F5] p-2 rounded-full mr-3 text-[#9C27B0]">🧠</span>
             How It Works
           </h2>
           <p className="mb-4 text-gray-700">
@@ -31,9 +31,9 @@ const AboutSection: React.FC = () => {
           </p>
         </div>
         
-        <div className="bg-white shadow rounded-xl p-6 mb-8 border border-gray-100">
-          <h2 className="text-xl font-semibold mb-4 text-primary-700 flex items-center">
-            <span className="bg-primary-100 p-2 rounded-full mr-3 text-primary-600">📊</span>
+        <div className="bg-white shadow rounded-xl p-6 mb-8 border border-[#EEEEEE]">
+          <h2 className="text-xl font-semibold mb-4 text-[#9C27B0] flex items-center">
+            <span className="bg-[#F3E5F5] p-2 rounded-full mr-3 text-[#9C27B0]">📊</span>
             Data Sources
           </h2>
           <p className="mb-2 text-gray-700">Our predictions incorporate data from:</p>
@@ -51,9 +51,9 @@ const AboutSection: React.FC = () => {
           </p>
         </div>
         
-        <div className="bg-white shadow rounded-xl p-6 border border-gray-100">
-          <h2 className="text-xl font-semibold mb-4 text-primary-700 flex items-center">
-            <span className="bg-primary-100 p-2 rounded-full mr-3 text-primary-600">⚠️</span>
+        <div className="bg-white shadow rounded-xl p-6 border border-[#EEEEEE]">
+          <h2 className="text-xl font-semibold mb-4 text-[#9C27B0] flex items-center">
+            <span className="bg-[#F3E5F5] p-2 rounded-full mr-3 text-[#9C27B0]">⚠️</span>
             Limitations
           </h2>
           <p className="mb-4 text-gray-700">
