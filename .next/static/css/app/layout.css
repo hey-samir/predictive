@@ -419,9 +419,6 @@
 .bg-\[\#2a3548\] {
   background-color: #2a3548;
 }
-.bg-\[\#8A3FFC\] {
-  background-color: #8A3FFC;
-}
 .bg-gradient-to-r {
   --tw-gradient-position: to right in oklab;
   background-image: linear-gradient(var(--tw-gradient-stops));
