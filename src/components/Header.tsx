@@ -12,36 +12,40 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
   const { primary, primaryLight, text, textSecondary } = THEME_COLORS;
   
   return (
-    <header className="bg-[#e7f6ec] sticky top-0 z-10 rounded-full mx-6 mt-6 mb-10">
+    <header className="bg-primary sticky top-0 z-10 rounded-xl mx-6 mt-6 mb-10">
       <div className="px-6 py-3">
         <div className="flex items-center justify-between">
           {/* Logo and Brand */}
           <div className="flex items-center">
             <div className="w-8 h-8 mr-3 overflow-hidden cursor-pointer" onClick={() => setActiveSection('predictive25')}>
-              <div className="bg-[#8A3FFC] rounded-md w-8 h-8 flex items-center justify-center text-white font-bold">
-                P
-              </div>
+              <Image 
+                src="/predictive-logo.png" 
+                alt="Predictive Logo" 
+                width={32} 
+                height={32} 
+                className="rounded-md" 
+              />
             </div>
             <div 
-              className={`text-[#1e2638] font-medium cursor-pointer ${activeSection === 'predictive25' ? 'opacity-100' : 'opacity-70 hover:opacity-100'}`}
+              className={`text-white font-medium cursor-pointer ${activeSection === 'predictive25' ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
               onClick={() => setActiveSection('predictive25')}
             >
               Predictive
             </div>
             <div 
-              className={`mx-4 text-[#1e2638] font-medium cursor-pointer ${activeSection === 'makers' ? 'opacity-100' : 'opacity-70 hover:opacity-100'}`}
+              className={`mx-4 text-white font-medium cursor-pointer ${activeSection === 'makers' ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
               onClick={() => setActiveSection('makers')}
             >
               Makers
             </div>
             <div 
-              className={`mr-4 text-[#1e2638] font-medium cursor-pointer ${activeSection === 'performers' ? 'opacity-100' : 'opacity-70 hover:opacity-100'}`}
+              className={`mr-4 text-white font-medium cursor-pointer ${activeSection === 'performers' ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
               onClick={() => setActiveSection('performers')}
             >
               Performers
             </div>
             <div 
-              className={`text-[#1e2638] font-medium cursor-pointer ${activeSection === 'history' ? 'opacity-100' : 'opacity-70 hover:opacity-100'}`}
+              className={`text-white font-medium cursor-pointer ${activeSection === 'history' ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
               onClick={() => setActiveSection('history')}
             >
               History
@@ -52,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           <nav className="flex items-center space-x-3">
             <button
               onClick={() => setActiveSection('creators')}
-              className="px-5 py-2 font-medium text-sm transition-all rounded-md border border-gray-200 bg-white flex items-center text-[#1e2638]"
+              className="px-5 py-2 font-medium text-sm transition-all rounded-md border border-primary-300 bg-primary-700 flex items-center text-white"
             >
               Creators
               <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 ml-1" viewBox="0 0 20 20" fill="currentColor">
@@ -61,17 +65,13 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
             </button>
             <button
               onClick={() => setActiveSection('crafters')}
-              className="px-5 py-2 font-medium text-sm transition-all rounded-md"
-              style={{ 
-                backgroundColor: primary,
-                color: 'white'
-              }}
+              className="px-5 py-2 font-medium text-sm transition-all rounded-md bg-primary-600 text-white"
             >
               Crafters
             </button>
             <button
               onClick={() => setActiveSection('about')}
-              className="px-5 py-2 font-medium text-sm transition-all rounded-md bg-[#12b76a] text-white flex items-center"
+              className="px-5 py-2 font-medium text-sm transition-all rounded-md bg-primary-800 text-white flex items-center"
             >
               About
               <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 ml-1" viewBox="0 0 20 20" fill="currentColor">
@@ -79,9 +79,9 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
               </svg>
             </button>
             
-            {/* Theme toggle */}
-            <button className="w-8 h-8 rounded-full bg-white flex items-center justify-center ml-2">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            {/* Theme toggle - a purple button with white icon */}
+            <button className="w-8 h-8 rounded-full bg-primary-800 flex items-center justify-center ml-2 border border-primary-300">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
               </svg>
             </button>

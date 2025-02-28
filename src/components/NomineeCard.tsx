@@ -19,58 +19,58 @@ type NomineeCardProps = {
 const formatLikelihood = (value?: number): ReactElement | null => {
   if (value === undefined) return null;
   
-  let colorClass = 'text-[#555555]';
-  if (value > 80) colorClass = 'text-[#2E7D32] font-bold';
-  else if (value > 60) colorClass = 'text-[#388E3C]';
-  else if (value > 40) colorClass = 'text-[#FFA000]';
-  else if (value > 20) colorClass = 'text-[#F57C00]';
-  else colorClass = 'text-[#D32F2F]';
+  let colorClass = 'text-gray-400';
+  if (value > 80) colorClass = 'text-primary-300 font-bold';
+  else if (value > 60) colorClass = 'text-primary-400';
+  else if (value > 40) colorClass = 'text-primary-500';
+  else if (value > 20) colorClass = 'text-gray-300';
+  else colorClass = 'text-gray-400';
   
   return <span className={colorClass}>{value.toFixed(1)}%</span>;
 };
 
 const NomineeCard: React.FC<NomineeCardProps> = ({ nominee, isWinner = false }) => {
   const cardClass = isWinner 
-    ? "border-l-4 border-[#2E7D32] bg-[#E8F5E9] p-3 mt-2 rounded"
-    : "border-l-4 border-[#9C27B0] bg-[#F3E5F5] p-3 mt-2 rounded";
+    ? "border-l-4 border-primary-300 bg-[#2a3548] p-4 mt-2 rounded-md"
+    : "border-l-4 border-primary-600 bg-[#2a3548] p-4 mt-2 rounded-md";
 
   return (
     <div className={cardClass}>
       <div className="flex flex-col md:flex-row md:justify-between">
         <div>
-          <div className="font-semibold">{nominee.nomineeName}</div>
+          <div className="font-semibold text-white">{nominee.nomineeName}</div>
           {nominee.filmTitle && (
-            <div className="text-sm text-[#616161] italic">{nominee.filmTitle}</div>
+            <div className="text-sm text-gray-400 italic">{nominee.filmTitle}</div>
           )}
         </div>
         
         <div className="mt-2 md:mt-0 flex flex-col md:items-end">
           {nominee.likelihood !== undefined && (
             <div className="text-sm">
-              <span className="text-[#616161] mr-1">Model:</span> 
+              <span className="text-gray-400 mr-1">Prediction:</span> 
               {formatLikelihood(nominee.likelihood)}
             </div>
           )}
           
           {nominee.bettingOdds && (
             <div className="text-sm">
-              <span className="text-[#616161] mr-1">Betting:</span> 
-              <span>{nominee.bettingOdds}</span>
+              <span className="text-gray-400 mr-1">Odds:</span> 
+              <span className="text-gray-300">{nominee.bettingOdds}</span>
             </div>
           )}
           
           {nominee.marketProbability !== undefined && (
             <div className="text-sm">
-              <span className="text-[#616161] mr-1">Markets:</span> 
-              <span>{nominee.marketProbability.toFixed(1)}%</span>
+              <span className="text-gray-400 mr-1">Markets:</span> 
+              <span className="text-gray-300">{nominee.marketProbability.toFixed(1)}%</span>
             </div>
           )}
         </div>
       </div>
       
       {nominee.awardSupport && (
-        <div className="mt-2 text-xs text-[#616161]">
-          <span className="font-medium">Awards support:</span> {nominee.awardSupport}
+        <div className="mt-3 text-xs text-gray-400 border-t border-gray-700 pt-2">
+          <span className="font-medium text-gray-300">Awards:</span> {nominee.awardSupport}
         </div>
       )}
     </div>

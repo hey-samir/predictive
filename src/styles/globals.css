@@ -8,9 +8,11 @@
   --primary: #9C27B0;
   --secondary: #03A9F4;
   --accent: #FF5722;
-  --background: #FFFFFF;
-  --text: #212121;
-  --shadow: #E0E0E0;
+  --background: #1e2638;
+  --text: #FFFFFF;
+  --card-bg: #2a3548;
+  --text-secondary: #a0aec0;
+  --shadow: rgba(0, 0, 0, 0.2);
 }
 
 * {
