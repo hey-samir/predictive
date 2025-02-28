@@ -26,7 +26,7 @@ from database.operations import (
 
 # Set page config
 st.set_page_config(
-    page_title="Oscar Predictor",
+    page_title="Predictive.film",
     page_icon="🎬",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -48,6 +48,12 @@ def apply_custom_css():
         font-family: 'Inter', sans-serif;
     }
     
+    /* Set dark theme */
+    .stApp {
+        background-color: #1e2638;
+        color: #ffffff;
+    }
+    
     /* Hide sidebar */
     section[data-testid="stSidebar"] {
         display: none !important;
@@ -63,9 +69,9 @@ def apply_custom_css():
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: white;
+        background-color: #1a2136;
         padding: 0.5rem 1rem;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         position: sticky;
         top: 0;
         z-index: 999;
@@ -82,7 +88,7 @@ def apply_custom_css():
     }
     
     .nav-link {
-        color: #616161;
+        color: #e0e0e0;
         text-decoration: none;
         font-weight: 500;
         padding: 0.5rem 0;
@@ -90,8 +96,8 @@ def apply_custom_css():
     }
     
     .nav-link:hover, .nav-link.active {
-        color: #9C27B0;
-        border-bottom: 2px solid #9C27B0;
+        color: #8A3FFC;
+        border-bottom: 2px solid #8A3FFC;
     }
     
     .nav-link.active {
@@ -110,26 +116,27 @@ def apply_custom_css():
         gap: 1px;
         padding: 10px 20px;
         font-weight: 600;
+        color: #e0e0e0;
     }
     
     .stTabs [aria-selected="true"] {
-        background-color: rgba(156, 39, 176, 0.1);
-        color: rgb(156, 39, 176);
+        background-color: rgba(138, 63, 252, 0.2);
+        color: #8A3FFC;
     }
     
     /* Card styling */
     .category-card {
-        border: 1px solid #E0E0E0;
+        border: 1px solid #2d3652;
         border-radius: 8px;
         padding: 16px;
         margin-bottom: 16px;
-        background-color: white;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        background-color: #1a2136;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.3);
     }
     
     .nominee-card {
-        border-left: 4px solid #9C27B0;
-        background-color: rgba(156, 39, 176, 0.05);
+        border-left: 4px solid #8A3FFC;
+        background-color: rgba(138, 63, 252, 0.1);
         padding: 10px;
         margin-top: 8px;
         border-radius: 4px;
@@ -137,27 +144,31 @@ def apply_custom_css():
     
     .winner-card {
         border-left: 4px solid #4CAF50;
-        background-color: rgba(76, 175, 80, 0.05);
+        background-color: rgba(76, 175, 80, 0.1);
     }
     
     /* Progress bar styling */
     .stProgress > div > div > div {
-        background-color: #9C27B0;
+        background-color: #8A3FFC;
     }
     
     /* Text styling */
+    h1, h2, h3, h4, h5, h6 {
+        color: #ffffff;
+    }
+    
     .prediction-header {
         font-size: 20px;
         font-weight: 600;
         margin-bottom: 8px;
-        color: #212121;
+        color: #ffffff;
     }
     
     .prediction-subheader {
         font-size: 16px;
         font-weight: 500;
         margin-bottom: 16px;
-        color: #616161;
+        color: #b0b0b0;
     }
     
     .top-margin {
@@ -165,19 +176,19 @@ def apply_custom_css():
     }
     
     .nomination-type-header {
-        background-color: #F5F5F5;
+        background-color: #2d3652;
         padding: 10px 16px;
         border-radius: 4px;
         font-weight: 600;
         margin-bottom: 12px;
-        color: #212121;
+        color: #ffffff;
     }
     
     /* Footer styling */
     .footer {
         margin-top: 3rem;
         padding-top: 1rem;
-        border-top: 1px solid #E0E0E0;
+        border-top: 1px solid #2d3652;
         text-align: center;
         color: #9E9E9E;
         font-size: 0.8rem;
@@ -186,6 +197,22 @@ def apply_custom_css():
     /* Hide the hamburger menu */
     [data-testid="collapsedControl"] {
         display: none !important;
+    }
+    
+    /* Override text elements */
+    p, div, span {
+        color: #e0e0e0;
+    }
+    
+    /* Button styling */
+    button.css-1x8cf1d {
+        background-color: #8A3FFC;
+        color: white;
+    }
+    
+    button.css-1x8cf1d:hover {
+        background-color: #7030d0;
+        color: white;
     }
     
     </style>

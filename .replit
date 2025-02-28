@@ -37,7 +37,7 @@ args = "Check Database Init Status"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Oscar Predictor"
+args = "Next.js App"
 
 [[workflows.workflow]]
 name = "Mkdir Command"
@@ -110,7 +110,7 @@ task = "shell.exec"
 args = "python -c \"from database.db_setup import get_session; print('Database connection test:', get_session())\""
 
 [[workflows.workflow]]
-name = "Oscar Predictor"
+name = "Next.js App"
 author = "agent"
 
 [workflows.workflow.metadata]
