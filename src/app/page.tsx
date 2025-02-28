@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import PredictionsSection from '../components/PredictionsSection';
 import HistorySection from '../components/HistorySection';

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 export type NomineeData = {
   id: number;
@@ -16,7 +16,7 @@ type NomineeCardProps = {
   isWinner?: boolean;
 };
 
-const formatLikelihood = (value?: number): JSX.Element | null => {
+const formatLikelihood = (value?: number): ReactElement | null => {
   if (value === undefined) return null;
   
   let colorClass = 'text-gray-700';
