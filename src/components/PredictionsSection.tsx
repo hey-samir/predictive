@@ -232,7 +232,7 @@ const AwardCard: React.FC<{
   
   return (
     <div 
-      className="bg-[#2a3548] shadow rounded-xl overflow-hidden transition-all duration-200 hover:shadow-md p-5 flex flex-col h-40"
+      className="bg-[#2a3548] shadow rounded-xl overflow-hidden transition-all duration-200 hover:shadow-lg p-5 flex flex-col justify-between h-full"
       style={{ backgroundColor: cardBackground }}
     >
       <div className="flex items-start">
@@ -242,16 +242,28 @@ const AwardCard: React.FC<{
           </svg>
         </div>
         <div>
-          <div className="text-xl font-semibold text-white mb-4">
+          <div className="text-xl font-semibold text-white mb-2">
             {topNominee.nomineeName}
           </div>
+          {topNominee.filmTitle && (
+            <div className="text-sm text-gray-400 mb-2 italic">
+              {topNominee.filmTitle}
+            </div>
+          )}
           <div className="text-sm text-gray-400">
             {category}
           </div>
-          <div className="mt-2 text-lg font-bold text-purple-400">
-            {topNominee.likelihood?.toFixed(0)}%
-          </div>
         </div>
+      </div>
+      <div className="flex justify-between items-end mt-4">
+        <div className="text-lg font-bold text-purple-400">
+          {topNominee.likelihood?.toFixed(0)}%
+        </div>
+        {topNominee.awardSupport && (
+          <div className="text-xs text-gray-400">
+            {topNominee.awardSupport}
+          </div>
+        )}
       </div>
     </div>
   );
