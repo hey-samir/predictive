@@ -83,10 +83,12 @@ export const THEME_COLORS = {
   primaryLight: "#F6F2FF", // Light Purple
   secondary: "#3F51B5",    // Indigo
   accent: "#FF5722",       // Orange
-  background: "#FFFFFF",   // White
-  text: "#212121",         // Dark gray
-  textSecondary: "#6E6E6E",// Medium gray
-  border: "#E6E6E6"        // Light gray
+  background: "#1e2638",   // Dark blue background
+  backgroundLight: "#2a3548", // Lighter dark blue for cards
+  cardBackground: "#2a3548", // Card background color
+  text: "#ffffff",         // White text
+  textSecondary: "#B4B7BD",// Light gray text
+  border: "#404859"        // Border color
 };
 
 // App sections

@@ -222,25 +222,39 @@ const mockVenueStrengths: VenueStrength[] = [
   }
 ];
 
-// Award Card component for portfolio style - ultra minimal as requested
+// Award Card component styled like the reference
 const AwardCard: React.FC<{ 
   category: string;
   topNominee: NomineeData;
 }> = ({ category, topNominee }) => {
   // Use theme colors
-  const { primary } = THEME_COLORS;
+  const { primary, textSecondary, cardBackground } = THEME_COLORS;
   
   return (
-    <div className="bg-white shadow rounded-xl overflow-hidden transition-all duration-200 hover:shadow-md">
-      <div className="h-1" style={{ backgroundColor: primary }}></div>
-      <div className="p-5">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="font-semibold text-lg" style={{ color: primary }}>{topNominee.nomineeName}</h2>
-          <div className="text-2xl font-bold" style={{ color: primary }}>
+    <div 
+      className="bg-[#2a3548] shadow rounded-xl overflow-hidden transition-all duration-200 hover:shadow-md p-5 flex flex-col h-40"
+      style={{ backgroundColor: cardBackground }}
+    >
+      <div className="flex items-start">
+        <div className="text-purple-400 mr-3">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+          </svg>
+        </div>
+        <div>
+          <div className="text-xl font-semibold text-white mb-4">
+            {topNominee.nomineeName}
+          </div>
+          <div className="text-sm text-gray-400">
+            Track all metrics for
+          </div>
+          <div className="text-sm text-gray-400">
+            {category}
+          </div>
+          <div className="mt-2 text-lg font-bold text-purple-400">
             {topNominee.likelihood?.toFixed(0)}%
           </div>
         </div>
-        <h3 className="font-medium text-gray-500 text-sm">{category}</h3>
       </div>
     </div>
   );
@@ -251,30 +265,40 @@ const VenueStrengthCard: React.FC<{
   venue: VenueStrength
 }> = ({ venue }) => {
   // Use theme colors
-  const { primary, primaryLight } = THEME_COLORS;
+  const { primary, cardBackground } = THEME_COLORS;
   
   return (
-    <div className="bg-white shadow rounded-xl overflow-hidden">
-      <div className="h-1" style={{ backgroundColor: primary }}></div>
+    <div 
+      className="shadow rounded-xl overflow-hidden"
+      style={{ backgroundColor: cardBackground }}
+    >
       <div className="p-5">
-        <h2 className="font-semibold text-lg mb-3" style={{ color: primary }}>{venue.venue}</h2>
-        <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
-          <div 
-            className="h-2.5 rounded-full" 
-            style={{ width: `${venue.strength * 100}%`, backgroundColor: primary }}
-          ></div>
-        </div>
-        <p className="text-sm text-gray-600 mb-3">Predictive strength: {(venue.strength * 100).toFixed(1)}%</p>
-        <div className="flex flex-wrap gap-2">
-          {venue.categories.map(category => (
-            <span 
-              key={category} 
-              className="px-2 py-1 text-xs rounded-full"
-              style={{ backgroundColor: primaryLight, color: primary }}
-            >
-              {category}
-            </span>
-          ))}
+        <div className="flex items-start">
+          <div className="text-purple-400 mr-3">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <h2 className="font-semibold text-lg mb-3 text-white">{venue.venue}</h2>
+            <div className="w-full bg-gray-700 rounded-full h-2.5 mb-4">
+              <div 
+                className="h-2.5 rounded-full bg-purple-500" 
+                style={{ width: `${venue.strength * 100}%` }}
+              ></div>
+            </div>
+            <p className="text-sm text-gray-400 mb-3">Predictive strength: {(venue.strength * 100).toFixed(1)}%</p>
+            <div className="flex flex-wrap gap-2">
+              {venue.categories.map(category => (
+                <span 
+                  key={category} 
+                  className="px-2 py-1 text-xs rounded-full bg-purple-900 text-purple-300"
+                >
+                  {category}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -359,20 +383,20 @@ const PredictionsSection: React.FC = () => {
   const filteredCategories = getFilteredCategories();
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto text-white">
       <h1 className="text-3xl font-bold mb-2" style={{ color: primary }}>Predictive {CURRENT_OSCAR_YEAR}</h1>
-      <p className="text-lg text-gray-600 mb-6">
+      <p className="text-lg text-gray-400 mb-6">
         Predictive uses sophisticated algorithms to predict the top Academy Award winners
       </p>
       
       {/* Tab Navigation - Sliding format */}
-      <div className="flex border-b border-gray-200 mb-6">
+      <div className="flex border-b border-gray-700 mb-6">
         <button
           onClick={() => setActiveTab('awardPredictive')}
           className={`px-4 py-2 font-medium -mb-px transition-all
             ${activeTab === 'awardPredictive' 
               ? 'border-b-2' 
-              : 'text-gray-600 hover:text-[#8A3FFC]'
+              : 'text-gray-400 hover:text-[#8A3FFC]'
             }`}
           style={{ 
             color: activeTab === 'awardPredictive' ? primary : '', 
@@ -386,7 +410,7 @@ const PredictionsSection: React.FC = () => {
           className={`px-4 py-2 font-medium -mb-px transition-all
             ${activeTab === 'venuePredictive' 
               ? 'border-b-2' 
-              : 'text-gray-600 hover:text-[#8A3FFC]'
+              : 'text-gray-400 hover:text-[#8A3FFC]'
             }`}
           style={{ 
             color: activeTab === 'venuePredictive' ? primary : '', 
@@ -400,7 +424,7 @@ const PredictionsSection: React.FC = () => {
           className={`px-4 py-2 font-medium -mb-px transition-all
             ${activeTab === 'topPicks' 
               ? 'border-b-2' 
-              : 'text-gray-600 hover:text-[#8A3FFC]'
+              : 'text-gray-400 hover:text-[#8A3FFC]'
             }`}
           style={{ 
             color: activeTab === 'topPicks' ? primary : '', 
@@ -414,17 +438,17 @@ const PredictionsSection: React.FC = () => {
       {/* Award Predictive Tab Content - Portfolio Style */}
       {activeTab === 'awardPredictive' && (
         <div>
-          {/* Category Filter */}
-          <div className="flex flex-wrap gap-2 mb-8">
+          {/* Category Filter - Styled like samir.xyz/portfolio */}
+          <div className="flex flex-wrap gap-1 mb-8 bg-gray-100 w-fit rounded-full p-1">
             {NOMINATION_CATEGORIES.map(category => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all`}
+                className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
+                  activeCategory === category ? 'text-white' : 'text-[#1e2638]'
+                }`}
                 style={{ 
-                  backgroundColor: activeCategory === category ? primary : 'transparent',
-                  color: activeCategory === category ? 'white' : primary,
-                  border: `1px solid ${primary}`
+                  backgroundColor: activeCategory === category ? '#8A3FFC' : 'transparent',
                 }}
               >
                 {category}
@@ -451,8 +475,8 @@ const PredictionsSection: React.FC = () => {
       {activeTab === 'venuePredictive' && (
         <div>
           <div className="mb-6">
-            <h2 className="text-xl font-semibold mb-4" style={{ color: primary }}>Awards Venue Analysis</h2>
-            <p className="text-gray-600 mb-6">
+            <h2 className="text-xl font-semibold mb-4 text-white">Awards Venue Analysis</h2>
+            <p className="text-gray-400 mb-6">
               How strongly each award venue predicts Oscar winners across categories
             </p>
           </div>
@@ -467,9 +491,9 @@ const PredictionsSection: React.FC = () => {
       
       {/* Top Picks Tab Content */}
       {activeTab === 'topPicks' && (
-        <div className="bg-white rounded-xl shadow p-6">
-          <h2 className="text-xl font-semibold mb-4" style={{ color: primary }}>Top Picks Across Categories</h2>
-          <p className="text-gray-600 mb-6">
+        <div className="bg-[#2a3548] rounded-xl shadow p-6">
+          <h2 className="text-xl font-semibold mb-4 text-white">Top Picks Across Categories</h2>
+          <p className="text-gray-400 mb-6">
             Our algorithm's strongest predictions across all categories
           </p>
           
@@ -490,7 +514,7 @@ const PredictionsSection: React.FC = () => {
         </div>
       )}
       
-      <div className="text-xs text-gray-500 mt-8 text-right">
+      <div className="text-xs text-gray-400 mt-8 text-right">
         Last updated: {lastUpdated}
       </div>
     </div>
