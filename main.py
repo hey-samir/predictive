@@ -29,7 +29,12 @@ st.set_page_config(
     page_title="Oscar Predictor",
     page_icon="🎬",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed",
+    menu_items={
+        'Get Help': None,
+        'Report a bug': None,
+        'About': None
+    }
 )
 
 # Apply custom CSS
@@ -43,6 +48,57 @@ def apply_custom_css():
         font-family: 'Inter', sans-serif;
     }
     
+    /* Hide sidebar */
+    section[data-testid="stSidebar"] {
+        display: none !important;
+    }
+    
+    /* Hide the Streamlit run button animation */
+    button[kind="primaryFormSubmit"] {
+        display: none !important;
+    }
+    
+    /* Top navigation bar */
+    .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        padding: 0.5rem 1rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 999;
+    }
+    
+    .nav-logo {
+        display: flex;
+        align-items: center;
+    }
+    
+    .nav-items {
+        display: flex;
+        gap: 1.5rem;
+    }
+    
+    .nav-link {
+        color: #616161;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 0.5rem 0;
+        transition: color 0.2s ease;
+    }
+    
+    .nav-link:hover, .nav-link.active {
+        color: #9C27B0;
+        border-bottom: 2px solid #9C27B0;
+    }
+    
+    .nav-link.active {
+        font-weight: 600;
+    }
+    
+    /* Tabs styling */
     .stTabs [data-baseweb="tab-list"] {
         gap: 10px;
     }
@@ -61,6 +117,7 @@ def apply_custom_css():
         color: rgb(156, 39, 176);
     }
     
+    /* Card styling */
     .category-card {
         border: 1px solid #E0E0E0;
         border-radius: 8px;
@@ -83,14 +140,12 @@ def apply_custom_css():
         background-color: rgba(76, 175, 80, 0.05);
     }
     
+    /* Progress bar styling */
     .stProgress > div > div > div {
         background-color: #9C27B0;
     }
     
-    section[data-testid="stSidebar"] {
-        background-color: #F5F5F5;
-    }
-    
+    /* Text styling */
     .prediction-header {
         font-size: 20px;
         font-weight: 600;
@@ -116,6 +171,21 @@ def apply_custom_css():
         font-weight: 600;
         margin-bottom: 12px;
         color: #212121;
+    }
+    
+    /* Footer styling */
+    .footer {
+        margin-top: 3rem;
+        padding-top: 1rem;
+        border-top: 1px solid #E0E0E0;
+        text-align: center;
+        color: #9E9E9E;
+        font-size: 0.8rem;
+    }
+    
+    /* Hide the hamburger menu */
+    [data-testid="collapsedControl"] {
+        display: none !important;
     }
     
     </style>
@@ -453,27 +523,60 @@ def about_section():
 
 def main():
     """Main function to run the Streamlit app."""
-    # Sidebar navigation
-    st.sidebar.image("generated-icon.png", width=100)
-    st.sidebar.title("Oscar Predictor")
+    # Top navigation bar
+    st.markdown("""
+    <div class="nav-container">
+        <div class="nav-logo">
+            <img src="https://raw.githubusercontent.com/streamlit/streamlit/develop/lib/streamlit/static/media/favicon.png" width="30" style="margin-right: 10px;"/>
+            <h2 style="margin: 0; color: #9C27B0;">Oscar Predictor</h2>
+        </div>
+        <div class="nav-items">
+            <a href="?section=predictive_25" class="nav-link active" id="predictive-link">Predictive 25</a>
+            <a href="?section=history" class="nav-link" id="history-link">History</a>
+            <a href="?section=about" class="nav-link" id="about-link">About</a>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     
-    navigation = st.sidebar.radio(
-        "Navigation",
-        list(APP_SECTIONS.values())
-    )
+    # Get query parameters
+    query_params = st.experimental_get_query_params()
+    section = query_params.get("section", ["predictive_25"])[0]
     
-    # Show selected section
-    if navigation == APP_SECTIONS["predictions"]:
-        predictions_section()
-    elif navigation == APP_SECTIONS["history"]:
+    # JavaScript for making the correct nav link active
+    js_code = f"""
+    <script>
+        // Remove active class from all links
+        document.querySelectorAll('.nav-link').forEach(link => {{
+            link.classList.remove('active');
+        }});
+        
+        // Add active class to the current section link
+        const currentSection = "{section}";
+        if (currentSection === "predictive_25") {{
+            document.getElementById('predictive-link').classList.add('active');
+        }} else if (currentSection === "history") {{
+            document.getElementById('history-link').classList.add('active');
+        }} else if (currentSection === "about") {{
+            document.getElementById('about-link').classList.add('active');
+        }}
+    </script>
+    """
+    st.markdown(js_code, unsafe_allow_html=True)
+    
+    # Display section based on query parameter
+    if section == "history":
         history_section()
-    elif navigation == APP_SECTIONS["about"]:
+    elif section == "about":
         about_section()
+    else:  # Default to predictions
+        predictions_section()
     
     # Footer
-    st.sidebar.markdown("---")
-    st.sidebar.caption("© 2025 Oscar Predictor")
-    st.sidebar.caption("Data updated: February 2025")
+    st.markdown("""
+    <div class="footer">
+        <p>© 2025 Oscar Predictor • Data updated: February 2025</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
