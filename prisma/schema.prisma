@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Models for Oscar predictions
+
+model Nomination {
+  id             Int          @id @default(autoincrement())
+  year           Int
+  category       String       @db.VarChar(100)
+  nominationType String       @map("nomination_type") @db.VarChar(50)
+  nomineeName    String       @map("nominee_name") @db.VarChar(200)
+  filmTitle      String?      @map("film_title") @db.VarChar(200)
+  wonOscar       Boolean      @default(false) @map("won_oscar")
+  createdAt      DateTime     @default(now()) @map("created_at") @db.Date
+  
+  awards         AwardWin[]
+  references     Reference[]
+
+  @@map("nominations")
+}
+
+model AwardWin {
+  id             Int          @id @default(autoincrement())
+  nominationId   Int          @map("nomination_id")
+  awardVenue     String       @map("award_venue") @db.VarChar(100)
+  awardCategory  String?      @map("award_category") @db.VarChar(200)
+  won            Boolean      @default(false)
+  
+  nomination     Nomination   @relation(fields: [nominationId], references: [id], onDelete: Cascade)
+
+  @@map("award_wins")
+}
+
+model Reference {
+  id              Int          @id @default(autoincrement())
+  nominationId    Int          @map("nomination_id")
+  referenceType   String       @map("reference_type") @db.VarChar(50)
+  value           Float?
+  source          String?      @db.VarChar(100)
+  
+  nomination      Nomination   @relation(fields: [nominationId], references: [id], onDelete: Cascade)
+
+  @@map("references")
+}
+
+model ModelWeight {
+  id             Int          @id @default(autoincrement())
+  year           Int
+  category       String       @db.VarChar(100)
+  awardVenue     String       @map("award_venue") @db.VarChar(100)
+  weight         Float
+  accuracy       Float?
+  
+  @@map("model_weights")
+}
