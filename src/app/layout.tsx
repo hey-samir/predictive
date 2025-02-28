@@ -7,23 +7,19 @@ const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
+  weight: ['400', '500', '600', '700'],
 });
 
 export const metadata: Metadata = {
-  title: 'Predictive | Academy Awards Forecast',
+  title: 'Predictive 25 | Oscar Predictions',
   description: 'Sophisticated algorithms to predict the top Academy Award winners',
   icons: {
     icon: [
       {
-        url: '/favicon.ico',
-        sizes: '32x32',
-      },
-      {
-        url: '/icon.png',
-        sizes: '192x192',
+        url: '/icon.svg',
+        type: 'image/svg+xml',
       }
     ],
-    apple: '/apple-icon.png',
   },
 };
 
@@ -34,13 +30,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-      </head>
-      <body className={`${inter.className} font-sans`}>
-        <main className="min-h-screen bg-gray-50">
-          {children}
-        </main>
+      <body className={`${inter.className} font-sans antialiased`}>
+        {children}
       </body>
     </html>
   );
