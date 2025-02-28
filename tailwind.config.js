@@ -13,6 +13,10 @@ module.exports = {
           background: '#1e2638',
           card: '#2a3548',
           purple: '#8A3FFC',
+          text: {
+            primary: '#ffffff',
+            secondary: '#a0aec0',
+          }
         },
         primary: {
           DEFAULT: '#8A3FFC', // Purple
