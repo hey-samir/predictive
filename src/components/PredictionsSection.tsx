@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CategoryCard from './CategoryCard';
-import { NOMINATION_TYPES, NOMINATION_TYPE_DESCRIPTIONS, CURRENT_OSCAR_YEAR } from '../lib/constants';
+import { NOMINATION_TYPES, NOMINATION_TYPE_DESCRIPTIONS, CURRENT_OSCAR_YEAR, AWARD_VENUES } from '../lib/constants';
 import { NomineeData } from './NomineeCard';
 import { runPredictions, getNominees } from '../lib/api';
 

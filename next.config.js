@@ -5,6 +5,9 @@ const nextConfig = {
   experimental: {
     serverActions: true,
   },
+  // This helps with routing in dev mode
+  assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
+  // Configure rewrites for Streamlit integration
   async rewrites() {
     return [
       // Streamlit runs on port 5000
@@ -14,6 +17,8 @@ const nextConfig = {
       },
     ];
   },
+  // Add output configuration for better hosting compatibility
+  output: 'standalone',
 };
 
 module.exports = nextConfig;
