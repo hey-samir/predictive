@@ -69,7 +69,9 @@ const PredictionsSection: React.FC = () => {
           return {
             ...nominee,
             id: (idx + 1) * category.length,
-            likelihood: Math.min(99, Math.max(1, nominee.likelihood + variation)),
+            likelihood: nominee.likelihood !== undefined ? 
+              Math.min(99, Math.max(1, nominee.likelihood + variation)) : 
+              50 + variation,
           };
         });
       });

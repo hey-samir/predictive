@@ -19,8 +19,8 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, nominees }) => {
   const predictedWinner = sortedNominees.find(n => n.wonOscar) || sortedNominees[0];
 
   return (
-    <div className="category-card">
-      <h3 className="prediction-header">{category}</h3>
+    <div className="border border-[#EEEEEE] rounded-xl p-5 mb-4 bg-white shadow-sm">
+      <h3 className="text-xl font-semibold mb-3 text-primary-800">{category}</h3>
       
       {sortedNominees.map((nominee) => (
         <NomineeCard 
