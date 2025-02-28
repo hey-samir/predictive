@@ -39,6 +39,10 @@ args = "Check Database Init Status"
 task = "workflow.run"
 args = "Oscar Predictor"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Streamlit Oscar Predictor"
+
 [[workflows.workflow]]
 name = "Mkdir Command"
 author = "agent"
@@ -121,7 +125,22 @@ task = "packager.installForAll"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npx next dev -p 5000 -H 0.0.0.0"
+args = "npx next dev -p 3333 -H 0.0.0.0"
+waitForPort = 3333
+
+[[workflows.workflow]]
+name = "Streamlit Oscar Predictor"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "streamlit run main.py"
 waitForPort = 5000
 
 [[ports]]
@@ -129,5 +148,13 @@ localPort = 3000
 externalPort = 3000
 
 [[ports]]
+localPort = 3333
+externalPort = 3001
+
+[[ports]]
 localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 8000
+externalPort = 8000

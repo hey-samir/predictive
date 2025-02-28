@@ -1,15 +1,7 @@
 import '../styles/globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import React from 'react';
-
-// Configure the Inter font with all necessary weights
-const inter = Inter({ 
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-  weight: ['400', '500', '600', '700', '800'],
-});
+import { inter } from '../lib/fonts';
 
 export const metadata: Metadata = {
   title: 'Predictive | Oscar Predictions',
