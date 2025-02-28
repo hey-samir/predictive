@@ -19,7 +19,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           <div className="flex items-center cursor-pointer" onClick={() => setActiveSection('predictive25')}>
             <div className="w-10 h-10 mr-3 overflow-hidden">
               <Image 
-                src="/logo.png" 
+                src="/predictive-logo.png" 
                 alt="Predictive Logo" 
                 width={40} 
                 height={40} 

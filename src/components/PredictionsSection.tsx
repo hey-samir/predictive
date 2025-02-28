@@ -27,29 +27,29 @@ type VenueStrength = {
   categories: string[];
 };
 
-// Mock nominees data for development (with more complete dataset for portfolio view)
+// Mock nominees data for 2025 (ensuring we use future predictions, not 2024 results)
 const generateMockNomineesData = (): NomineeData[] => {
   // Best Picture
   const bestPictureNominees = [
     {
       id: 101,
       category: "Best Picture",
-      nomineeName: "Oppenheimer",
-      filmTitle: "Christopher Nolan, Charles Roven, Emma Thomas",
-      likelihood: 89.7,
-      bettingOdds: "1/5",
-      marketProbability: 86.2,
-      awardSupport: "BAFTA, PGA, Critics Choice"
+      nomineeName: "Mission: Impossible — Impossible Fate",
+      filmTitle: "Christopher McQuarrie",
+      likelihood: 74.8,
+      bettingOdds: "3/1",
+      marketProbability: 71.2,
+      awardSupport: "PGA, Critics Choice"
     },
     {
       id: 102,
       category: "Best Picture",
-      nomineeName: "Poor Things",
-      filmTitle: "Ed Guiney, Yorgos Lanthimos, Andrew Lowe",
-      likelihood: 12.3,
-      bettingOdds: "16/1",
-      marketProbability: 15.4,
-      awardSupport: "Golden Globes (Comedy)"
+      nomineeName: "Jurassic World: Rebirth",
+      filmTitle: "David Koepp",
+      likelihood: 38.3,
+      bettingOdds: "8/1",
+      marketProbability: 35.4,
+      awardSupport: "NBR"
     }
   ];
   
@@ -58,22 +58,22 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 201,
       category: "Directing",
-      nomineeName: "Christopher Nolan",
-      filmTitle: "Oppenheimer",
-      likelihood: 92.5,
-      bettingOdds: "1/6",
-      marketProbability: 89.8,
-      awardSupport: "BAFTA, DGA, Golden Globes, Critics Choice"
+      nomineeName: "Denis Villeneuve",
+      filmTitle: "Dune Messiah",
+      likelihood: 82.5,
+      bettingOdds: "2/1",
+      marketProbability: 79.8,
+      awardSupport: "BAFTA, DGA, Golden Globes"
     },
     {
       id: 202,
       category: "Directing",
-      nomineeName: "Yorgos Lanthimos",
-      filmTitle: "Poor Things",
-      likelihood: 4.8,
-      bettingOdds: "25/1",
-      marketProbability: 8.7,
-      awardSupport: ""
+      nomineeName: "Greta Gerwig",
+      filmTitle: "The Chronicles of Narnia",
+      likelihood: 64.8,
+      bettingOdds: "4/1",
+      marketProbability: 62.7,
+      awardSupport: "NYFCC"
     }
   ];
   
@@ -82,22 +82,22 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 301,
       category: "Actor in a Leading Role",
-      nomineeName: "Cillian Murphy",
-      filmTitle: "Oppenheimer",
+      nomineeName: "Robert Downey Jr.",
+      filmTitle: "Sherlock Holmes 3",
       likelihood: 78.2,
-      bettingOdds: "1/3",
+      bettingOdds: "2/1",
       marketProbability: 76.5,
-      awardSupport: "BAFTA, Golden Globes (Drama), SAG"
+      awardSupport: "BAFTA, Golden Globes, SAG"
     },
     {
       id: 302,
       category: "Actor in a Leading Role",
-      nomineeName: "Paul Giamatti",
-      filmTitle: "The Holdovers",
-      likelihood: 21.3,
-      bettingOdds: "5/1",
-      marketProbability: 19.8,
-      awardSupport: "Golden Globes (Comedy), Critics Choice"
+      nomineeName: "Leonardo DiCaprio",
+      filmTitle: "Jim Jones",
+      likelihood: 69.3,
+      bettingOdds: "3/1",
+      marketProbability: 67.8,
+      awardSupport: "Critics Choice"
     }
   ];
   
@@ -106,22 +106,22 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 401,
       category: "Actress in a Leading Role",
-      nomineeName: "Emma Stone",
-      filmTitle: "Poor Things",
-      likelihood: 82.7,
-      bettingOdds: "1/4",
-      marketProbability: 80.3,
-      awardSupport: "BAFTA, Golden Globes (Comedy), Critics Choice"
+      nomineeName: "Zendaya",
+      filmTitle: "Dune Messiah",
+      likelihood: 85.7,
+      bettingOdds: "5/4",
+      marketProbability: 82.3,
+      awardSupport: "Golden Globes, Critics Choice"
     },
     {
       id: 402,
       category: "Actress in a Leading Role",
-      nomineeName: "Lily Gladstone",
-      filmTitle: "Killers of the Flower Moon",
-      likelihood: 17.1,
-      bettingOdds: "6/1",
-      marketProbability: 19.2,
-      awardSupport: "Golden Globes (Drama), SAG"
+      nomineeName: "Jennifer Lawrence",
+      filmTitle: "The Wives",
+      likelihood: 71.1,
+      bettingOdds: "5/2",
+      marketProbability: 69.2,
+      awardSupport: "SAG"
     }
   ];
   
@@ -130,22 +130,22 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 501,
       category: "Writing (Original Screenplay)",
-      nomineeName: "Justine Triet & Arthur Harari",
-      filmTitle: "Anatomy of a Fall",
-      likelihood: 75.4,
-      bettingOdds: "4/9",
-      marketProbability: 72.8,
-      awardSupport: "BAFTA, Golden Globes, Critics Choice"
+      nomineeName: "Jordan Peele",
+      filmTitle: "Nope 2",
+      likelihood: 79.4,
+      bettingOdds: "2/1",
+      marketProbability: 76.8,
+      awardSupport: "WGA, Critics Choice"
     },
     {
       id: 502,
       category: "Writing (Adapted Screenplay)",
-      nomineeName: "Cord Jefferson",
-      filmTitle: "American Fiction",
+      nomineeName: "Emerald Fennell",
+      filmTitle: "Wuthering Heights",
       likelihood: 68.3,
-      bettingOdds: "8/15",
+      bettingOdds: "7/2",
       marketProbability: 65.4,
-      awardSupport: "BAFTA, Critics Choice"
+      awardSupport: "BAFTA"
     }
   ];
   
@@ -154,32 +154,32 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 601,
       category: "Cinematography",
-      nomineeName: "Hoyte van Hoytema",
-      filmTitle: "Oppenheimer",
-      likelihood: 88.2,
-      bettingOdds: "1/7",
-      marketProbability: 86.4,
-      awardSupport: "BAFTA, ASC, Critics Choice"
+      nomineeName: "Roger Deakins",
+      filmTitle: "Blade Runner 2099",
+      likelihood: 91.2,
+      bettingOdds: "1/3",
+      marketProbability: 89.4,
+      awardSupport: "BAFTA, ASC"
     },
     {
       id: 602,
       category: "Film Editing",
-      nomineeName: "Jennifer Lame",
-      filmTitle: "Oppenheimer",
-      likelihood: 84.3,
-      bettingOdds: "1/5",
-      marketProbability: 82.7,
-      awardSupport: "BAFTA, ACE Eddie, Critics Choice"
+      nomineeName: "Thelma Schoonmaker",
+      filmTitle: "Roosevelt",
+      likelihood: 87.3,
+      bettingOdds: "1/2",
+      marketProbability: 84.7,
+      awardSupport: "ACE Eddie"
     },
     {
       id: 603,
       category: "Visual Effects",
-      nomineeName: "Godzilla Minus One",
-      filmTitle: "Visual Effects Team",
-      likelihood: 79.8,
-      bettingOdds: "1/4",
-      marketProbability: 77.6,
-      awardSupport: "BAFTA, VES Awards"
+      nomineeName: "Dune Messiah",
+      filmTitle: "DNEG",
+      likelihood: 93.8,
+      bettingOdds: "1/5",
+      marketProbability: 92.6,
+      awardSupport: "VES Awards"
     }
   ];
   
@@ -222,26 +222,25 @@ const mockVenueStrengths: VenueStrength[] = [
   }
 ];
 
-// Award Card component for portfolio style - simplified as requested
+// Award Card component for portfolio style - ultra minimal as requested
 const AwardCard: React.FC<{ 
   category: string;
   topNominee: NomineeData;
 }> = ({ category, topNominee }) => {
   // Use theme colors
-  const { primary, primaryLight } = THEME_COLORS;
+  const { primary } = THEME_COLORS;
   
   return (
     <div className="bg-white shadow rounded-xl overflow-hidden transition-all duration-200 hover:shadow-md">
       <div className="h-1" style={{ backgroundColor: primary }}></div>
       <div className="p-5">
-        <h3 className="font-medium text-gray-500 text-sm mb-3">{category}</h3>
-        
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-3">
           <h2 className="font-semibold text-lg" style={{ color: primary }}>{topNominee.nomineeName}</h2>
           <div className="text-2xl font-bold" style={{ color: primary }}>
             {topNominee.likelihood?.toFixed(0)}%
           </div>
         </div>
+        <h3 className="font-medium text-gray-500 text-sm">{category}</h3>
       </div>
     </div>
   );
