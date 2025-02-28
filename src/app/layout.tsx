@@ -11,13 +11,19 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Predictive 25 | Oscar Predictions',
-  description: 'Sophisticated algorithms to predict the top Academy Award winners',
+  title: 'Predictive | Oscar Predictions',
+  description: 'Predictive uses sophisticated algorithms to predict the top Academy Award winners',
   icons: {
     icon: [
       {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
+        url: '/logo.png',
+        type: 'image/png',
+      }
+    ],
+    apple: [
+      {
+        url: '/logo.png',
+        type: 'image/png',
       }
     ],
   },
