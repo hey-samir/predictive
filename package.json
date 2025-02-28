@@ -1,0 +1,31 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@prisma/client": "^6.4.1",
+    "@tremor/react": "^3.18.7",
+    "@types/node": "^22.13.5",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "autoprefixer": "^10.4.20",
+    "axios": "^1.8.1",
+    "next": "^13.5.8",
+    "postcss": "^8.5.3",
+    "prisma": "^6.4.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.15.1",
+    "swr": "^2.3.2",
+    "tailwindcss": "^4.0.9",
+    "typescript": "^5.7.3",
+    "zod": "^3.24.2"
+  }
+}
