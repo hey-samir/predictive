@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import { THEME_COLORS } from '../lib/constants';
 
 type HeaderProps = {
   activeSection: string;
@@ -7,9 +8,8 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
-  // Defining bright purple from samir.xyz
-  const brightPurple = '#8A3FFC';
-  const lightPurple = '#F6F2FF';
+  // Use theme colors
+  const { primary, primaryLight } = THEME_COLORS;
   
   return (
     <header className="bg-white shadow-sm sticky top-0 z-10 border-b border-gray-100">
@@ -17,11 +17,17 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
         <div className="flex items-center justify-between">
           {/* Logo and Brand */}
           <div className="flex items-center cursor-pointer" onClick={() => setActiveSection('predictive25')}>
-            <div className="w-10 h-10 mr-3 bg-gradient-to-br from-[#3F51B5] to-[#8A3FFC] rounded-md flex items-center justify-center">
-              <span className="text-white text-xl">🎬</span>
+            <div className="w-10 h-10 mr-3 overflow-hidden">
+              <Image 
+                src="/logo.png" 
+                alt="Predictive Logo" 
+                width={40} 
+                height={40} 
+                className="rounded-md" 
+              />
             </div>
             <div>
-              <div className="text-xl font-semibold" style={{ color: brightPurple }}>
+              <div className="text-xl font-semibold" style={{ color: primary }}>
                 Predictive
               </div>
               <div className="text-xs text-gray-500 -mt-1">
@@ -34,42 +40,30 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           <nav className="flex items-center space-x-1">
             <button
               onClick={() => setActiveSection('predictive25')}
-              className={`px-4 py-2 font-medium text-sm transition-all rounded
-                ${activeSection === 'predictive25' 
-                  ? `bg-${lightPurple} text-${brightPurple}` 
-                  : 'text-gray-600 hover:text-[#8A3FFC]'
-                }`}
+              className="px-4 py-2 font-medium text-sm transition-all rounded"
               style={{ 
-                backgroundColor: activeSection === 'predictive25' ? lightPurple : '',
-                color: activeSection === 'predictive25' ? brightPurple : ''
+                backgroundColor: activeSection === 'predictive25' ? primary : 'transparent',
+                color: activeSection === 'predictive25' ? 'white' : '#666666'
               }}
             >
               Predictive 25
             </button>
             <button
               onClick={() => setActiveSection('history')}
-              className={`px-4 py-2 font-medium text-sm transition-all rounded
-                ${activeSection === 'history' 
-                  ? `bg-${lightPurple} text-${brightPurple}` 
-                  : 'text-gray-600 hover:text-[#8A3FFC]'
-                }`}
+              className="px-4 py-2 font-medium text-sm transition-all rounded"
               style={{ 
-                backgroundColor: activeSection === 'history' ? lightPurple : '',
-                color: activeSection === 'history' ? brightPurple : ''
+                backgroundColor: activeSection === 'history' ? primary : 'transparent',
+                color: activeSection === 'history' ? 'white' : '#666666'
               }}
             >
               History
             </button>
             <button
               onClick={() => setActiveSection('about')}
-              className={`px-4 py-2 font-medium text-sm transition-all rounded
-                ${activeSection === 'about' 
-                  ? `bg-${lightPurple} text-${brightPurple}` 
-                  : 'text-gray-600 hover:text-[#8A3FFC]'
-                }`}
+              className="px-4 py-2 font-medium text-sm transition-all rounded"
               style={{ 
-                backgroundColor: activeSection === 'about' ? lightPurple : '',
-                color: activeSection === 'about' ? brightPurple : ''
+                backgroundColor: activeSection === 'about' ? primary : 'transparent',
+                color: activeSection === 'about' ? 'white' : '#666666'
               }}
             >
               About

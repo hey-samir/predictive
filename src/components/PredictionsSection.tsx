@@ -222,7 +222,7 @@ const mockVenueStrengths: VenueStrength[] = [
   }
 ];
 
-// Award Card component for portfolio style
+// Award Card component for portfolio style - simplified as requested
 const AwardCard: React.FC<{ 
   category: string;
   topNominee: NomineeData;
@@ -236,35 +236,12 @@ const AwardCard: React.FC<{
       <div className="p-5">
         <h3 className="font-medium text-gray-500 text-sm mb-3">{category}</h3>
         
-        <div className="flex items-start justify-between">
-          <div className="flex-1">
-            <h2 className="font-semibold text-lg" style={{ color: primary }}>{topNominee.nomineeName}</h2>
-            {topNominee.filmTitle && (
-              <p className="text-sm text-gray-600 mt-1">{topNominee.filmTitle}</p>
-            )}
-          </div>
-          
+        <div className="flex items-center justify-between">
+          <h2 className="font-semibold text-lg" style={{ color: primary }}>{topNominee.nomineeName}</h2>
           <div className="text-2xl font-bold" style={{ color: primary }}>
             {topNominee.likelihood?.toFixed(0)}%
           </div>
         </div>
-        
-        {topNominee.awardSupport && (
-          <div className="mt-4 pt-4 border-t border-gray-100">
-            <h4 className="text-xs text-gray-500 mb-2">Supported by</h4>
-            <div className="flex flex-wrap gap-1">
-              {topNominee.awardSupport.split(', ').map(award => (
-                <span 
-                  key={award} 
-                  className="px-2 py-1 text-xs rounded-full"
-                  style={{ backgroundColor: primaryLight, color: primary }}
-                >
-                  {award}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
