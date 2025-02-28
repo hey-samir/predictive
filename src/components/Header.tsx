@@ -30,53 +30,35 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
               className={`text-white font-medium cursor-pointer ${activeSection === 'predictive25' ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
               onClick={() => setActiveSection('predictive25')}
             >
-              Predictive
-            </div>
-            <div 
-              className={`mx-4 text-white font-medium cursor-pointer ${activeSection === 'makers' ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
-              onClick={() => setActiveSection('makers')}
-            >
-              Makers
-            </div>
-            <div 
-              className={`mr-4 text-white font-medium cursor-pointer ${activeSection === 'performers' ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
-              onClick={() => setActiveSection('performers')}
-            >
-              Performers
-            </div>
-            <div 
-              className={`text-white font-medium cursor-pointer ${activeSection === 'history' ? 'opacity-100' : 'opacity-80 hover:opacity-100'}`}
-              onClick={() => setActiveSection('history')}
-            >
-              History
+              Predictive 2025
             </div>
           </div>
           
           {/* Main Navigation */}
           <nav className="flex items-center space-x-3">
             <button
-              onClick={() => setActiveSection('creators')}
-              className="px-5 py-2 font-medium text-sm transition-all rounded-md border border-primary-300 bg-primary-700 flex items-center text-white"
+              onClick={() => setActiveSection('awards')}
+              className={`px-5 py-2 font-medium text-sm transition-all rounded-md ${activeSection === 'awards' ? 'bg-primary-700' : 'bg-primary-800'} text-white`}
             >
-              Creators
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
+              Awards
             </button>
             <button
-              onClick={() => setActiveSection('crafters')}
-              className="px-5 py-2 font-medium text-sm transition-all rounded-md bg-primary-600 text-white"
+              onClick={() => setActiveSection('predictives')}
+              className={`px-5 py-2 font-medium text-sm transition-all rounded-md ${activeSection === 'predictives' ? 'bg-primary-700' : 'bg-primary-800'} text-white`}
             >
-              Crafters
+              Predictives
+            </button>
+            <button
+              onClick={() => setActiveSection('history')}
+              className={`px-5 py-2 font-medium text-sm transition-all rounded-md ${activeSection === 'history' ? 'bg-primary-700' : 'bg-primary-800'} text-white`}
+            >
+              History
             </button>
             <button
               onClick={() => setActiveSection('about')}
-              className="px-5 py-2 font-medium text-sm transition-all rounded-md bg-primary-800 text-white flex items-center"
+              className={`px-5 py-2 font-medium text-sm transition-all rounded-md ${activeSection === 'about' ? 'bg-primary-700' : 'bg-primary-800'} text-white`}
             >
               About
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
             </button>
             
             {/* Theme toggle - a purple button with white icon */}

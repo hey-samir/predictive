@@ -246,9 +246,6 @@ const AwardCard: React.FC<{
             {topNominee.nomineeName}
           </div>
           <div className="text-sm text-gray-400">
-            Track all metrics for
-          </div>
-          <div className="text-sm text-gray-400">
             {category}
           </div>
           <div className="mt-2 text-lg font-bold text-purple-400">
@@ -440,7 +437,7 @@ const PredictionsSection: React.FC = () => {
         <div>
           {/* Category Filter - Styled like samir.xyz/portfolio */}
           <div className="flex flex-wrap gap-1 mb-8 bg-gray-100 w-fit rounded-full p-1">
-            {NOMINATION_CATEGORIES.map(category => (
+            {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
