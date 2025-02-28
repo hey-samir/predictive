@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { APP_SECTIONS } from '../lib/constants';
+import Image from 'next/image';
 
 type HeaderProps = {
   activeSection: string;
@@ -11,27 +11,47 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
   return (
     <header className="bg-white shadow-md">
       <div className="container mx-auto px-4 py-4">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="flex items-center mb-4 md:mb-0">
+        <div className="flex flex-row items-center justify-between">
+          <div className="flex items-center">
+            <div className="w-10 h-10 mr-3 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center">
+              <span className="text-xl">🎬</span>
+            </div>
             <div className="text-2xl font-bold text-primary">
-              Oscar Predictor
+              Predictive
             </div>
           </div>
           
-          <nav className="flex space-x-1 md:space-x-2">
-            {Object.entries(APP_SECTIONS).map(([key, label]) => (
-              <button
-                key={key}
-                onClick={() => setActiveSection(key)}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors
-                  ${activeSection === key 
-                    ? 'bg-primary text-white' 
-                    : 'text-gray-700 hover:bg-gray-100'
-                  }`}
-              >
-                {label}
-              </button>
-            ))}
+          <nav className="flex space-x-6">
+            <button
+              onClick={() => setActiveSection('predictions')}
+              className={`px-3 py-2 font-medium transition-colors border-b-2 
+                ${activeSection === 'predictions' 
+                  ? 'border-primary text-primary' 
+                  : 'border-transparent text-gray-700 hover:text-primary'
+                }`}
+            >
+              Predictive 25
+            </button>
+            <button
+              onClick={() => setActiveSection('history')}
+              className={`px-3 py-2 font-medium transition-colors border-b-2 
+                ${activeSection === 'history' 
+                  ? 'border-primary text-primary' 
+                  : 'border-transparent text-gray-700 hover:text-primary'
+                }`}
+            >
+              History
+            </button>
+            <button
+              onClick={() => setActiveSection('about')}
+              className={`px-3 py-2 font-medium transition-colors border-b-2 
+                ${activeSection === 'about' 
+                  ? 'border-primary text-primary' 
+                  : 'border-transparent text-gray-700 hover:text-primary'
+                }`}
+            >
+              About
+            </button>
           </nav>
         </div>
       </div>
