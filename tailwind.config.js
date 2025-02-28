@@ -108,7 +108,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
         // Tremor specific shadow

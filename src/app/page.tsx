@@ -10,7 +10,7 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState('predictive25');
 
   return (
-    <div className="min-h-screen flex flex-col bg-app-background font-['Inter']">
+    <div className="min-h-screen flex flex-col bg-app-background">
       <Header activeSection={activeSection} setActiveSection={setActiveSection} />
       
       <main className="flex-grow px-4 py-8">
