@@ -12,16 +12,15 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
         <div className="flex items-center justify-between">
           {/* Logo and Brand */}
           <div className="flex items-center cursor-pointer" onClick={() => setActiveSection('awards')}>
-            <div className="w-5 h-5 mr-2 overflow-hidden">
+            <div className="w-8 h-8 mr-2 overflow-hidden">
               <img 
-                src="/images/predictive_logo.png" 
+                src="/images/predictive_logo.svg" 
                 alt="Predictive Logo" 
-                className="w-5 h-5 object-contain"
-                style={{ maxWidth: "20px", maxHeight: "20px" }}
+                className="w-full h-full object-contain"
               />
             </div>
-            <div className="text-white text-lg font-bold lowercase">
-              predictive
+            <div className="text-white text-lg font-bold lowercase tracking-tight ml-1">
+              predictive.film
             </div>
           </div>
           
