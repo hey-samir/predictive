@@ -1,7 +1,7 @@
-import '@/styles/globals.css';
+import './globals.css';
 import type { Metadata } from 'next';
 import React from 'react';
-import { inter } from '@/lib/fonts';
+import { inter } from '../lib/fonts';
 
 export const metadata: Metadata = {
   title: 'Predictive | Oscar Predictions',
