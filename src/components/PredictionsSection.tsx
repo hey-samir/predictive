@@ -414,7 +414,7 @@ const AwardCard: React.FC<{
 }> = ({ category, topNominee }) => {
   return (
     <div className="prediction-card w-full max-w-xs">
-      <div className="text-center mb-4">
+      <div className="text-center mb-3">
         <div className="card-title">
           {topNominee.nomineeName}
         </div>
@@ -423,16 +423,16 @@ const AwardCard: React.FC<{
             {topNominee.filmTitle}
           </div>
         )}
-        <div className="card-category mt-2">
+        <div className="card-category mt-1">
           {category}
         </div>
       </div>
-      <div className="flex flex-col items-center gap-2 mt-6 mb-2">
+      <div className="flex flex-col items-center mt-3">
         <div className="likelihood-value">
           {topNominee.likelihood?.toFixed(0)}%
         </div>
         {topNominee.awardSupport && (
-          <div className="award-support text-center mt-2">
+          <div className="award-support text-center">
             Supported by: {topNominee.awardSupport}
           </div>
         )}
@@ -514,7 +514,7 @@ const PredictionsSection: React.FC = () => {
       </div>
       
       {/* Award Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 mx-auto max-w-5xl py-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-12 mx-auto max-w-6xl py-8">
         {filteredCategories.map(category => (
           topNomineesMap[category] && (
             <div key={category} className="flex justify-center">
