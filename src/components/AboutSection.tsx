@@ -11,7 +11,7 @@ const AboutSection: React.FC = () => {
     <div className="max-w-6xl mx-auto">
       <h1 className="text-3xl font-bold mb-2 text-app-purple">About Predictive</h1>
       <p className="text-lg text-gray-400 mb-8">
-        Predictive uses sophisticated algorithms to predict the top Academy Award winners
+        Predictive uses sophisticated algorithms to predict the top Academy Award winners.
       </p>
       
       <div className="bg-app-card shadow rounded-xl overflow-hidden mb-8">
@@ -129,30 +129,22 @@ const AboutSection: React.FC = () => {
         <div className="p-6">
           <h2 className="text-xl font-semibold mb-4 text-app-purple">About</h2>
           <p className="mb-4 text-gray-300">
-            Predictive was built by Interspace Ventures for personal use using Replit AI and Streamlit.
-          </p>
-          <div className="flex space-x-4 mt-6">
-            <a href="https://samir.xyz" 
+            Built by{' '}
+            <a href="https://samir.xyz/ventures" 
                target="_blank" 
                rel="noopener noreferrer"
                className="font-medium text-app-purple hover:underline">
-              samir.xyz
-            </a>
-            <span className="text-gray-400">•</span>
+              Interspace Ventures
+            </a>{' '}
+            for personal use using{' '}
             <a href="https://replit.com" 
                target="_blank" 
                rel="noopener noreferrer"
                className="font-medium text-app-purple hover:underline">
-              replit.com
-            </a>
-            <span className="text-gray-400">•</span>
-            <a href="https://streamlit.io" 
-               target="_blank" 
-               rel="noopener noreferrer"
-               className="font-medium text-app-purple hover:underline">
-              streamlit.io
-            </a>
-          </div>
+              Replit AI
+            </a>{' '}
+            and Streamlit
+          </p>
         </div>
       </div>
     </div>
