@@ -413,8 +413,8 @@ const AwardCard: React.FC<{
   topNominee: NomineeData;
 }> = ({ category, topNominee }) => {
   return (
-    <div className="prediction-card">
-      <div>
+    <div className="prediction-card p-6">
+      <div className="text-center mb-4">
         <div className="card-title">
           {topNominee.nomineeName}
         </div>
@@ -423,16 +423,16 @@ const AwardCard: React.FC<{
             {topNominee.filmTitle}
           </div>
         )}
-        <div className="card-category">
+        <div className="card-category mt-2">
           {category}
         </div>
       </div>
-      <div className="flex justify-between items-end mt-4">
+      <div className="flex flex-col items-center gap-2 mt-5">
         <div className="likelihood-value">
           {topNominee.likelihood?.toFixed(0)}%
         </div>
         {topNominee.awardSupport && (
-          <div className="award-support">
+          <div className="award-support text-center">
             {topNominee.awardSupport}
           </div>
         )}
@@ -491,18 +491,16 @@ const PredictionsSection: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-8 text-white">
-      <h1 className="text-3xl font-bold mb-8 tracking-tight">
-        Oscar Predictions
-      </h1>
-      
       {/* Category Filter */}
-      <div className="flex flex-wrap gap-1 mb-8 bg-gray-100 w-fit rounded-full p-1">
+      <div className="flex flex-wrap gap-2 mb-8">
         {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
           <button
             key={category}
             onClick={() => setActiveCategory(category)}
-            className={`category-filter ${
-              activeCategory === category ? 'category-filter-active' : 'category-filter-inactive'
+            className={`px-4 py-2 text-sm font-medium transition-all rounded-md ${
+              activeCategory === category 
+                ? 'bg-[#8A3FFC] text-white' 
+                : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
             }`}
           >
             {category}
@@ -511,7 +509,7 @@ const PredictionsSection: React.FC = () => {
       </div>
       
       {/* Award Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredCategories.map(category => (
           topNomineesMap[category] && (
             <AwardCard 
