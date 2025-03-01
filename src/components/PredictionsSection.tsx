@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   NOMINATION_TYPES, 
-  NOMINATION_TYPE_DESCRIPTIONS, 
-  CURRENT_OSCAR_YEAR, 
-  AWARD_VENUES, 
-  NOMINATION_CATEGORIES,
-  THEME_COLORS 
+  CURRENT_OSCAR_YEAR 
 } from '../lib/constants';
 
 // Define nominee data type
@@ -20,14 +16,7 @@ export type NomineeData = {
   category: string;
 };
 
-// Define venue strength type
-type VenueStrength = {
-  venue: string;
-  strength: number;
-  categories: string[];
-};
-
-// Mock nominees data for 2025 (ensuring we use future predictions, not 2024 results)
+// Mock nominees data for 2025
 const generateMockNomineesData = (): NomineeData[] => {
   // Best Picture
   const bestPictureNominees = [
@@ -193,49 +182,15 @@ const generateMockNomineesData = (): NomineeData[] => {
   ];
 };
 
-// Mock venue strength data
-const mockVenueStrengths: VenueStrength[] = [
-  {
-    venue: "BAFTA",
-    strength: 0.85,
-    categories: ["Best Picture", "Directing", "Actor in a Leading Role"]
-  },
-  {
-    venue: "Golden Globes",
-    strength: 0.72,
-    categories: ["Best Picture", "Actress in a Leading Role", "Actor in a Supporting Role"]
-  },
-  {
-    venue: "Critics Choice",
-    strength: 0.68,
-    categories: ["Best Picture", "Directing", "Writing (Original Screenplay)"]
-  },
-  {
-    venue: "SAG Awards",
-    strength: 0.91,
-    categories: ["Actor in a Leading Role", "Actress in a Leading Role", "Actor in a Supporting Role", "Actress in a Supporting Role"]
-  },
-  {
-    venue: "DGA",
-    strength: 0.89,
-    categories: ["Directing"]
-  }
-];
-
-// Award Card component styled like the reference
+// Award Card component
 const AwardCard: React.FC<{ 
   category: string;
   topNominee: NomineeData;
 }> = ({ category, topNominee }) => {
-  // Use theme colors
-  const { primary, textSecondary, cardBackground } = THEME_COLORS;
-  
   return (
-    <div 
-      className="bg-app-card shadow rounded-xl overflow-hidden transition-all duration-200 hover:shadow-lg p-5 flex flex-col justify-between h-full"
-    >
+    <div className="bg-app-card shadow-card rounded-xl overflow-hidden hover:shadow-lg p-5 flex flex-col justify-between h-full transition-shadow duration-200">
       <div>
-        <div className="text-xl font-semibold text-white mb-2">
+        <div className="text-xl font-semibold text-white mb-2 tracking-tight">
           {topNominee.nomineeName}
         </div>
         {topNominee.filmTitle && (
@@ -261,51 +216,13 @@ const AwardCard: React.FC<{
   );
 };
 
-// Venue Strength Card component
-const VenueStrengthCard: React.FC<{
-  venue: VenueStrength
-}> = ({ venue }) => {
-  return (
-    <div 
-      className="bg-app-card shadow rounded-xl overflow-hidden transition-all duration-200 hover:shadow-lg p-5 flex flex-col justify-between h-full"
-    >
-      <div>
-        <h2 className="font-semibold text-lg mb-3 text-white">{venue.venue}</h2>
-        <div className="w-full bg-gray-700 rounded-full h-2.5 mb-4">
-          <div 
-            className="h-2.5 rounded-full bg-app-purple" 
-            style={{ width: `${venue.strength * 100}%` }}
-          ></div>
-        </div>
-        <p className="text-sm text-gray-400 mb-3">Predictive strength: {(venue.strength * 100).toFixed(1)}%</p>
-      </div>
-      
-      <div className="mt-2">
-        <div className="flex flex-wrap gap-2">
-          {venue.categories.map(category => (
-            <span 
-              key={category} 
-              className="px-2 py-1 text-xs rounded-full bg-app-purple/20 text-app-purple"
-            >
-              {category}
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const PredictionsSection: React.FC = () => {
-  // Use theme colors
-  const { primary } = THEME_COLORS;
-  
-  // Filter category state for portfolio view
+  // Filter category state
   const [activeCategory, setActiveCategory] = useState("All");
   
   // Data states
-  const [predictions, setPredictions] = useState<NomineeData[]>(generateMockNomineesData());
-  const [lastUpdated, setLastUpdated] = useState<string>(new Date().toLocaleString());
+  const [predictions] = useState<NomineeData[]>(generateMockNomineesData());
+  const [lastUpdated] = useState<string>(new Date().toLocaleString());
 
   // Get top nominees for each category
   const getTopNomineesMap = () => {
@@ -349,9 +266,11 @@ const PredictionsSection: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto text-white">
-      <h1 className="text-3xl font-bold mb-2 text-app-purple">Predictive {CURRENT_OSCAR_YEAR}</h1>
-      <p className="text-lg text-gray-400 mb-6">
-        Predictive uses sophisticated algorithms to predict the top Academy Award winners
+      <h1 className="text-3xl font-bold mb-2 text-app-purple tracking-tight">
+        Predictive {CURRENT_OSCAR_YEAR}
+      </h1>
+      <p className="text-lg text-gray-400 mb-8 font-light">
+        Academy Award predictions using sophisticated algorithms
       </p>
       
       {/* Category Filter */}
@@ -373,7 +292,7 @@ const PredictionsSection: React.FC = () => {
       </div>
       
       {/* Award Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredCategories.map(category => (
           topNomineesMap[category] && (
             <AwardCard 
@@ -385,7 +304,7 @@ const PredictionsSection: React.FC = () => {
         ))}
       </div>
       
-      <div className="text-xs text-gray-400 mt-8 text-right">
+      <div className="text-xs text-gray-500 mt-8 text-right">
         Last updated: {lastUpdated}
       </div>
     </div>

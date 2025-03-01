@@ -7,6 +7,9 @@ module.exports = {
     './node_modules/@tremor/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    fontFamily: {
+      sans: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
+    },
     extend: {
       colors: {
         app: {
@@ -81,57 +84,11 @@ module.exports = {
           800: '#2E7D32',
           900: '#1B5E20',
         },
-        tremor: {
-          brand: {
-            faint: '#FCE4FF',
-            muted: '#F3B7FF',
-            subtle: '#E48AFF',
-            DEFAULT: '#9C27B0',
-            emphasis: '#7B1FA2',
-            inverted: '#FFFFFF',
-          },
-          background: {
-            muted: '#F9FAFB',
-            subtle: '#F3F4F6',
-            DEFAULT: '#FFFFFF',
-            emphasis: '#374151',
-          },
-          border: {
-            DEFAULT: '#E5E7EB',
-          },
-          ring: {
-            DEFAULT: '#E5E7EB',
-          },
-          content: {
-            subtle: '#9CA3AF',
-            DEFAULT: '#6B7280',
-            emphasis: '#374151',
-            strong: '#111827',
-            inverted: '#FFFFFF',
-          },
-        },
-      },
-      fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        // Tremor specific shadow
-        'tremor-input': '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-        'tremor-card': '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
-        'tremor-dropdown': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-      },
-      borderRadius: {
-        'tremor-small': '0.375rem',
-        'tremor-default': '0.5rem',
-        'tremor-full': '9999px',
+        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
       },
     },
   },
-  safelist: [
-    {
-      pattern: /^(bg|text|border|ring)-(.*)-(50|100|200|300|400|500|600|700|800|900)/,
-      variants: ['hover', 'focus', 'dark'],
-    },
-  ],
   plugins: [],
 };
