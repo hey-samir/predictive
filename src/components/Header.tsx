@@ -7,7 +7,7 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
   return (
-    <header className="bg-app-card sticky top-0 z-10 rounded-xl mx-6 mt-6 mb-10 border border-app-purple/20 shadow-lg">
+    <header style={{ backgroundColor: 'var(--app-card)' }} className="sticky top-0 z-10 rounded-xl mx-6 mt-6 mb-10 border border-[#8A3FFC]/20 shadow-lg">
       <div className="px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo and Brand */}
@@ -31,30 +31,19 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           
           {/* Main Navigation */}
           <nav className="flex items-center space-x-4">
-            <button
-              onClick={() => setActiveSection('awards')}
-              className={`px-5 py-2 font-medium text-sm transition-all rounded-md ${
-                activeSection === 'awards' ? 'bg-app-purple shadow-md' : 'bg-app-card hover:bg-app-purple/20'
-              } text-white`}
-            >
-              Awards
-            </button>
-            <button
-              onClick={() => setActiveSection('analysis')}
-              className={`px-5 py-2 font-medium text-sm transition-all rounded-md ${
-                activeSection === 'analysis' ? 'bg-app-purple shadow-md' : 'bg-app-card hover:bg-app-purple/20'
-              } text-white`}
-            >
-              Analysis
-            </button>
-            <button
-              onClick={() => setActiveSection('about')}
-              className={`px-5 py-2 font-medium text-sm transition-all rounded-md ${
-                activeSection === 'about' ? 'bg-app-purple shadow-md' : 'bg-app-card hover:bg-app-purple/20'
-              } text-white`}
-            >
-              About
-            </button>
+            {['awards', 'analysis', 'about'].map((section) => (
+              <button
+                key={section}
+                onClick={() => setActiveSection(section)}
+                style={{ 
+                  backgroundColor: activeSection === section ? 'var(--app-purple)' : 'transparent',
+                  boxShadow: activeSection === section ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)' : 'none'
+                }}
+                className="px-5 py-2 font-medium text-sm transition-all rounded-md text-white hover:bg-[#8A3FFC]/20"
+              >
+                {section.charAt(0).toUpperCase() + section.slice(1)}
+              </button>
+            ))}
           </nav>
         </div>
       </div>

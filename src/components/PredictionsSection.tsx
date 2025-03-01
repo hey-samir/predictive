@@ -188,26 +188,26 @@ const AwardCard: React.FC<{
   topNominee: NomineeData;
 }> = ({ category, topNominee }) => {
   return (
-    <div className="bg-app-card shadow-card rounded-xl overflow-hidden hover:shadow-lg p-5 flex flex-col justify-between h-full transition-shadow duration-200">
+    <div className="prediction-card">
       <div>
-        <div className="text-xl font-semibold text-white mb-2 tracking-tight">
+        <div className="card-title">
           {topNominee.nomineeName}
         </div>
         {topNominee.filmTitle && (
-          <div className="text-sm text-gray-400 mb-2 italic">
+          <div className="card-subtitle">
             {topNominee.filmTitle}
           </div>
         )}
-        <div className="text-sm text-gray-400">
+        <div className="card-category">
           {category}
         </div>
       </div>
       <div className="flex justify-between items-end mt-4">
-        <div className="text-lg font-bold text-app-purple">
+        <div className="likelihood-value">
           {topNominee.likelihood?.toFixed(0)}%
         </div>
         {topNominee.awardSupport && (
-          <div className="text-xs text-gray-400">
+          <div className="award-support">
             {topNominee.awardSupport}
           </div>
         )}
@@ -279,12 +279,9 @@ const PredictionsSection: React.FC = () => {
           <button
             key={category}
             onClick={() => setActiveCategory(category)}
-            className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
-              activeCategory === category ? 'text-white' : 'text-app-background'
+            className={`category-filter ${
+              activeCategory === category ? 'category-filter-active' : 'category-filter-inactive'
             }`}
-            style={{ 
-              backgroundColor: activeCategory === category ? '#8A3FFC' : 'transparent',
-            }}
           >
             {category}
           </button>
