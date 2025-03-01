@@ -413,27 +413,27 @@ const AwardCard: React.FC<{
   topNominee: NomineeData;
 }> = ({ category, topNominee }) => {
   return (
-    <div className="prediction-card w-full max-w-xs">
-      <div className="text-center mb-3">
-        <div className="card-title">
+    <div className="prediction-card w-full border border-[#8A3FFC]/20 p-4">
+      <div className="text-center mb-2">
+        <div className="card-title text-lg font-semibold">
           {topNominee.nomineeName}
         </div>
         {topNominee.filmTitle && (
-          <div className="card-subtitle">
+          <div className="card-subtitle text-sm text-gray-400 mt-1">
             {topNominee.filmTitle}
           </div>
         )}
-        <div className="card-category mt-1">
+        <div className="card-category text-xs text-gray-500 uppercase tracking-wider mt-1">
           {category}
         </div>
       </div>
       <div className="flex flex-col items-center mt-3">
-        <div className="likelihood-value">
+        <div className="likelihood-value text-3xl font-bold text-[#8A3FFC]">
           {topNominee.likelihood?.toFixed(0)}%
         </div>
         {topNominee.awardSupport && (
-          <div className="award-support text-center">
-            Supported by: {topNominee.awardSupport}
+          <div className="award-support text-center text-xs text-gray-400 mt-2 line-clamp-2">
+            {topNominee.awardSupport}
           </div>
         )}
       </div>
@@ -497,15 +497,15 @@ const PredictionsSection: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-6 py-8 text-white">
       {/* Category Filter */}
-      <div className="flex justify-center flex-wrap gap-2 mb-10">
+      <div className="flex justify-center flex-wrap gap-4 mb-10">
         {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
           <button
             key={category}
             onClick={() => setActiveCategory(category)}
-            className={`category-filter ${
+            className={`px-4 py-2 text-sm uppercase tracking-wider transition-colors border ${
               activeCategory === category 
-                ? 'category-filter-active' 
-                : 'category-filter-inactive'
+                ? 'border-[#8A3FFC] text-white bg-[#8A3FFC]/10' 
+                : 'border-gray-700 text-gray-400 hover:text-white'
             }`}
           >
             {category}
@@ -513,11 +513,11 @@ const PredictionsSection: React.FC = () => {
         ))}
       </div>
       
-      {/* Award Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-12 mx-auto max-w-6xl py-8">
+      {/* Award Cards Grid - 2 per row with less padding */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-8 mx-auto max-w-5xl py-6">
         {filteredCategories.map(category => (
           topNomineesMap[category] && (
-            <div key={category} className="flex justify-center">
+            <div key={category} className="w-full">
               <AwardCard 
                 category={category}
                 topNominee={topNomineesMap[category]}
