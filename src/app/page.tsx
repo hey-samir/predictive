@@ -1,35 +1,64 @@
 'use client';
 
-import React, { useState } from 'react';
-import Header from '../components/Header';
-import PredictionsSection from '../components/PredictionsSection';
-import HistorySection from '../components/HistorySection';
-import AboutSection from '../components/AboutSection';
+import React from 'react';
 
 export default function Home() {
-  const [activeSection, setActiveSection] = useState('predictive25');
-
   return (
-    <div className="min-h-screen flex flex-col bg-app-background">
-      <Header activeSection={activeSection} setActiveSection={setActiveSection} />
+    <div style={{ 
+      backgroundColor: '#1e2638', 
+      color: 'white',
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
+      <header style={{ 
+        backgroundColor: '#8A3FFC', 
+        padding: '1rem',
+        textAlign: 'center'
+      }}>
+        <h1 style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>Predictive</h1>
+        <p>Oscar Predictions 2025</p>
+      </header>
       
-      <main className="flex-grow px-4 py-8">
-        {activeSection === 'predictive25' && <PredictionsSection />}
-        {activeSection === 'predictives' && <PredictionsSection />}
-        {activeSection === 'awards' && <PredictionsSection />}
-        {activeSection === 'history' && <HistorySection />}
-        {activeSection === 'about' && <AboutSection />}
-      </main>
-      
-      <footer className="bg-app-purple text-white py-6 mt-auto">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center">
-            <p className="font-medium">Predictive © {new Date().getFullYear()}</p>
-            <p className="text-sm mt-2 text-gray-200">
-              Accurate Academy Award predictions using advanced data analysis and machine learning
-            </p>
+      <main style={{ 
+        flex: '1',
+        padding: '2rem',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+      }}>
+        <div style={{ 
+          backgroundColor: '#2a3548',
+          padding: '1.5rem',
+          borderRadius: '0.5rem',
+          width: '100%',
+          maxWidth: '600px',
+          marginBottom: '2rem'
+        }}>
+          <h2 style={{ 
+            fontSize: '1.25rem', 
+            fontWeight: '600',
+            marginBottom: '1rem',
+            color: '#ffffff'
+          }}>Best Picture</h2>
+          <div style={{ 
+            backgroundColor: '#3a4560',
+            padding: '1rem',
+            borderRadius: '0.375rem',
+            marginBottom: '1rem'
+          }}>
+            <h3 style={{ color: '#ffffff' }}>Dune: Part Two</h3>
+            <p style={{ color: '#a0aec0', fontSize: '0.875rem' }}>Likelihood: 82%</p>
           </div>
         </div>
+      </main>
+      
+      <footer style={{ 
+        backgroundColor: '#8A3FFC',
+        padding: '1rem',
+        textAlign: 'center'
+      }}>
+        <p>Predictive © {new Date().getFullYear()}</p>
       </footer>
     </div>
   );
