@@ -9,14 +9,14 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/images/logo.png',
-        type: 'image/png',
+        url: '/images/predictive_logo.svg',
+        type: 'image/svg+xml',
       }
     ],
     apple: [
       {
-        url: '/images/logo.png',
-        type: 'image/png',
+        url: '/images/predictive_logo.svg',
+        type: 'image/svg+xml',
       }
     ],
   },
@@ -29,7 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="font-sans antialiased bg-app-background text-white min-h-screen">
+      <body className="font-sans antialiased bg-app-background text-white min-h-screen flex flex-col">
         {children}
       </body>
     </html>

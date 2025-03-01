@@ -31,45 +31,54 @@ const formatLikelihood = (value?: number): ReactElement | null => {
 
 const NomineeCard: React.FC<NomineeCardProps> = ({ nominee, isWinner = false }) => {
   const cardClass = isWinner 
-    ? "border-l-4 border-app-purple bg-app-card p-5 rounded-md shadow-md transition-all duration-200"
-    : "border-l-4 border-app-purple/40 bg-app-card p-5 rounded-md shadow-md hover:border-app-purple/60 transition-all duration-200";
+    ? "bg-gray-800 p-4 rounded-lg shadow-md transition-all duration-200 relative overflow-hidden border border-app-purple"
+    : "bg-gray-800/60 p-4 rounded-lg shadow-md hover:bg-gray-800/80 transition-all duration-200 relative overflow-hidden";
+
+  const likelihoodValue = nominee.likelihood !== undefined ? `${nominee.likelihood.toFixed(0)}%` : '';
 
   return (
     <div className={cardClass}>
-      <div className="flex flex-col md:flex-row md:justify-between">
-        <div>
-          <h3 className="font-semibold text-white text-base">{nominee.nomineeName}</h3>
-          {nominee.filmTitle && (
-            <div className="text-sm text-gray-400 italic mt-1">{nominee.filmTitle}</div>
-          )}
+      {/* Winner Badge */}
+      {isWinner && (
+        <div className="absolute top-0 right-0">
+          <div className="bg-app-purple text-white text-xs py-1 px-2 rounded-bl-md">
+            <span className="font-medium">TOP PICK</span>
+          </div>
         </div>
-        
-        <div className="mt-3 md:mt-0 flex flex-col md:items-end">
-          {nominee.likelihood !== undefined && (
-            <div className="text-sm font-medium">
-              <span className="text-gray-400 mr-1">Prediction:</span> 
-              {formatLikelihood(nominee.likelihood)}
-            </div>
+      )}
+      
+      <div className="flex justify-between items-start">
+        <div className="flex-1">
+          <div className="flex items-center">
+            <h4 className="font-semibold text-white text-base">{nominee.nomineeName}</h4>
+            {likelihoodValue && (
+              <span className="ml-2 text-sm font-bold text-app-purple">[{likelihoodValue}]</span>
+            )}
+          </div>
+          
+          {nominee.filmTitle && (
+            <div className="text-sm text-gray-400 mt-1">{nominee.filmTitle}</div>
           )}
           
-          {nominee.bettingOdds && (
-            <div className="text-sm font-medium mt-1">
-              <span className="text-gray-400 mr-1">Odds:</span> 
-              <span className="text-gray-300">{nominee.bettingOdds}</span>
-            </div>
-          )}
-          
-          {nominee.marketProbability !== undefined && (
-            <div className="text-sm font-medium mt-1">
-              <span className="text-gray-400 mr-1">Markets:</span> 
-              <span className="text-gray-300">{nominee.marketProbability.toFixed(1)}%</span>
-            </div>
-          )}
+          {/* Betting and Market data in badges */}
+          <div className="flex flex-wrap gap-2 mt-2">
+            {nominee.bettingOdds && (
+              <span className="px-2 py-0.5 text-xs bg-gray-700 rounded-full text-gray-300">
+                Odds: {nominee.bettingOdds}
+              </span>
+            )}
+            
+            {nominee.marketProbability !== undefined && (
+              <span className="px-2 py-0.5 text-xs bg-gray-700 rounded-full text-gray-300">
+                Market: {nominee.marketProbability.toFixed(0)}%
+              </span>
+            )}
+          </div>
         </div>
       </div>
       
       {nominee.awardSupport && (
-        <div className="mt-4 text-xs text-gray-400 border-t border-gray-700 pt-3">
+        <div className="mt-3 text-xs text-gray-400 border-t border-gray-700 pt-2">
           <span className="font-medium text-gray-300">Awards:</span> {nominee.awardSupport}
         </div>
       )}

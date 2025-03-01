@@ -4,9 +4,10 @@ import NomineeCard, { NomineeData } from './NomineeCard';
 type CategoryCardProps = {
   category: string;
   nominees: NomineeData[];
+  nominationType?: string; // Makers, Performers, Creators, or Crafters
 };
 
-const CategoryCard: React.FC<CategoryCardProps> = ({ category, nominees }) => {
+const CategoryCard: React.FC<CategoryCardProps> = ({ category, nominees, nominationType }) => {
   // Sort nominees by likelihood in descending order
   const sortedNominees = [...nominees].sort((a, b) => {
     if (a.likelihood === undefined && b.likelihood === undefined) return 0;
@@ -18,17 +19,32 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, nominees }) => {
   // The nominee with highest likelihood or the one with wonOscar=true
   const predictedWinner = sortedNominees.find(n => n.wonOscar) || sortedNominees[0];
 
+  let badgeColor = 'bg-app-purple';
+  if (nominationType === 'Makers') badgeColor = 'bg-blue-500';
+  if (nominationType === 'Performers') badgeColor = 'bg-pink-500';
+  if (nominationType === 'Creators') badgeColor = 'bg-green-500';
+  if (nominationType === 'Crafters') badgeColor = 'bg-amber-500';
+
   return (
-    <div className="border border-gray-700 rounded-xl p-5 mb-4 bg-[#2a3548] shadow-md">
-      <h3 className="text-xl font-semibold mb-4 text-primary-300">{category}</h3>
+    <div className="bg-app-card rounded-xl p-5 mb-8 shadow-lg border border-gray-800">
+      <div className="flex items-center mb-4">
+        <h3 className="text-xl font-semibold text-white">{category}</h3>
+        {nominationType && (
+          <span className={`ml-2 px-2 py-0.5 text-xs font-medium rounded-full ${badgeColor} text-white`}>
+            {nominationType}
+          </span>
+        )}
+      </div>
       
-      {sortedNominees.map((nominee) => (
-        <NomineeCard 
-          key={nominee.id} 
-          nominee={nominee} 
-          isWinner={nominee.id === predictedWinner.id}
-        />
-      ))}
+      <div className="space-y-3">
+        {sortedNominees.map((nominee) => (
+          <NomineeCard 
+            key={nominee.id} 
+            nominee={nominee} 
+            isWinner={nominee.id === predictedWinner.id}
+          />
+        ))}
+      </div>
     </div>
   );
 };
