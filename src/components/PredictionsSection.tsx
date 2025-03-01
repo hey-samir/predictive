@@ -509,10 +509,10 @@ const PredictionsSection: React.FC = () => {
       </div>
       
       {/* Award Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto max-w-5xl">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mx-auto max-w-5xl py-6">
         {filteredCategories.map(category => (
           topNomineesMap[category] && (
-            <div key={category} className="flex justify-center">
+            <div key={category} className="flex justify-center p-2">
               <AwardCard 
                 category={category}
                 topNominee={topNomineesMap[category]}
