@@ -16,29 +16,59 @@ export type NomineeData = {
   category: string;
 };
 
-// Mock nominees data for 2025
+// Nominees data for 2024 (for 2025 Oscars)
 const generateMockNomineesData = (): NomineeData[] => {
   // Best Picture
   const bestPictureNominees = [
     {
       id: 101,
       category: "Best Picture",
-      nomineeName: "Mission: Impossible — Impossible Fate",
-      filmTitle: "Christopher McQuarrie",
-      likelihood: 74.8,
-      bettingOdds: "3/1",
-      marketProbability: 71.2,
-      awardSupport: "PGA, Critics Choice"
+      nomineeName: "Oppenheimer",
+      filmTitle: "Universal Pictures",
+      likelihood: 92.8,
+      bettingOdds: "1/4",
+      marketProbability: 91.2,
+      awardSupport: "PGA, BAFTA, Critics Choice, Golden Globes"
     },
     {
       id: 102,
       category: "Best Picture",
-      nomineeName: "Jurassic World: Rebirth",
-      filmTitle: "David Koepp",
-      likelihood: 38.3,
-      bettingOdds: "8/1",
-      marketProbability: 35.4,
+      nomineeName: "Poor Things",
+      filmTitle: "Searchlight Pictures",
+      likelihood: 64.3,
+      bettingOdds: "6/1",
+      marketProbability: 62.4,
+      awardSupport: "Golden Globes"
+    },
+    {
+      id: 103,
+      category: "Best Picture",
+      nomineeName: "The Holdovers",
+      filmTitle: "Focus Features",
+      likelihood: 47.5,
+      bettingOdds: "12/1",
+      marketProbability: 45.2,
+      awardSupport: "Critics Choice"
+    },
+    {
+      id: 104,
+      category: "Best Picture",
+      nomineeName: "Killers of the Flower Moon",
+      filmTitle: "Apple/Paramount",
+      likelihood: 42.6,
+      bettingOdds: "16/1",
+      marketProbability: 40.3,
       awardSupport: "NBR"
+    },
+    {
+      id: 105,
+      category: "Best Picture",
+      nomineeName: "American Fiction",
+      filmTitle: "MGM",
+      likelihood: 38.1,
+      bettingOdds: "20/1",
+      marketProbability: 35.8,
+      awardSupport: "WGA"
     }
   ];
   
@@ -47,22 +77,32 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 201,
       category: "Directing",
-      nomineeName: "Denis Villeneuve",
-      filmTitle: "Dune Messiah",
-      likelihood: 82.5,
-      bettingOdds: "2/1",
-      marketProbability: 79.8,
-      awardSupport: "BAFTA, DGA, Golden Globes"
+      nomineeName: "Christopher Nolan",
+      filmTitle: "Oppenheimer",
+      likelihood: 96.5,
+      bettingOdds: "1/9",
+      marketProbability: 95.8,
+      awardSupport: "BAFTA, DGA, Golden Globes, Critics Choice"
     },
     {
       id: 202,
       category: "Directing",
-      nomineeName: "Greta Gerwig",
-      filmTitle: "The Chronicles of Narnia",
-      likelihood: 64.8,
-      bettingOdds: "4/1",
-      marketProbability: 62.7,
-      awardSupport: "NYFCC"
+      nomineeName: "Martin Scorsese",
+      filmTitle: "Killers of the Flower Moon",
+      likelihood: 48.3,
+      bettingOdds: "12/1",
+      marketProbability: 46.7,
+      awardSupport: "NBR"
+    },
+    {
+      id: 203,
+      category: "Directing",
+      nomineeName: "Yorgos Lanthimos",
+      filmTitle: "Poor Things",
+      likelihood: 38.9,
+      bettingOdds: "18/1",
+      marketProbability: 36.2,
+      awardSupport: "Golden Globes"
     }
   ];
   
@@ -71,22 +111,22 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 301,
       category: "Actor in a Leading Role",
-      nomineeName: "Robert Downey Jr.",
-      filmTitle: "Sherlock Holmes 3",
-      likelihood: 78.2,
-      bettingOdds: "2/1",
-      marketProbability: 76.5,
-      awardSupport: "BAFTA, Golden Globes, SAG"
+      nomineeName: "Cillian Murphy",
+      filmTitle: "Oppenheimer",
+      likelihood: 88.2,
+      bettingOdds: "1/3",
+      marketProbability: 86.5,
+      awardSupport: "BAFTA, SAG, Golden Globes"
     },
     {
       id: 302,
       category: "Actor in a Leading Role",
-      nomineeName: "Leonardo DiCaprio",
-      filmTitle: "Jim Jones",
-      likelihood: 69.3,
-      bettingOdds: "3/1",
-      marketProbability: 67.8,
-      awardSupport: "Critics Choice"
+      nomineeName: "Paul Giamatti",
+      filmTitle: "The Holdovers",
+      likelihood: 73.6,
+      bettingOdds: "4/1",
+      marketProbability: 71.2,
+      awardSupport: "Critics Choice, Golden Globes (Comedy)"
     }
   ];
   
@@ -95,80 +135,254 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 401,
       category: "Actress in a Leading Role",
-      nomineeName: "Zendaya",
-      filmTitle: "Dune Messiah",
-      likelihood: 85.7,
-      bettingOdds: "5/4",
-      marketProbability: 82.3,
-      awardSupport: "Golden Globes, Critics Choice"
+      nomineeName: "Emma Stone",
+      filmTitle: "Poor Things",
+      likelihood: 82.7,
+      bettingOdds: "2/5",
+      marketProbability: 80.3,
+      awardSupport: "Golden Globes, Critics Choice, BAFTA"
     },
     {
       id: 402,
       category: "Actress in a Leading Role",
-      nomineeName: "Jennifer Lawrence",
-      filmTitle: "The Wives",
+      nomineeName: "Lily Gladstone",
+      filmTitle: "Killers of the Flower Moon",
       likelihood: 71.1,
-      bettingOdds: "5/2",
+      bettingOdds: "7/2",
       marketProbability: 69.2,
-      awardSupport: "SAG"
+      awardSupport: "SAG, Golden Globes (Drama)"
+    }
+  ];
+  
+  // Supporting Actor
+  const actorSupportingNominees = [
+    {
+      id: 501,
+      category: "Actor in a Supporting Role",
+      nomineeName: "Robert Downey Jr.",
+      filmTitle: "Oppenheimer",
+      likelihood: 94.8,
+      bettingOdds: "1/8",
+      marketProbability: 93.9,
+      awardSupport: "BAFTA, SAG, Golden Globes, Critics Choice"
+    },
+    {
+      id: 502,
+      category: "Actor in a Supporting Role",
+      nomineeName: "Ryan Gosling",
+      filmTitle: "Barbie",
+      likelihood: 42.5,
+      bettingOdds: "16/1",
+      marketProbability: 40.7,
+      awardSupport: "Critics Choice"
+    }
+  ];
+  
+  // Supporting Actress
+  const actressSupportingNominees = [
+    {
+      id: 601,
+      category: "Actress in a Supporting Role",
+      nomineeName: "Da'Vine Joy Randolph",
+      filmTitle: "The Holdovers",
+      likelihood: 95.2,
+      bettingOdds: "1/12",
+      marketProbability: 94.7,
+      awardSupport: "SAG, BAFTA, Golden Globes, Critics Choice"
+    },
+    {
+      id: 602,
+      category: "Actress in a Supporting Role",
+      nomineeName: "Emily Blunt",
+      filmTitle: "Oppenheimer",
+      likelihood: 38.6,
+      bettingOdds: "20/1",
+      marketProbability: 36.4,
+      awardSupport: "BAFTA nom, SAG nom"
     }
   ];
   
   // Screenplay nominees
   const screenplayNominees = [
     {
-      id: 501,
+      id: 701,
       category: "Writing (Original Screenplay)",
-      nomineeName: "Jordan Peele",
-      filmTitle: "Nope 2",
-      likelihood: 79.4,
-      bettingOdds: "2/1",
-      marketProbability: 76.8,
-      awardSupport: "WGA, Critics Choice"
+      nomineeName: "Anatomy of a Fall",
+      filmTitle: "Justine Triet, Arthur Harari",
+      likelihood: 82.4,
+      bettingOdds: "1/2",
+      marketProbability: 80.8,
+      awardSupport: "WGA, BAFTA, Golden Globes"
     },
     {
-      id: 502,
+      id: 702,
       category: "Writing (Adapted Screenplay)",
-      nomineeName: "Emerald Fennell",
-      filmTitle: "Wuthering Heights",
-      likelihood: 68.3,
-      bettingOdds: "7/2",
-      marketProbability: 65.4,
-      awardSupport: "BAFTA"
+      nomineeName: "American Fiction",
+      filmTitle: "Cord Jefferson",
+      likelihood: 76.3,
+      bettingOdds: "2/3",
+      marketProbability: 74.4,
+      awardSupport: "WGA, BAFTA, USC Scripter"
     }
   ];
   
   // Technical categories
   const technicalNominees = [
     {
-      id: 601,
+      id: 801,
       category: "Cinematography",
-      nomineeName: "Roger Deakins",
-      filmTitle: "Blade Runner 2099",
-      likelihood: 91.2,
+      nomineeName: "Hoyte van Hoytema",
+      filmTitle: "Oppenheimer",
+      likelihood: 89.2,
       bettingOdds: "1/3",
-      marketProbability: 89.4,
+      marketProbability: 88.4,
       awardSupport: "BAFTA, ASC"
     },
     {
-      id: 602,
+      id: 802,
       category: "Film Editing",
-      nomineeName: "Thelma Schoonmaker",
-      filmTitle: "Roosevelt",
+      nomineeName: "Jennifer Lame",
+      filmTitle: "Oppenheimer",
       likelihood: 87.3,
       bettingOdds: "1/2",
       marketProbability: 84.7,
-      awardSupport: "ACE Eddie"
+      awardSupport: "ACE Eddie, BAFTA, Critics Choice"
     },
     {
-      id: 603,
+      id: 803,
       category: "Visual Effects",
-      nomineeName: "Dune Messiah",
-      filmTitle: "DNEG",
+      nomineeName: "Godzilla Minus One",
+      filmTitle: "Takashi Yamazaki",
+      likelihood: 76.8,
+      bettingOdds: "4/5",
+      marketProbability: 75.6,
+      awardSupport: "VES Awards, Critics Choice"
+    }
+  ];
+  
+  // International Feature
+  const internationalNominees = [
+    {
+      id: 901,
+      category: "International Feature Film",
+      nomineeName: "The Zone of Interest",
+      filmTitle: "United Kingdom",
+      likelihood: 88.3,
+      bettingOdds: "1/3",
+      marketProbability: 86.9,
+      awardSupport: "BAFTA, Critics Choice"
+    }
+  ];
+  
+  // Animated Feature
+  const animatedNominees = [
+    {
+      id: 1001,
+      category: "Animated Feature Film",
+      nomineeName: "The Boy and the Heron",
+      filmTitle: "Hayao Miyazaki",
+      likelihood: 85.9,
+      bettingOdds: "2/5",
+      marketProbability: 84.3,
+      awardSupport: "PGA, Golden Globes, Critics Choice, Annie Awards"
+    }
+  ];
+  
+  // Documentary Feature
+  const documentaryNominees = [
+    {
+      id: 1101,
+      category: "Documentary Feature Film",
+      nomineeName: "20 Days in Mariupol",
+      filmTitle: "Mstyslav Chernov",
+      likelihood: 76.2,
+      bettingOdds: "4/6",
+      marketProbability: 74.8,
+      awardSupport: "DGA, Critics Choice"
+    }
+  ];
+  
+  // Production Design
+  const productionDesignNominees = [
+    {
+      id: 1201,
+      category: "Production Design",
+      nomineeName: "Poor Things",
+      filmTitle: "James Price, Shona Heath",
+      likelihood: 86.7,
+      bettingOdds: "1/3",
+      marketProbability: 85.4,
+      awardSupport: "BAFTA, ADG, Critics Choice"
+    }
+  ];
+  
+  // Costume Design
+  const costumeDesignNominees = [
+    {
+      id: 1301,
+      category: "Costume Design",
+      nomineeName: "Poor Things",
+      filmTitle: "Holly Waddington",
+      likelihood: 82.9,
+      bettingOdds: "2/5",
+      marketProbability: 81.6,
+      awardSupport: "BAFTA, CDG"
+    }
+  ];
+  
+  // Makeup and Hairstyling
+  const makeupNominees = [
+    {
+      id: 1401,
+      category: "Makeup and Hairstyling",
+      nomineeName: "Poor Things",
+      filmTitle: "Nadia Stacey, Mark Coulier",
+      likelihood: 90.4,
+      bettingOdds: "1/4",
+      marketProbability: 89.8,
+      awardSupport: "BAFTA, Critics Choice"
+    }
+  ];
+  
+  // Sound
+  const soundNominees = [
+    {
+      id: 1501,
+      category: "Sound",
+      nomineeName: "Oppenheimer",
+      filmTitle: "Willie Burton, Richard King",
+      likelihood: 88.1,
+      bettingOdds: "1/3",
+      marketProbability: 87.5,
+      awardSupport: "BAFTA, MPSE, CAS"
+    }
+  ];
+  
+  // Original Score
+  const scoreNominees = [
+    {
+      id: 1601,
+      category: "Music (Original Score)",
+      nomineeName: "Ludwig Göransson",
+      filmTitle: "Oppenheimer",
       likelihood: 93.8,
       bettingOdds: "1/5",
       marketProbability: 92.6,
-      awardSupport: "VES Awards"
+      awardSupport: "Golden Globes, Critics Choice, BAFTA"
+    }
+  ];
+  
+  // Original Song
+  const songNominees = [
+    {
+      id: 1701,
+      category: "Music (Original Song)",
+      nomineeName: "What Was I Made For?",
+      filmTitle: "Barbie",
+      likelihood: 82.6,
+      bettingOdds: "1/2",
+      marketProbability: 81.3,
+      awardSupport: "Golden Globes, Critics Choice, Grammy"
     }
   ];
   
@@ -177,8 +391,19 @@ const generateMockNomineesData = (): NomineeData[] => {
     ...directingNominees,
     ...actorLeadingNominees,
     ...actressLeadingNominees,
+    ...actorSupportingNominees,
+    ...actressSupportingNominees,
     ...screenplayNominees,
-    ...technicalNominees
+    ...technicalNominees,
+    ...internationalNominees,
+    ...animatedNominees,
+    ...documentaryNominees,
+    ...productionDesignNominees,
+    ...costumeDesignNominees,
+    ...makeupNominees,
+    ...soundNominees,
+    ...scoreNominees,
+    ...songNominees
   ];
 };
 
@@ -265,13 +490,10 @@ const PredictionsSection: React.FC = () => {
   const filteredCategories = getFilteredCategories();
 
   return (
-    <div className="max-w-6xl mx-auto text-white">
-      <h1 className="text-3xl font-bold mb-2 text-app-purple tracking-tight">
-        Predictive {CURRENT_OSCAR_YEAR}
+    <div className="max-w-6xl mx-auto px-6 py-8 text-white">
+      <h1 className="text-3xl font-bold mb-8 tracking-tight">
+        Oscar Predictions
       </h1>
-      <p className="text-lg text-gray-400 mb-8 font-light">
-        Academy Award predictions using sophisticated algorithms
-      </p>
       
       {/* Category Filter */}
       <div className="flex flex-wrap gap-1 mb-8 bg-gray-100 w-fit rounded-full p-1">
@@ -289,7 +511,7 @@ const PredictionsSection: React.FC = () => {
       </div>
       
       {/* Award Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
         {filteredCategories.map(category => (
           topNomineesMap[category] && (
             <AwardCard 
