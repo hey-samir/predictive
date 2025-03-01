@@ -497,15 +497,15 @@ const PredictionsSection: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-6 py-8 text-white">
       {/* Category Filter */}
-      <div className="flex justify-center flex-wrap gap-4 mb-10">
+      <div className="flex justify-center flex-wrap gap-2 mb-10">
         {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
           <button
             key={category}
             onClick={() => setActiveCategory(category)}
-            className={`px-4 py-2 text-sm uppercase tracking-wider transition-colors border ${
+            className={`category-filter ${
               activeCategory === category 
-                ? 'border-[#8A3FFC] text-white bg-[#8A3FFC]/10' 
-                : 'border-gray-700 text-gray-400 hover:text-white'
+                ? 'category-filter-active' 
+                : 'category-filter-inactive'
             }`}
           >
             {category}
