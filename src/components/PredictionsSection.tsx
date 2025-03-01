@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   NOMINATION_TYPES, 
   CURRENT_OSCAR_YEAR 
@@ -447,7 +447,12 @@ const PredictionsSection: React.FC = () => {
   
   // Data states
   const [predictions] = useState<NomineeData[]>(generateMockNomineesData());
-  const [lastUpdated] = useState<string>(new Date().toLocaleString());
+  const [lastUpdated, setLastUpdated] = useState<string>("");
+  
+  // Use useEffect to set the date on the client side only to avoid hydration errors
+  useEffect(() => {
+    setLastUpdated(new Date().toLocaleString());
+  }, []);
 
   // Get top nominees for each category
   const getTopNomineesMap = () => {
