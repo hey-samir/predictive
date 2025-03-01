@@ -7,9 +7,9 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
   return (
-    <header style={{ backgroundColor: 'var(--app-card)' }} className="sticky top-0 z-10 mx-6 mt-6 mb-10 border border-[#8A3FFC]/20 shadow-lg">
+    <header className="sticky top-0 z-10 mx-6 mt-6 mb-10 border border-[#8A3FFC]/20 shadow-lg rounded-lg overflow-hidden" style={{ backgroundColor: 'var(--app-card)' }}>
       <div className="px-6 py-4">
-        <div className="flex items-center">
+        <div className="flex items-center justify-between">
           {/* Logo and Brand */}
           <div className="flex items-center cursor-pointer" onClick={() => setActiveSection('awards')}>
             <div className="w-5 h-5 mr-2 overflow-hidden">
@@ -26,25 +26,26 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           </div>
           
           {/* Main Navigation - Centered */}
-          <nav className="flex items-center mx-auto">
+          <nav className="flex items-center">
             {['awards', 'analysis', 'about'].map((section) => (
               <button
                 key={section}
                 onClick={() => setActiveSection(section)}
-                style={{ 
-                  backgroundColor: activeSection === section ? 'var(--app-purple)' : 'transparent',
-                  boxShadow: activeSection === section ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)' : 'none',
-                  border: activeSection === section ? '1px solid rgba(138, 63, 252, 0.5)' : '1px solid rgba(138, 63, 252, 0.2)'
-                }}
-                className="px-5 py-2 mx-2 font-medium text-sm transition-all rounded-full text-white hover:bg-[#8A3FFC]/20"
+                className={`px-5 py-2 mx-2 font-medium text-sm transition-all rounded-full text-white hover:bg-[#8A3FFC]/20 ${
+                  activeSection === section 
+                    ? 'bg-[#8A3FFC] shadow-md border border-[#8A3FFC]/50' 
+                    : 'bg-transparent border border-[#8A3FFC]/20'
+                }`}
               >
                 {section.charAt(0).toUpperCase() + section.slice(1)}
               </button>
             ))}
           </nav>
           
-          {/* Empty div to balance the flex layout */}
-          <div style={{ width: "104px" }}></div>
+          {/* User section to balance layout */}
+          <div className="opacity-0 w-24">
+            placeholder
+          </div>
         </div>
       </div>
     </header>
