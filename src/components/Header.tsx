@@ -12,11 +12,12 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
         <div className="flex items-center">
           {/* Logo and Brand */}
           <div className="flex items-center cursor-pointer" onClick={() => setActiveSection('awards')}>
-            <div className="w-6 h-6 mr-2 overflow-hidden">
+            <div className="w-5 h-5 mr-2 overflow-hidden">
               <img 
                 src="/images/predictive_logo.png" 
                 alt="Predictive Logo" 
-                className="w-6 h-6 object-contain"
+                className="w-5 h-5 object-contain"
+                style={{ maxWidth: "20px", maxHeight: "20px" }}
               />
             </div>
             <div className="text-white text-lg font-bold lowercase">
@@ -32,9 +33,10 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
                 onClick={() => setActiveSection(section)}
                 style={{ 
                   backgroundColor: activeSection === section ? 'var(--app-purple)' : 'transparent',
-                  boxShadow: activeSection === section ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)' : 'none'
+                  boxShadow: activeSection === section ? '0 4px 6px -1px rgba(0, 0, 0, 0.1)' : 'none',
+                  border: activeSection === section ? '1px solid rgba(138, 63, 252, 0.5)' : '1px solid rgba(138, 63, 252, 0.2)'
                 }}
-                className="px-5 py-2 mx-2 font-medium text-sm transition-all rounded-md text-white hover:bg-[#8A3FFC]/20"
+                className="px-5 py-2 mx-2 font-medium text-sm transition-all rounded-full text-white hover:bg-[#8A3FFC]/20"
               >
                 {section.charAt(0).toUpperCase() + section.slice(1)}
               </button>
