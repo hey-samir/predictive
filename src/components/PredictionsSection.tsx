@@ -413,7 +413,7 @@ const AwardCard: React.FC<{
   topNominee: NomineeData;
 }> = ({ category, topNominee }) => {
   return (
-    <div className="prediction-card p-6">
+    <div className="prediction-card w-full max-w-xs">
       <div className="text-center mb-4">
         <div className="card-title">
           {topNominee.nomineeName}
@@ -427,13 +427,13 @@ const AwardCard: React.FC<{
           {category}
         </div>
       </div>
-      <div className="flex flex-col items-center gap-2 mt-5">
+      <div className="flex flex-col items-center gap-2 mt-6 mb-2">
         <div className="likelihood-value">
           {topNominee.likelihood?.toFixed(0)}%
         </div>
         {topNominee.awardSupport && (
-          <div className="award-support text-center">
-            {topNominee.awardSupport}
+          <div className="award-support text-center mt-2">
+            Supported by: {topNominee.awardSupport}
           </div>
         )}
       </div>
@@ -492,15 +492,15 @@ const PredictionsSection: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-6 py-8 text-white">
       {/* Category Filter */}
-      <div className="flex flex-wrap gap-2 mb-8">
+      <div className="flex justify-center flex-wrap gap-2 mb-10">
         {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
           <button
             key={category}
             onClick={() => setActiveCategory(category)}
-            className={`px-4 py-2 text-sm font-medium transition-all rounded-md ${
+            className={`category-filter ${
               activeCategory === category 
-                ? 'bg-[#8A3FFC] text-white' 
-                : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                ? 'category-filter-active' 
+                : 'category-filter-inactive'
             }`}
           >
             {category}
@@ -509,14 +509,15 @@ const PredictionsSection: React.FC = () => {
       </div>
       
       {/* Award Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto max-w-5xl">
         {filteredCategories.map(category => (
           topNomineesMap[category] && (
-            <AwardCard 
-              key={category}
-              category={category}
-              topNominee={topNomineesMap[category]}
-            />
+            <div key={category} className="flex justify-center">
+              <AwardCard 
+                category={category}
+                topNominee={topNomineesMap[category]}
+              />
+            </div>
           )
         ))}
       </div>
