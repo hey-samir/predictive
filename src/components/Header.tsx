@@ -12,11 +12,11 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
         <div className="flex items-center">
           {/* Logo and Brand */}
           <div className="flex items-center cursor-pointer" onClick={() => setActiveSection('awards')}>
-            <div className="w-10 h-10 mr-3 overflow-hidden">
+            <div className="w-6 h-6 mr-2 overflow-hidden">
               <img 
                 src="/images/predictive_logo.png" 
                 alt="Predictive Logo" 
-                className="w-10 h-10 object-contain"
+                className="w-6 h-6 object-contain"
               />
             </div>
             <div className="text-white text-lg font-bold lowercase">
@@ -42,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           </nav>
           
           {/* Empty div to balance the flex layout */}
-          <div className="w-32"></div>
+          <div style={{ width: "104px" }}></div>
         </div>
       </div>
     </header>
