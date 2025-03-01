@@ -9,9 +9,9 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
   return (
     <header className="sticky top-0 z-10 mx-6 mt-6 mb-10 border border-[#8A3FFC]/20 shadow-lg overflow-hidden" style={{ backgroundColor: 'var(--app-card)' }}>
       <div className="px-6 py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo and Brand */}
-          <div className="flex items-center cursor-pointer" onClick={() => setActiveSection('awards')}>
+        <div className="flex items-center">
+          {/* Logo and Brand - Left-aligned */}
+          <div className="flex items-center cursor-pointer mr-auto" onClick={() => setActiveSection('awards')}>
             <div className="w-8 h-8 mr-2 overflow-hidden">
               <img 
                 src="/images/predictive_logo.svg" 
@@ -40,11 +40,6 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
               </button>
             ))}
           </nav>
-          
-          {/* User section to balance layout */}
-          <div className="opacity-0 w-24">
-            placeholder
-          </div>
         </div>
       </div>
     </header>
