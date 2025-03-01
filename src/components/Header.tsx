@@ -7,45 +7,35 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
   return (
-    <header className="sticky top-0 z-10 mx-6 mt-6 mb-10 border border-[#8A3FFC]/20 shadow-lg overflow-hidden" style={{ backgroundColor: 'var(--app-card)' }}>
-      <div className="px-6 py-4">
+    <header className="sticky top-0 z-10 bg-[#121212] py-6 px-6 md:px-12">
+      <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between">
-          {/* Logo and Brand - Left-aligned */}
-          <div className="flex items-center cursor-pointer" onClick={() => setActiveSection('awards')}>
-            <div className="w-8 h-8 mr-2">
-              <img 
-                src="/images/logo.svg"
-                alt="Predictive Logo" 
-                width={32}
-                height={32}
-              />
-            </div>
-            <div className="text-white text-lg font-bold lowercase tracking-tight ml-1">
+          {/* Brand Name - Left-aligned */}
+          <div 
+            className="flex items-center cursor-pointer" 
+            onClick={() => setActiveSection('awards')}
+          >
+            <h1 className="text-white text-xl font-bold lowercase tracking-tight">
               predictive.film
-            </div>
+            </h1>
           </div>
           
-          {/* Main Navigation */}
-          <div className="flex-1 flex justify-center">
-            <nav className="flex items-center">
-              {['awards', 'analysis', 'about'].map((section) => (
-                <button
-                  key={section}
-                  onClick={() => setActiveSection(section)}
-                  className={`px-4 py-1.5 mx-1 font-medium text-sm transition-all text-white hover:bg-[#8A3FFC]/20 ${
-                    activeSection === section 
-                      ? 'bg-[#8A3FFC] shadow-md border border-[#8A3FFC]/50' 
-                      : 'bg-transparent border border-[#8A3FFC]/20'
-                  }`}
-                >
-                  {section.charAt(0).toUpperCase() + section.slice(1)}
-                </button>
-              ))}
-            </nav>
-          </div>
-          
-          {/* Spacer for balance */}
-          <div className="w-[120px]"></div>
+          {/* Main Navigation - Right-aligned */}
+          <nav className="flex items-center space-x-10">
+            {['awards', 'analysis', 'about'].map((section) => (
+              <button
+                key={section}
+                onClick={() => setActiveSection(section)}
+                className={`font-medium text-sm uppercase tracking-wider transition-colors ${
+                  activeSection === section 
+                    ? 'text-white' 
+                    : 'text-gray-400 hover:text-white'
+                }`}
+              >
+                {section}
+              </button>
+            ))}
+          </nav>
         </div>
       </div>
     </header>
