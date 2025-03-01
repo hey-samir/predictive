@@ -7,7 +7,7 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
   return (
-    <header className="sticky top-0 z-10 mx-6 mt-6 mb-10 border border-[#8A3FFC]/20 shadow-lg rounded-lg overflow-hidden" style={{ backgroundColor: 'var(--app-card)' }}>
+    <header className="sticky top-0 z-10 mx-6 mt-6 mb-10 border border-[#8A3FFC]/20 shadow-lg overflow-hidden" style={{ backgroundColor: 'var(--app-card)' }}>
       <div className="px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo and Brand */}
@@ -31,7 +31,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
               <button
                 key={section}
                 onClick={() => setActiveSection(section)}
-                className={`px-5 py-2 mx-2 font-medium text-sm transition-all rounded-full text-white hover:bg-[#8A3FFC]/20 ${
+                className={`px-5 py-2 mx-2 font-medium text-sm transition-all text-white hover:bg-[#8A3FFC]/20 ${
                   activeSection === section 
                     ? 'bg-[#8A3FFC] shadow-md border border-[#8A3FFC]/50' 
                     : 'bg-transparent border border-[#8A3FFC]/20'
