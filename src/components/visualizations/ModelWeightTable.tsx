@@ -46,16 +46,17 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
     width: '100%',
     borderCollapse: 'collapse' as const,
     border: `2px solid ${purpleColor}30`,
-    overflow: 'hidden'
+    overflow: 'hidden',
+    fontSize: '0.75rem' // Reduced font size
   };
   
   const tableHeaderStyle = {
     backgroundColor: purpleColor,
     color: 'white',
     textTransform: 'uppercase' as const,
-    fontSize: '0.813rem',
+    fontSize: '0.75rem', // Reduced font size
     fontWeight: 'bold',
-    padding: '0.75rem 1rem',
+    padding: '0.5rem 0.5rem', // Reduced padding
     textAlign: 'left' as const
   };
   
@@ -65,7 +66,7 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
   };
 
   const rotatedCellStyle = {
-    width: '40px',
+    width: '30px', // Narrower width
     position: 'relative' as const,
     verticalAlign: 'middle' as const,
     padding: 0,
@@ -77,20 +78,20 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
     bottom: '0',
     left: '50%',
     height: '100%',
-    transformOrigin: 'left bottom 0',
-    transform: 'rotate(-90deg) translate(-100%, 0)',
+    transformOrigin: 'bottom left',
+    transform: 'rotate(-90deg) translateY(-50%)',
     whiteSpace: 'nowrap' as const,
-    fontSize: '0.9rem',
+    fontSize: '0.75rem', // Reduced font size
     fontWeight: 'bold',
     color: purpleColor,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '0 0.75rem'
+    width: '100%'
   };
 
   return (
-    <div className="bg-app-card shadow rounded-xl p-6 mb-8 overflow-x-auto">
+    <div className="bg-app-card shadow rounded-xl p-4 mb-8 overflow-x-auto">
       <h2 className="text-xl font-semibold mb-4 text-app-purple border-b border-gray-700 pb-2">Precision</h2>
       <table style={tableStyle}>
         <thead>
@@ -118,8 +119,8 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
               };
               
               const cellStyle = {
-                padding: '0.75rem 1rem',
-                fontSize: '0.813rem',
+                padding: '0.4rem 0.5rem',
+                fontSize: '0.75rem',
                 color: 'white'
               };
               
