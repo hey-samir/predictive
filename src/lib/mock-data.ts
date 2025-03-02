@@ -74,7 +74,7 @@ export function generateMockNomineesData(year: number): Nomination[] {
           year,
           category,
           nominationType,
-          nomineeName: `${nominationType} Nominee ${i+1} for ${category}`,
+          nomineeName: `Nominee ${i+1} for ${category}`,
           filmTitle: `Film Title ${i+1} (${year})`,
           wonOscar: false, // Not determined yet
           createdAt: new Date().toISOString()
