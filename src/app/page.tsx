@@ -14,7 +14,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <Header activeSection={activeSection} setActiveSection={setActiveSection} />
       
-      <main className="flex-1 p-6 max-w-7xl mx-auto w-full">
+      <main className="flex-1 px-6 pt-6 pb-0 max-w-7xl mx-auto w-full">
         {activeSection === 'awards' && <PredictionsSection />}
         {activeSection === 'analysis' && <HistorySection />}
         {activeSection === 'about' && <AboutSection />}

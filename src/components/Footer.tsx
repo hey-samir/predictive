@@ -3,14 +3,14 @@ import React from 'react';
 const Footer: React.FC = () => {
   return (
     <>
-      {/* This div adds moderate space before the footer */}
-      <div style={{ height: '120px' }}></div>
+      {/* This div adds a small space before the footer */}
+      <div style={{ height: '30px' }}></div>
 
       {/* Footer with inline styles to avoid CSS conflicts */}
       <footer style={{
-        marginTop: '60px',
-        paddingTop: '40px', 
-        paddingBottom: '30px',
+        marginTop: '20px',
+        paddingTop: '20px', 
+        paddingBottom: '20px',
         paddingLeft: '2rem',
         paddingRight: '2rem',
         borderTop: '1px solid #2D3748',

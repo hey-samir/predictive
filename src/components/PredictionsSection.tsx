@@ -700,7 +700,7 @@ const PredictionsSection: React.FC = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-8 md:px-12 py-10 text-white">
+    <div className="max-w-6xl mx-auto px-8 md:px-12 pt-8 pb-0 text-white">
       {renderContent()}
     </div>
   );
