@@ -25,23 +25,7 @@ args = "List Database Directory"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Fix Database Directory"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Initialize Database"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Check Database Init Status"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
 args = "Next.js App"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "FastAPI Server"
 
 [[workflows.workflow]]
 name = "Mkdir Command"
@@ -72,48 +56,6 @@ task = "shell.exec"
 args = "ls -la database"
 
 [[workflows.workflow]]
-name = "Fix Database Directory"
-author = "agent"
-
-[workflows.workflow.metadata]
-agentRequireRestartOnSave = false
-
-[[workflows.workflow.tasks]]
-task = "packager.installForAll"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "rm -f database && mkdir -p database"
-
-[[workflows.workflow]]
-name = "Initialize Database"
-author = "agent"
-
-[workflows.workflow.metadata]
-agentRequireRestartOnSave = false
-
-[[workflows.workflow.tasks]]
-task = "packager.installForAll"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python -m database.db_init_script"
-
-[[workflows.workflow]]
-name = "Check Database Init Status"
-author = "agent"
-
-[workflows.workflow.metadata]
-agentRequireRestartOnSave = false
-
-[[workflows.workflow.tasks]]
-task = "packager.installForAll"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python -c \"from database.db_setup import get_session; print('Database connection test:', get_session())\""
-
-[[workflows.workflow]]
 name = "Next.js App"
 author = "agent"
 
@@ -127,21 +69,6 @@ task = "packager.installForAll"
 task = "shell.exec"
 args = "npx next dev -p 5000 -H 0.0.0.0"
 waitForPort = 5000
-
-[[workflows.workflow]]
-name = "FastAPI Server"
-author = "agent"
-
-[workflows.workflow.metadata]
-agentRequireRestartOnSave = false
-
-[[workflows.workflow.tasks]]
-task = "packager.installForAll"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "uvicorn server.api:app --host 0.0.0.0 --port 5001 --reload"
-waitForPort = 5001
 
 [[ports]]
 localPort = 3000
