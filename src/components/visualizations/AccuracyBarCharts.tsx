@@ -46,7 +46,7 @@ const AccuracyBarCharts: React.FC<AccuracyBarChartsProps> = ({ accuracyData }) =
 
   return (
     <div className="bg-app-card shadow rounded-xl p-6 mb-8">
-      <h2 className="text-xl font-semibold mb-4 text-app-purple border-b border-gray-700 pb-2">Venue Accuracy By Category</h2>
+      <h2 className="text-xl font-semibold mb-4 text-app-purple border-b border-gray-700 pb-2">Accuracy</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
         {Object.entries(dataByVenue).map(([venue, data], venueIndex) => {

@@ -55,11 +55,12 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
 
   return (
     <div className="bg-app-card shadow rounded-xl p-6 mb-8 overflow-x-auto">
-      <h2 className="text-xl font-semibold mb-4 text-app-purple border-b border-gray-700 pb-2">Model Weights by Category</h2>
+      <h2 className="text-xl font-semibold mb-4 text-app-purple border-b border-gray-700 pb-2">Precision</h2>
       <table style={tableStyle}>
         <thead>
           <tr>
             <th style={tableHeaderStyle}>Category</th>
+            <th style={tableHeaderStyle}>Type</th>
             <th style={tableHeaderStyle}>Nomination</th>
             {AWARD_VENUES.filter(venue => venue !== 'Critics Choice').map(venue => (
               <th key={venue} style={tableHeaderCenterStyle}>{venue}</th>
@@ -106,10 +107,16 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
               }
             });
 
+            // Generate a sample nominee for this category
+            const exampleNominee = categoryNominees.length > 0 ? 
+              `${categoryNominees[0].nomineeName}${categoryNominees[0].filmTitle ? ` (${categoryNominees[0].filmTitle})` : ''}` : 
+              'Example Nominee';
+
             return (
               <tr key={category} style={rowStyle}>
                 <td style={nameStyle}>{category}</td>
                 <td style={cellStyle}>{nominationType}</td>
+                <td style={cellStyle}>{exampleNominee}</td>
                 {AWARD_VENUES.filter(venue => venue !== 'Critics Choice').map(venue => {
                   // Find the weight for this venue and category
                   const weight = categoryWeights.find(w => w.awardVenue === venue);

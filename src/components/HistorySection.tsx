@@ -162,46 +162,26 @@ const HistorySection: React.FC = () => {
         Exploring the data behind Oscar predictions
       </p>
       
-      {/* Nomination Type Filter */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold mb-4 text-app-purple">Filter by Nomination Type</h2>
-        <div className="flex flex-wrap gap-2">
-          {NOMINATION_CATEGORIES.map(category => (
-            <button
-              key={category}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-all
-                ${selectedCategory === category 
-                  ? 'bg-app-purple text-white shadow-md' 
-                  : 'bg-app-card text-gray-300 hover:bg-gray-700'}`}
-              onClick={() => setSelectedCategory(category)}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-      </div>
+      {/* Removed filter section as requested */}
       
       {/* Precision Section - Model Weights Table */}
       <div className="mb-8">
-        <h2 className="text-2xl font-bold mb-4 text-app-purple">Precision: Award Weight Analysis</h2>
         <ModelWeightTable 
           nominees={nominees} 
           modelWeights={modelWeights} 
-          nominationType={selectedCategory}
+          nominationType="All"
         />
       </div>
       
       {/* Accuracy Section - Bar Charts */}
       <div className="mb-8">
-        <h2 className="text-2xl font-bold mb-4 text-app-purple">Accuracy: Historical Prediction Performance</h2>
         <AccuracyBarCharts accuracyData={accuracyData} />
       </div>
       
       {/* Depth Section - Donut Charts */}
       <div className="mb-8">
-        <h2 className="text-2xl font-bold mb-4 text-app-purple">Depth: Nomination Win Likelihood</h2>
         <div className="bg-app-card shadow rounded-xl p-6">
-          <h3 className="text-xl font-semibold mb-4 text-app-purple border-b border-gray-700 pb-2">Top Nominees by Likelihood</h3>
+          <h2 className="text-xl font-semibold mb-4 text-app-purple border-b border-gray-700 pb-2">Depth</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
             {categoriesForDonutCharts.slice(0, 6).map(category => {
