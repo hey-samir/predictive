@@ -17,7 +17,6 @@ export default function Home() {
       
       <main className="flex-1 px-6 pt-6 pb-0 max-w-7xl mx-auto w-full">
         {activeSection === 'awards' && <PredictionsSection />}
-        {activeSection === 'visualizations' && <VisualizationsSection />}
         {activeSection === 'analysis' && <HistorySection />}
         {activeSection === 'about' && <AboutSection />}
       </main>

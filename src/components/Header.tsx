@@ -38,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
         
         {/* Main Navigation - Right-aligned */}
         <nav className="navbar-links">
-          {['awards', 'visualizations', 'analysis', 'about'].map((section) => (
+          {['awards', 'analysis', 'about'].map((section) => (
             <div key={section} className="relative">
               <button
                 onClick={() => setActiveSection(section)}

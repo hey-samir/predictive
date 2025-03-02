@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AWARD_VENUES, NOMINATION_TYPES } from '../../lib/constants';
 import { ModelWeight, NomineeData } from '../../lib/types';
 
@@ -28,78 +28,96 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
     nomineesByCategory[nominee.category].push(nominee);
   });
 
+  // Define styles from About page table styling
+  const purpleColor = '#8A3FFC';
+  
+  const tableStyle = {
+    width: '100%',
+    borderCollapse: 'collapse' as const,
+    border: `2px solid ${purpleColor}30`,
+    overflow: 'hidden'
+  };
+  
+  const tableHeaderStyle = {
+    backgroundColor: purpleColor,
+    color: 'white',
+    textTransform: 'uppercase' as const,
+    fontSize: '0.813rem',
+    fontWeight: 'bold',
+    padding: '0.75rem 1rem',
+    textAlign: 'left' as const
+  };
+  
+  const tableHeaderCenterStyle = {
+    ...tableHeaderStyle,
+    textAlign: 'center' as const
+  };
+
   return (
-    <div className="overflow-x-auto shadow-lg rounded-lg">
-      <table className="min-w-full bg-app-card text-gray-200">
+    <div className="bg-app-card shadow rounded-xl p-6 mb-8 overflow-x-auto">
+      <h2 className="text-xl font-semibold mb-4 text-app-purple border-b border-gray-700 pb-2">Model Weights by Category</h2>
+      <table style={tableStyle}>
         <thead>
-          <tr className="border-b border-gray-700">
-            <th className="py-3 px-4 text-left text-sm font-semibold">Category</th>
-            <th className="py-3 px-4 text-left text-sm font-semibold">Nominee</th>
-            <th className="py-3 px-4 text-left text-sm font-semibold">Film</th>
+          <tr>
+            <th style={tableHeaderStyle}>Category</th>
             {AWARD_VENUES.map(venue => (
-              <th key={venue} className="py-3 px-4 text-center text-sm font-semibold">{venue}</th>
+              <th key={venue} style={tableHeaderCenterStyle}>{venue}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {Object.entries(nomineesByCategory).flatMap(([category, nominees]) => 
-            nominees.map((nominee, index) => {
-              // Get model weights for this category
-              const categoryWeights = modelWeights.filter(w => w.category === category);
-              
-              return (
-                <tr 
-                  key={nominee.id} 
-                  className={`
-                    ${index < nominees.length - 1 ? 'border-b border-gray-800' : ''}
-                    ${index === 0 && index !== nominees.length - 1 ? 'border-t border-gray-700' : ''}
-                    hover:bg-gray-800/30 transition-colors
-                  `}
-                >
-                  {/* Show category only for the first nominee in a category */}
-                  {index === 0 ? (
+          {Object.entries(nomineesByCategory).map(([category, categoryNominees], categoryIndex) => {
+            // Get model weights for this category
+            const categoryWeights = modelWeights.filter(w => w.category === category);
+            
+            // Only show unique categories
+            if (categoryIndex > 0 && Object.keys(nomineesByCategory)[categoryIndex - 1] === category) {
+              return null;
+            }
+            
+            const rowStyle = {
+              backgroundColor: categoryIndex % 2 === 0 ? `${purpleColor}15` : 'transparent',
+              borderBottom: `1px solid ${purpleColor}30`
+            };
+            
+            const cellStyle = {
+              padding: '0.75rem 1rem',
+              fontSize: '0.813rem',
+              color: 'white'
+            };
+            
+            const nameStyle = {
+              ...cellStyle,
+              fontWeight: 'bold',
+              color: purpleColor
+            };
+            
+            const centerStyle = {
+              ...cellStyle,
+              textAlign: 'center' as const
+            };
+            
+            return (
+              <tr key={category} style={rowStyle}>
+                <td style={nameStyle}>{category}</td>
+                {AWARD_VENUES.map(venue => {
+                  // Find the weight for this venue and category
+                  const weight = categoryWeights.find(w => w.awardVenue === venue);
+                  const weightValue = weight ? weight.weight : 0;
+                  const weightPercent = (weightValue * 100).toFixed(0);
+                  
+                  return (
                     <td 
-                      className="py-3 px-4 text-left text-sm font-medium text-white"
-                      rowSpan={nominees.length}
+                      key={`${category}-${venue}`} 
+                      style={centerStyle}
                     >
-                      {category}
+                      {weightPercent}%
                     </td>
-                  ) : null}
-                  
-                  <td className="py-3 px-4 text-left text-sm">
-                    {nominee.nomineeName}
-                  </td>
-                  
-                  <td className="py-3 px-4 text-left text-sm text-gray-400">
-                    {nominee.filmTitle || ''}
-                  </td>
-                  
-                  {AWARD_VENUES.map(venue => {
-                    // Find the weight for this venue and category
-                    const weight = categoryWeights.find(w => w.awardVenue === venue);
-                    const weightValue = weight ? weight.weight : 0;
-                    
-                    // Generate a background color intensity based on weight
-                    const colorIntensity = Math.round(weightValue * 100);
-                    
-                    return (
-                      <td 
-                        key={`${nominee.id}-${venue}`} 
-                        className="py-2 px-4 text-center text-sm relative"
-                      >
-                        <div className="absolute inset-0 bg-app-purple opacity-20" 
-                          style={{ opacity: weightValue * 0.4 }}
-                        />
-                        <span className="relative z-10 font-medium">
-                          {weightValue.toFixed(2)}
-                        </span>
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })
-          )}
+                  );
+                })}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

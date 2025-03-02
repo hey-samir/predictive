@@ -70,9 +70,8 @@ const NomineeDonutChart: React.FC<NomineeDonutChartProps> = ({ nominees, categor
   };
 
   return (
-    <div className="bg-app-card rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow">
+    <div className="bg-app-card/50 rounded-lg shadow border border-gray-700 p-4">
       <h3 className="text-lg font-semibold text-app-purple mb-1">{category}</h3>
-      <p className="text-sm text-gray-400 mb-4">Top contenders by likelihood</p>
       
       {chartData.length > 0 ? (
         <div className="h-64">
