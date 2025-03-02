@@ -60,7 +60,8 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
         <thead>
           <tr>
             <th style={tableHeaderStyle}>Category</th>
-            {AWARD_VENUES.map(venue => (
+            <th style={tableHeaderStyle}>Nomination</th>
+            {AWARD_VENUES.filter(venue => venue !== 'Critics Choice').map(venue => (
               <th key={venue} style={tableHeaderCenterStyle}>{venue}</th>
             ))}
           </tr>
@@ -97,10 +98,19 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
               textAlign: 'center' as const
             };
             
+            // Find nomination type for this category
+            let nominationType = "N/A";
+            Object.entries(NOMINATION_TYPES).forEach(([type, categories]) => {
+              if (categories.includes(category)) {
+                nominationType = type;
+              }
+            });
+
             return (
               <tr key={category} style={rowStyle}>
                 <td style={nameStyle}>{category}</td>
-                {AWARD_VENUES.map(venue => {
+                <td style={cellStyle}>{nominationType}</td>
+                {AWARD_VENUES.filter(venue => venue !== 'Critics Choice').map(venue => {
                   // Find the weight for this venue and category
                   const weight = categoryWeights.find(w => w.awardVenue === venue);
                   const weightValue = weight ? weight.weight : 0;

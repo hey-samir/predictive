@@ -11,7 +11,8 @@ const AccuracyBarCharts: React.FC<AccuracyBarChartsProps> = ({ accuracyData }) =
   // Group data by venue
   const dataByVenue: Record<string, HistoricalAccuracy[]> = {};
   
-  AWARD_VENUES.forEach(venue => {
+  // Filter out Critics Choice from venues
+  AWARD_VENUES.filter(venue => venue !== 'Critics Choice').forEach(venue => {
     dataByVenue[venue] = accuracyData.filter(item => item.venue === venue);
   });
 

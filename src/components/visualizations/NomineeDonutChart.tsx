@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 import { NomineeData } from '../../lib/types';
 import { THEME_COLORS } from '../../lib/constants';
@@ -9,18 +9,27 @@ interface NomineeDonutChartProps {
 }
 
 const NomineeDonutChart: React.FC<NomineeDonutChartProps> = ({ nominees, category }) => {
-  // Sort nominees by likelihood and take top 5
-  const topNominees = [...nominees]
-    .filter(nominee => nominee.likelihood !== undefined)
-    .sort((a, b) => (b.likelihood || 0) - (a.likelihood || 0))
-    .slice(0, 5);
+  const [chartData, setChartData] = useState<any[]>([]);
+  const [chartKey, setChartKey] = useState(0);
 
-  // Generate data for the chart
-  const chartData = topNominees.map(nominee => ({
-    name: nominee.nomineeName,
-    film: nominee.filmTitle || '',
-    value: nominee.likelihood || 0,
-  }));
+  useEffect(() => {
+    // Sort nominees by likelihood and take top 5
+    const topNominees = [...nominees]
+      .filter(nominee => nominee.likelihood !== undefined)
+      .sort((a, b) => (b.likelihood || 0) - (a.likelihood || 0))
+      .slice(0, 5);
+
+    // Generate data for the chart
+    const data = topNominees.map(nominee => ({
+      name: nominee.nomineeName,
+      film: nominee.filmTitle || '',
+      value: nominee.likelihood || 0,
+    }));
+
+    setChartData(data);
+    // Force re-render of chart by changing key
+    setChartKey(prev => prev + 1);
+  }, [nominees, category]);
 
   // Color palette for the pie slices
   const COLORS = [
@@ -74,7 +83,7 @@ const NomineeDonutChart: React.FC<NomineeDonutChartProps> = ({ nominees, categor
       <h3 className="text-lg font-semibold text-app-purple mb-1">{category}</h3>
       
       {chartData.length > 0 ? (
-        <div className="h-64">
+        <div className="h-64" key={chartKey}>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
@@ -87,6 +96,8 @@ const NomineeDonutChart: React.FC<NomineeDonutChartProps> = ({ nominees, categor
                 paddingAngle={5}
                 dataKey="value"
                 labelLine={false}
+                animationBegin={0}
+                animationDuration={1000}
               >
                 {chartData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
