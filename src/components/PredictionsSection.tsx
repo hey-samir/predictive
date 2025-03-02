@@ -448,15 +448,7 @@ const AwardCard: React.FC<{
             {topNominee.filmTitle}
           </div>
         )}
-        <div style={{
-          fontSize: '0.7rem',
-          color: '#a0aec0',
-          textTransform: 'uppercase',
-          letterSpacing: '0.05em',
-          opacity: 0.8
-        }}>
-          {category}
-        </div>
+
       </div>
       <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '12px'}}>
         <div style={{
@@ -681,27 +673,7 @@ const PredictionsSection: React.FC = () => {
           </div>
         </div>
         
-        {/* Update button and timestamp */}
-        <div className="flex justify-center mt-8">
-          <button 
-            className="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-md transition text-sm"
-            onClick={async () => {
-              try {
-                setIsLoading(true);
-                const { runPredictions } = await import('../lib/api');
-                await runPredictions();
-                // Reload the page to get fresh data
-                window.location.reload();
-              } catch (err) {
-                console.error('Error running predictions:', err);
-                setError('Failed to run predictions.');
-                setIsLoading(false);
-              }
-            }}
-          >
-            Update Predictions
-          </button>
-        </div>
+
       </>
     );
   };
