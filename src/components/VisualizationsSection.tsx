@@ -150,17 +150,10 @@ const VisualizationsSection: React.FC = () => {
   
   if (isLoading) {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold mb-3 text-app-purple">Oscar Visualizations</h1>
-        <p className="text-lg text-gray-400 mb-8">
-          Explore the data behind Oscar predictions with interactive visualizations
-        </p>
-        
+      <div className="max-w-7xl mx-auto px-4 py-12 flex justify-center items-center min-h-[60vh]">
         <LoadingCard 
-          title="Visualization Data" 
-          message="Loading analytics visualizations..." 
           spinnerSize="large"
-          className="max-w-md mx-auto mb-8"
+          className="max-w-md mx-auto"
         />
       </div>
     );

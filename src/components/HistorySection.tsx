@@ -170,12 +170,10 @@ const HistorySection: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-12">
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-12 flex justify-center items-center min-h-[60vh]">
         <LoadingCard 
-          title="Analytics Data" 
-          message="Loading visualization data..." 
           spinnerSize="large"
-          className="max-w-md mx-auto mb-8"
+          className="max-w-md mx-auto"
         />
       </div>
     );

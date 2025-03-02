@@ -588,10 +588,8 @@ const PredictionsSection: React.FC = () => {
   const renderContent = () => {
     if (isLoading) {
       return (
-        <div className="py-12">
+        <div className="py-12 flex justify-center items-center min-h-[60vh]">
           <LoadingCard 
-            title="Oscar Predictions" 
-            message="Analyzing award data and calculating predictions..." 
             spinnerSize="large"
             className="max-w-md mx-auto"
           />
