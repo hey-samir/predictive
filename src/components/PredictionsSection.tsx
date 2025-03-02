@@ -551,22 +551,18 @@ const PredictionsSection: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-8 md:px-12 py-10 text-white">
-      {/* Category Filter - Always visible with responsive sizing */}
+      {/* Category Filter with original styling */}
       <div className="max-w-5xl mx-auto mb-10 px-4">
-        <div className="flex justify-center items-center flex-wrap">
+        <div className="flex justify-center items-center space-x-4">
           {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`m-1 px-3 py-2 rounded-md transition-all duration-200 text-center ${
+              className={`category-filter ${
                 activeCategory === category 
-                  ? 'bg-[#8A3FFC]/20 text-white border border-[#8A3FFC]' 
-                  : 'bg-gray-800/30 text-gray-300 border border-gray-700 hover:border-gray-500'
+                  ? 'category-filter-active' 
+                  : 'category-filter-inactive'
               }`}
-              style={{
-                fontSize: 'clamp(0.7rem, 2vw, 0.875rem)', // Responsive font size
-                whiteSpace: 'nowrap'
-              }}
             >
               {category}
             </button>

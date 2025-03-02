@@ -439,17 +439,19 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 0;
   font-size: 0.875rem;
   font-weight: 500;
+  letter-spacing: 0.05em;
   transition: all 0.2s ease;
   cursor: pointer;
   border: 1px solid rgba(138, 63, 252, 0.2);
   margin: 0.25rem 0.5rem;
+  white-space: nowrap;
 }
 
 .category-filter-active {
   color: white;
-  background-color: var(--app-purple);
-  border-color: rgba(138, 63, 252, 0.5);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.15);
+  background-color: rgba(138, 63, 252, 0.2);
+  border-color: var(--app-purple);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .category-filter-inactive {
@@ -469,17 +471,20 @@ h1, h2, h3, h4, h5, h6 {
   background: linear-gradient(to right, var(--app-purple), #6A1B9A);
 }
 
-/* Force 2 cards per row in predictions section */
+/* Force 2 cards per row in predictions section with narrower width */
 .awards-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  gap: 2rem;
   width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 @media (max-width: 640px) {
   .awards-grid {
     grid-template-columns: 1fr;
+    max-width: 400px;
   }
 }
 
@@ -488,25 +493,31 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.5rem;
-  background-color: var(--app-background);
+  padding: 1.5rem 2rem;
+  background-color: transparent;
 }
 
 .navbar-links {
   display: flex;
-  gap: 2rem;
+  gap: 2.5rem;
   align-items: center;
 }
 
 .navbar-link {
-  color: var(--app-text-secondary);
-  font-size: 0.9rem;
+  color: white;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   font-weight: 500;
   transition: all 0.2s ease;
+  background: transparent;
+  border: none;
+  padding: 4px 2px;
+  cursor: pointer;
 }
 
 .navbar-link:hover {
-  color: var(--app-text-primary);
+  opacity: 0.9;
 }
 
 .navbar-link-active {
