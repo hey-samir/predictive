@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
             className="cursor-pointer" 
             onClick={() => setActiveSection('awards')}
           >
-            <h1 className="text-white text-lg font-bold lowercase tracking-tight flex items-center">
+            <h1 className="text-white text-sm font-bold lowercase tracking-tight flex items-center">
               predictive<span className="text-[#8A3FFC]">:film</span>
             </h1>
           </div>

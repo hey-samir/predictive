@@ -558,9 +558,9 @@ const PredictionsSection: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-8 md:px-12 py-10 text-white">
-      {/* Category Filter with tighter spacing and explicit centering */}
-      <div className="w-full mx-auto mb-10">
-        <div className="flex justify-center items-center" style={{gap: '4px'}}>
+      {/* Category Filter with larger buttons and proper spacing */}
+      <div className="w-full mx-auto mb-16 mt-8">
+        <div className="flex flex-wrap justify-center items-center" style={{gap: '12px'}}>
           {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
             <button
               key={category}
@@ -577,12 +577,17 @@ const PredictionsSection: React.FC = () => {
         </div>
       </div>
       
-      {/* Award Cards Grid - Using our guaranteed 2-column class */}
-      <div className="max-w-5xl mx-auto py-6">
-        <div className="awards-grid">
+      {/* Award Cards Grid - Force 2-column layout with !important */}
+      <div className="w-full mx-auto py-6" style={{maxWidth: '650px'}}>
+        <div className="awards-grid" style={{
+          display: 'grid !important',
+          gridTemplateColumns: 'repeat(2, 1fr) !important',
+          gap: '2rem !important',
+          width: '100% !important'
+        }}>
           {filteredCategories.map(category => (
             topNomineesMap[category] && (
-              <div key={category} className="h-full">
+              <div key={category} className="h-full" style={{width: '100%'}}>
                 <AwardCard 
                   category={category}
                   topNominee={topNomineesMap[category]}
