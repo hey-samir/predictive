@@ -157,12 +157,7 @@ const HistorySection: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <h1 className="text-3xl font-bold mb-3 text-app-purple">Data & Analysis</h1>
-      <p className="text-lg text-gray-400 mb-6">
-        Exploring the data behind Oscar predictions
-      </p>
-      
-      {/* Removed filter section as requested */}
+      {/* Header removed as requested */}
       
       {/* Precision Section - Model Weights Table */}
       <div className="mb-8">
