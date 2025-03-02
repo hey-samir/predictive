@@ -156,7 +156,7 @@ const HistorySection: React.FC = () => {
     : NOMINATION_TYPES[selectedCategory] || [];
 
   return (
-    <div className="max-w-6xl mx-auto px-8 sm:px-10 lg:px-12">
+    <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
       {/* Header removed as requested */}
       
       {/* Precision Section - Model Weights Table */}
