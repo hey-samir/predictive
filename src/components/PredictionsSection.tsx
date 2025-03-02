@@ -635,7 +635,17 @@ const PredictionsSection: React.FC = () => {
       <>
         {/* Category Filter with larger buttons and proper spacing */}
         <div className="w-full mx-auto mb-16 mt-8 text-center">
-          <div className="inline-flex flex-wrap justify-center items-center" style={{gap: '12px'}}>
+          <div 
+            style={{
+              display: 'flex', 
+              flexWrap: 'wrap', 
+              justifyContent: 'center', 
+              alignItems: 'center',
+              gap: '12px',
+              margin: '0 auto',
+              width: 'fit-content'
+            }}
+          >
             {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
               <button
                 key={category}
