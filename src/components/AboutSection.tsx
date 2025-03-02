@@ -50,10 +50,10 @@ const AboutSection: React.FC = () => {
     textAlign: 'center' as const
   };
   
-  // Render a table row with optional highlight
-  const renderTableRow = (name: string, description: string, details: string, isHighlighted: boolean = false) => {
+  // Render a table row with consistent alternating pattern
+  const renderTableRow = (name: string, description: string, details: string, isAlternate: boolean = false) => {
     const rowStyle = {
-      backgroundColor: isHighlighted ? `${purpleColor}15` : 'transparent',
+      backgroundColor: isAlternate ? `${purpleColor}10` : 'transparent',
       borderBottom: `1px solid ${purpleColor}30`
     };
     
@@ -157,7 +157,7 @@ const AboutSection: React.FC = () => {
                 'Rotten Tomatoes',
                 'Critics\' Metascore',
                 'Professional reception and consensus',
-                true
+                false
               )}
               {renderTableRow(
                 'Kalshi',
@@ -198,7 +198,8 @@ const AboutSection: React.FC = () => {
               {renderTableRow(
                 'Performers',
                 'The faces on screen',
-                'Leading & Supporting Actor/Actress'
+                'Leading & Supporting Actor/Actress',
+                false
               )}
               {renderTableRow(
                 'Creators',
@@ -209,7 +210,8 @@ const AboutSection: React.FC = () => {
               {renderTableRow(
                 'Crafters',
                 'The technical wizards',
-                'Cinematography, Editing, Production Design, Costume, Makeup, Sound, VFX'
+                'Cinematography, Editing, Production Design, Costume, Makeup, Sound, VFX',
+                false
               )}
             </tbody>
           </table>
@@ -238,7 +240,8 @@ const AboutSection: React.FC = () => {
               {renderTableRow(
                 'Golden Globe Awards',
                 'Hollywood Foreign Press Association',
-                'January'
+                'January',
+                false
               )}
               {renderTableRow(
                 'BAFTA Awards',
@@ -250,23 +253,25 @@ const AboutSection: React.FC = () => {
                 'Screen Actors Guild (SAG)',
                 'SAG-AFTRA',
                 'February',
-                true
+                false
               )}
               {renderTableRow(
                 'Directors Guild (DGA)',
                 'Directors Guild of America',
-                'February'
+                'February',
+                true
               )}
               {renderTableRow(
                 'Producers Guild (PGA)',
                 'Producers Guild of America',
                 'February',
-                true
+                false
               )}
               {renderTableRow(
                 'Writers Guild (WGA)',
                 'Writers Guild of America',
-                'February'
+                'February',
+                true
               )}
             </tbody>
           </table>
