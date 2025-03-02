@@ -72,7 +72,7 @@ const AccuracyBarCharts: React.FC<AccuracyBarChartsProps> = ({ accuracyData }) =
                   <BarChart
                     data={chartData}
                     layout="vertical"
-                    margin={{ top: 5, right: 20, left: 20, bottom: 5 }}
+                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                   >
                     <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#404859" />
                     <XAxis 
@@ -85,13 +85,13 @@ const AccuracyBarCharts: React.FC<AccuracyBarChartsProps> = ({ accuracyData }) =
                       dataKey="name" 
                       type="category" 
                       tick={{ fill: '#B4B7BD' }}
-                      width={100}
-                      tickFormatter={(value) => value.length > 12 ? `${value.substring(0, 12)}...` : value}
+                      width={90}
+                      tickFormatter={(value) => value.length > 10 ? `${value.substring(0, 10)}...` : value}
                     />
                     <Tooltip content={<CustomTooltip />} />
-                    <Bar dataKey="accuracy" radius={[0, 4, 4, 0]}>
+                    <Bar dataKey="accuracy" barSize={20} fill={THEME_COLORS.primary} radius={[0, 4, 4, 0]}>
                       {chartData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
+                        <Cell key={`cell-${index}`} fill={getBarColor(index)} />
                       ))}
                     </Bar>
                   </BarChart>

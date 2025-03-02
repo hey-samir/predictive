@@ -66,12 +66,12 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
   };
 
   const rotatedCellStyle = {
-    width: '30px', // Narrower width
+    width: '20px', // Even narrower width
     position: 'relative' as const,
     verticalAlign: 'middle' as const,
     padding: 0,
     backgroundColor: `${purpleColor}25`,
-    height: '100px' // Ensure cell has enough height for text
+    height: '80px' // Shorter height for text
   };
 
   const rotatedTextStyle = {
