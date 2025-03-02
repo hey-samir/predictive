@@ -488,9 +488,25 @@ const PredictionsSection: React.FC = () => {
   const [predictions] = useState<NomineeData[]>(generateMockNomineesData());
   const [lastUpdated, setLastUpdated] = useState<string>("");
   
+  // State for filter dropdown
+  const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
+
   // Use useEffect to set the date on the client side only to avoid hydration errors
   useEffect(() => {
     setLastUpdated(new Date().toLocaleString());
+    
+    // Add event listener to close dropdown when clicking outside
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.filter-dropdown-container')) {
+        setFilterDropdownOpen(false);
+      }
+    };
+    
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
   }, []);
 
   // Get top nominees for each category
@@ -535,25 +551,63 @@ const PredictionsSection: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-8 md:px-12 py-10 text-white">
-      {/* Category Filter - Responsive and stays on one line */}
-      <div className="max-w-5xl mx-auto mb-10 px-8">
-        {/* Single responsive filter that changes layout based on screen size */}
-        <div className="flex sm:flex-row flex-col sm:justify-center items-center sm:space-x-4 space-y-2 sm:space-y-0" 
-          style={{
-            whiteSpace: 'nowrap'
-          }}
-        >
-          <style jsx>{`
-            @media (max-width: 768px) {
-              .category-filter {
-                font-size: clamp(0.7rem, 2vw, 0.875rem);
-                padding: 0.5rem 0.75rem;
-                width: 100%;
-                text-align: center;
-              }
-            }
-          `}</style>
+      {/* Category Filter - Adaptive based on viewport width */}
+      <div className="max-w-5xl mx-auto mb-10 px-4">
+        {/* CSS for responsiveness */}
+        <style jsx>{`
+          /* Filter button styles */
+          .category-filter {
+            font-size: 0.875rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+          }
           
+          /* Dropdown styles */
+          .filter-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #222;
+            border-radius: 0.375rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 50;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+          }
+          
+          .filter-dropdown button {
+            width: 100%;
+            text-align: left;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.25rem;
+            margin: 0.25rem 0;
+          }
+          
+          /* Responsive behaviors */
+          @media (max-width: 640px) {
+            .filter-button-group {
+              display: none;
+            }
+            .filter-dropdown-container {
+              display: block;
+            }
+          }
+          
+          @media (min-width: 641px) {
+            .filter-button-group {
+              display: flex;
+            }
+            .filter-dropdown-container {
+              display: none;
+            }
+          }
+        `}</style>
+        
+        {/* Desktop/tablet view - All buttons in a row */}
+        <div className="filter-button-group justify-center items-center space-x-4">
           {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
             <button
               key={category}
@@ -567,6 +621,38 @@ const PredictionsSection: React.FC = () => {
               {category}
             </button>
           ))}
+        </div>
+        
+        {/* Mobile view - Dropdown menu */}
+        <div className="filter-dropdown-container relative text-center">
+          <button 
+            className="category-filter category-filter-active uppercase tracking-wider"
+            onClick={(e) => {
+              e.stopPropagation();
+              setFilterDropdownOpen(!filterDropdownOpen);
+            }}
+          >
+            FILTER: {activeCategory}
+          </button>
+          
+          {filterDropdownOpen && (
+            <div className="filter-dropdown">
+              {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
+                <button
+                  key={category}
+                  onClick={() => {
+                    setActiveCategory(category);
+                    setFilterDropdownOpen(false);
+                  }}
+                  className={`hover:bg-gray-700 ${
+                    activeCategory === category ? 'text-[#8A3FFC]' : 'text-white'
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
       
