@@ -1,5 +1,14 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip as RechartsTooltip,
+  ResponsiveContainer,
+  Cell
+} from 'recharts';
 import { HistoricalAccuracy } from '../../lib/types';
 import { AWARD_VENUES, THEME_COLORS } from '../../lib/constants';
 
@@ -88,7 +97,7 @@ const AccuracyBarCharts: React.FC<AccuracyBarChartsProps> = ({ accuracyData }) =
                       width={90}
                       tickFormatter={(value) => value.length > 10 ? `${value.substring(0, 10)}...` : value}
                     />
-                    <Tooltip content={<CustomTooltip />} />
+                    <RechartsTooltip content={<CustomTooltip />} />
                     <Bar dataKey="accuracy" barSize={20} fill={THEME_COLORS.primary} radius={[0, 4, 4, 0]}>
                       {chartData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={getBarColor(index)} />
