@@ -1,17 +1,16 @@
 import React from 'react';
 
 const Footer: React.FC = () => {
-  // Use spacer div to ensure there's significant space before the footer
   return (
     <>
-      {/* This div adds space before the footer */}
-      <div style={{ height: '300px' }}></div>
+      {/* This div adds moderate space before the footer */}
+      <div style={{ height: '120px' }}></div>
 
       {/* Footer with inline styles to avoid CSS conflicts */}
       <footer style={{
-        marginTop: '300px',
-        paddingTop: '80px', 
-        paddingBottom: '40px',
+        marginTop: '60px',
+        paddingTop: '40px', 
+        paddingBottom: '30px',
         paddingLeft: '2rem',
         paddingRight: '2rem',
         borderTop: '1px solid #2D3748',
