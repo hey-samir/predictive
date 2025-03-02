@@ -413,26 +413,65 @@ const AwardCard: React.FC<{
   topNominee: NomineeData;
 }> = ({ category, topNominee }) => {
   return (
-    <div className="prediction-card w-full border border-[#8A3FFC]/20 p-4">
-      <div className="text-center mb-2">
-        <div className="card-title text-lg font-semibold">
+    <div style={{
+      backgroundColor: 'var(--app-card)',
+      border: '1px solid rgba(138, 63, 252, 0.15)',
+      padding: '1.25rem',
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between'
+    }}>
+      <div style={{textAlign: 'center', marginBottom: '12px'}}>
+        <div style={{
+          fontSize: '1rem',
+          fontWeight: 600,
+          color: 'white',
+          marginBottom: '8px'
+        }}>
           {topNominee.nomineeName}
         </div>
         {topNominee.filmTitle && (
-          <div className="card-subtitle text-sm text-gray-400 mt-1">
+          <div style={{
+            fontSize: '0.8rem',
+            color: '#a0aec0',
+            marginBottom: '8px',
+            fontStyle: 'italic'
+          }}>
             {topNominee.filmTitle}
           </div>
         )}
-        <div className="card-category text-xs text-gray-500 uppercase tracking-wider mt-1">
+        <div style={{
+          fontSize: '0.7rem',
+          color: '#a0aec0',
+          textTransform: 'uppercase',
+          letterSpacing: '0.05em',
+          opacity: 0.8
+        }}>
           {category}
         </div>
       </div>
-      <div className="flex flex-col items-center mt-3">
-        <div className="likelihood-value text-3xl font-bold text-[#8A3FFC]">
+      <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '12px'}}>
+        <div style={{
+          fontSize: '1.5rem',
+          fontWeight: 700,
+          color: 'var(--app-purple)',
+          marginTop: '8px'
+        }}>
           {topNominee.likelihood?.toFixed(0)}%
         </div>
         {topNominee.awardSupport && (
-          <div className="award-support text-center text-xs text-gray-400 mt-2 line-clamp-2">
+          <div style={{
+            fontSize: '0.7rem',
+            color: '#a0aec0',
+            textAlign: 'center',
+            lineHeight: 1.4,
+            marginTop: '8px',
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden'
+          }}>
             {topNominee.awardSupport}
           </div>
         )}
@@ -513,18 +552,27 @@ const PredictionsSection: React.FC = () => {
         ))}
       </div>
       
-      {/* Award Cards Grid - 2 per row with less padding */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-8 mx-auto max-w-5xl py-6">
-        {filteredCategories.map(category => (
-          topNomineesMap[category] && (
-            <div key={category} className="w-full">
-              <AwardCard 
-                category={category}
-                topNominee={topNomineesMap[category]}
-              />
-            </div>
-          )
-        ))}
+      {/* Award Cards Grid - using flexbox for 2 per row with consistent layout */}
+      <div className="max-w-5xl mx-auto py-6">
+        <div className="flex flex-wrap" style={{ margin: "-10px" }}>
+          {filteredCategories.map(category => (
+            topNomineesMap[category] && (
+              <div key={category} 
+                style={{ 
+                  width: "100%", 
+                  padding: "10px", 
+                  boxSizing: "border-box" 
+                }}
+                className="sm:!w-1/2"
+              >
+                <AwardCard 
+                  category={category}
+                  topNominee={topNomineesMap[category]}
+                />
+              </div>
+            )
+          ))}
+        </div>
       </div>
       
       <div className="text-xs text-gray-500 mt-8 text-right">

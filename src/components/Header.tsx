@@ -7,7 +7,7 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
   return (
-    <header className="sticky top-0 z-10 py-6 px-6 md:px-12">
+    <header className="sticky top-0 z-10 py-6 px-6 md:px-12" style={{background: 'transparent'}}>
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between">
           {/* Brand Name - Left-aligned */}
@@ -26,12 +26,23 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
               <div key={section} className="relative">
                 <button
                   onClick={() => setActiveSection(section)}
-                  className="font-medium text-base uppercase tracking-wider transition-colors text-white px-1 bg-transparent"
+                  style={{
+                    fontWeight: 500,
+                    fontSize: '14px',
+                    letterSpacing: '0.05em',
+                    textTransform: 'uppercase',
+                    color: 'white',
+                    background: 'transparent',
+                    border: 'none',
+                    padding: '4px 2px',
+                    transition: 'all 0.2s ease'
+                  }}
                 >
                   {section.toUpperCase()}
                 </button>
                 {activeSection === section && (
-                  <div className="absolute bottom-[-8px] left-0 right-0 h-[2px] bg-[#8A3FFC]"></div>
+                  <div className="absolute bottom-[-8px] left-0 right-0 h-[2px]" 
+                    style={{backgroundColor: '#8A3FFC'}}></div>
                 )}
               </div>
             ))}
