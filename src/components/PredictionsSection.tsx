@@ -492,15 +492,50 @@ const PredictionsSection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   
   // Data states
-  const [predictions] = useState<NomineeData[]>(generateMockNomineesData());
+  const [predictions, setPredictions] = useState<NomineeData[]>([]);
   const [lastUpdated, setLastUpdated] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   
   // State for filter dropdown
   const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
 
-  // Use useEffect to set the date on the client side only to avoid hydration errors
+  // Fetch data from the API
   useEffect(() => {
-    setLastUpdated(new Date().toLocaleString());
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        // Import api functions
+        const { getNominees, runPredictions } = await import('../lib/api');
+        
+        // Fetch nominees data
+        const nomineesData = await getNominees();
+        
+        // Transform the data to flat array format
+        const nomineesList: NomineeData[] = [];
+        Object.entries(nomineesData).forEach(([category, nominees]) => {
+          nominees.forEach((nominee) => {
+            nomineesList.push({
+              ...nominee,
+              category
+            });
+          });
+        });
+        
+        setPredictions(nomineesList);
+        setLastUpdated(new Date().toLocaleString());
+      } catch (err) {
+        console.error('Error fetching data:', err);
+        setError('Failed to load predictions data. Using mock data instead.');
+        // Fallback to mock data
+        setPredictions(generateMockNomineesData());
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    fetchData();
     
     // Add event listener to close dropdown when clicking outside
     const handleClickOutside = (event: MouseEvent) => {
@@ -556,49 +591,124 @@ const PredictionsSection: React.FC = () => {
   const topNomineesMap = getTopNomineesMap();
   const filteredCategories = getFilteredCategories();
 
+  // Handle different UI states
+  const renderContent = () => {
+    if (isLoading) {
+      return (
+        <div className="flex flex-col items-center justify-center py-12">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-purple-500 mb-4"></div>
+          <p className="text-lg">Loading predictions data...</p>
+        </div>
+      );
+    }
+
+    if (error) {
+      return (
+        <div className="flex flex-col items-center justify-center py-12">
+          <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-6 max-w-md">
+            <p className="text-red-400 mb-4">{error}</p>
+            <p className="text-sm opacity-80">Showing mock data as fallback.</p>
+          </div>
+        </div>
+      );
+    }
+
+    if (predictions.length === 0) {
+      return (
+        <div className="flex flex-col items-center justify-center py-12">
+          <p className="text-lg mb-4">No prediction data available.</p>
+          <button 
+            className="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-md transition"
+            onClick={async () => {
+              try {
+                setIsLoading(true);
+                const { runPredictions } = await import('../lib/api');
+                await runPredictions();
+                // Reload the page to get fresh data
+                window.location.reload();
+              } catch (err) {
+                console.error('Error running predictions:', err);
+                setError('Failed to run predictions.');
+                setIsLoading(false);
+              }
+            }}
+          >
+            Generate Predictions
+          </button>
+        </div>
+      );
+    }
+
+    return (
+      <>
+        {/* Category Filter with larger buttons and proper spacing */}
+        <div className="w-full mx-auto mb-16 mt-8">
+          <div className="flex flex-wrap justify-center items-center" style={{gap: '12px'}}>
+            {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
+              <button
+                key={category}
+                onClick={() => setActiveCategory(category)}
+                className={`category-filter ${
+                  activeCategory === category 
+                    ? 'category-filter-active' 
+                    : 'category-filter-inactive'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+        
+        {/* Award Cards Grid - Force 2-column layout with !important */}
+        <div className="w-full mx-auto py-6" style={{maxWidth: '650px'}}>
+          <div className="awards-grid" style={{
+            display: 'grid !important',
+            gridTemplateColumns: 'repeat(2, 1fr) !important',
+            gap: '2rem !important',
+            width: '100% !important'
+          }}>
+            {filteredCategories.map(category => (
+              topNomineesMap[category] && (
+                <div key={category} className="h-full" style={{width: '100%'}}>
+                  <AwardCard 
+                    category={category}
+                    topNominee={topNomineesMap[category]}
+                  />
+                </div>
+              )
+            ))}
+          </div>
+        </div>
+        
+        {/* Update button and timestamp */}
+        <div className="flex justify-center mt-8">
+          <button 
+            className="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-md transition text-sm"
+            onClick={async () => {
+              try {
+                setIsLoading(true);
+                const { runPredictions } = await import('../lib/api');
+                await runPredictions();
+                // Reload the page to get fresh data
+                window.location.reload();
+              } catch (err) {
+                console.error('Error running predictions:', err);
+                setError('Failed to run predictions.');
+                setIsLoading(false);
+              }
+            }}
+          >
+            Update Predictions
+          </button>
+        </div>
+      </>
+    );
+  };
+
   return (
     <div className="max-w-6xl mx-auto px-8 md:px-12 py-10 text-white">
-      {/* Category Filter with larger buttons and proper spacing */}
-      <div className="w-full mx-auto mb-16 mt-8">
-        <div className="flex flex-wrap justify-center items-center" style={{gap: '12px'}}>
-          {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`category-filter ${
-                activeCategory === category 
-                  ? 'category-filter-active' 
-                  : 'category-filter-inactive'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-      </div>
-      
-      {/* Award Cards Grid - Force 2-column layout with !important */}
-      <div className="w-full mx-auto py-6" style={{maxWidth: '650px'}}>
-        <div className="awards-grid" style={{
-          display: 'grid !important',
-          gridTemplateColumns: 'repeat(2, 1fr) !important',
-          gap: '2rem !important',
-          width: '100% !important'
-        }}>
-          {filteredCategories.map(category => (
-            topNomineesMap[category] && (
-              <div key={category} className="h-full" style={{width: '100%'}}>
-                <AwardCard 
-                  category={category}
-                  topNominee={topNomineesMap[category]}
-                />
-              </div>
-            )
-          ))}
-        </div>
-      </div>
-      
-      {/* Last updated removed as requested */}
+      {renderContent()}
     </div>
   );
 };
