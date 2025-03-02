@@ -559,8 +559,8 @@ const PredictionsSection: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-8 md:px-12 py-10 text-white">
       {/* Category Filter with tighter spacing and explicit centering */}
-      <div className="max-w-5xl mx-auto mb-10 px-4">
-        <div className="flex justify-center items-center space-x-1">
+      <div className="w-full mx-auto mb-10">
+        <div className="flex justify-center items-center" style={{gap: '4px'}}>
           {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
             <button
               key={category}
