@@ -21,9 +21,14 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           </div>
           
           {/* Main Navigation - Right-aligned */}
-          <nav className="flex items-center space-x-10">
+          <nav style={{ 
+            display: 'flex', 
+            flexDirection: 'row', /* Explicitly set to row */
+            alignItems: 'center',
+            gap: '2.5rem' /* Using gap instead of space-x for better control */
+          }}>
             {['awards', 'analysis', 'about'].map((section) => (
-              <div key={section} className="relative">
+              <div key={section} className="relative" style={{ display: 'inline-block' }}>
                 <button
                   onClick={() => setActiveSection(section)}
                   style={{
@@ -35,7 +40,8 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
                     background: 'transparent',
                     border: 'none',
                     padding: '4px 2px',
-                    transition: 'all 0.2s ease'
+                    transition: 'all 0.2s ease',
+                    cursor: 'pointer'
                   }}
                 >
                   {section.toUpperCase()}
