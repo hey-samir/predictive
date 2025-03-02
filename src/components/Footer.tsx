@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-center items-center">
           <p className="text-gray-400 text-sm text-center">
-            Copyright 2025. Built by Interspace Ventures and coded with Replit
+            © 2025. Built by <a href="https://samir.xyz/ventures" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">Interspace Ventures</a> and coded with <a href="https://replit.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors">Replit</a>
           </p>
         </div>
       </div>

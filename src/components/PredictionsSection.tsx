@@ -535,21 +535,61 @@ const PredictionsSection: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-8 text-white">
-      {/* Category Filter */}
-      <div className="flex justify-center flex-wrap gap-2 mb-10">
-        {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
-          <button
-            key={category}
-            onClick={() => setActiveCategory(category)}
-            className={`category-filter ${
-              activeCategory === category 
-                ? 'category-filter-active' 
-                : 'category-filter-inactive'
-            }`}
-          >
-            {category}
-          </button>
-        ))}
+      {/* Category Filter - Responsive and stays on one line */}
+      <div className="max-w-5xl mx-auto mb-10">
+        {/* Desktop and Tablet View - Horizontal */}
+        <div className="hidden sm:flex justify-center items-center space-x-3" 
+          style={{
+            whiteSpace: 'nowrap',
+            overflowX: 'auto', /* Allow horizontal scroll if needed */
+            scrollbarWidth: 'none', /* Hide scrollbar for Firefox */
+            msOverflowStyle: 'none' /* Hide scrollbar for IE/Edge */
+          }}
+        >
+          {/* Custom CSS to hide scrollbar for Chrome/Safari */}
+          <style jsx>{`
+            div::-webkit-scrollbar {
+              display: none;
+            }
+            @media (max-width: 768px) {
+              .category-filter-responsive {
+                font-size: clamp(0.7rem, 2vw, 0.875rem);
+                padding: 0.5rem 0.75rem;
+              }
+            }
+          `}</style>
+          
+          {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
+            <button
+              key={category}
+              onClick={() => setActiveCategory(category)}
+              className={`category-filter category-filter-responsive ${
+                activeCategory === category 
+                  ? 'category-filter-active' 
+                  : 'category-filter-inactive'
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+        
+        {/* Mobile View - Vertical */}
+        <div className="flex sm:hidden flex-col items-center space-y-2">
+          {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
+            <button
+              key={category}
+              onClick={() => setActiveCategory(category)}
+              className={`category-filter w-full ${
+                activeCategory === category 
+                  ? 'category-filter-active' 
+                  : 'category-filter-inactive'
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
       </div>
       
       {/* Award Cards Grid - using flexbox for 2 per row with consistent layout */}
@@ -575,9 +615,7 @@ const PredictionsSection: React.FC = () => {
         </div>
       </div>
       
-      <div className="text-xs text-gray-500 mt-8 text-right">
-        Last updated: {lastUpdated}
-      </div>
+      {/* Last updated removed as requested */}
     </div>
   );
 };
