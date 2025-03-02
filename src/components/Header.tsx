@@ -14,8 +14,8 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
             className="cursor-pointer" 
             onClick={() => setActiveSection('awards')}
           >
-            <h1 className="text-white text-xl font-bold lowercase tracking-tight">
-              predictive
+            <h1 className="text-white text-lg font-bold lowercase tracking-tight flex items-center">
+              predictive<span className="text-[#8A3FFC]">:film</span>
             </h1>
           </div>
         </div>
@@ -30,9 +30,6 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
               >
                 {section.toUpperCase()}
               </button>
-              {activeSection === section && (
-                <div className="absolute -bottom-2 left-0 w-full h-0.5 bg-[#8A3FFC]"></div>
-              )}
             </div>
           ))}
         </nav>
