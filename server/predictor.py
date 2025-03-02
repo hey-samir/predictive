@@ -317,6 +317,12 @@ class OscarPredictor:
             betting_data = betting_odds[["category", "nominee_name", "probability"]].copy()
             betting_data.columns = ["Award Category", "Nominee Name", "Betting Odds"]
             
+            # Convert betting odds to string format (fractional odds)
+            from data_collection.betting_scraper import convert_probability_to_odds
+            betting_data["Betting Odds"] = betting_data["Betting Odds"].apply(
+                lambda x: convert_probability_to_odds(x) if pd.notna(x) else None
+            )
+            
             # Merge
             merged = pd.merge(
                 merged, 
