@@ -1,18 +1,33 @@
 import React from 'react';
 
 const Footer: React.FC = () => {
+  // Use spacer div to ensure there's significant space before the footer
   return (
-    <footer className="mt-96 pt-32 pb-16 px-8 md:px-12 border-t border-gray-800 text-center">
-      <div className="max-w-6xl mx-auto">
-        <p style={{
-          fontSize: '0.7rem', 
-          color: '#9E9E9E',
-          textAlign: 'center'
-        }}>
-          © 2025. Built by <a href="https://samir.xyz/ventures" target="_blank" rel="noopener noreferrer" style={{color: '#a0aec0', transition: 'color 0.2s'}} className="hover:text-white">Interspace Ventures</a> and coded with <a href="https://replit.com" target="_blank" rel="noopener noreferrer" style={{color: '#a0aec0', transition: 'color 0.2s'}} className="hover:text-white">Replit</a>
-        </p>
-      </div>
-    </footer>
+    <>
+      {/* This div adds space before the footer */}
+      <div style={{ height: '300px' }}></div>
+
+      {/* Footer with inline styles to avoid CSS conflicts */}
+      <footer style={{
+        marginTop: '300px',
+        paddingTop: '80px', 
+        paddingBottom: '40px',
+        paddingLeft: '2rem',
+        paddingRight: '2rem',
+        borderTop: '1px solid #2D3748',
+        textAlign: 'center'
+      }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <p style={{
+            fontSize: '0.7rem', 
+            color: '#9E9E9E',
+            textAlign: 'center'
+          }}>
+            © 2025. Built by <a href="https://samir.xyz/ventures" target="_blank" rel="noopener noreferrer" style={{color: '#a0aec0', transition: 'color 0.2s'}} className="hover:text-white">Interspace Ventures</a> and coded with <a href="https://replit.com" target="_blank" rel="noopener noreferrer" style={{color: '#a0aec0', transition: 'color 0.2s'}} className="hover:text-white">Replit</a>
+          </p>
+        </div>
+      </footer>
+    </>
   );
 };
 

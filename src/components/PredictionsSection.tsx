@@ -652,17 +652,26 @@ const PredictionsSection: React.FC = () => {
           </div>
         </div>
         
-        {/* Award Cards Grid - Force 2-column layout with !important */}
-        <div className="w-full mx-auto py-6" style={{maxWidth: '650px'}}>
-          <div className="awards-grid" style={{
-            display: 'grid !important',
-            gridTemplateColumns: 'repeat(2, 1fr) !important',
-            gap: '2rem !important',
-            width: '100% !important'
+        {/* Award Cards Grid - Force 2-column layout with inline styles */}
+        <div style={{
+          width: '100%',
+          maxWidth: '650px',
+          margin: '0 auto',
+          padding: '1.5rem 0'
+        }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gap: '2rem',
+            width: '100%'
           }}>
             {filteredCategories.map(category => (
               topNomineesMap[category] && (
-                <div key={category} className="h-full" style={{width: '100%'}}>
+                <div key={category} style={{
+                  height: '100%',
+                  width: '100%',
+                  minWidth: '280px'
+                }}>
                   <AwardCard 
                     category={category}
                     topNominee={topNomineesMap[category]}
