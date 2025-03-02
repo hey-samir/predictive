@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { CURRENT_OSCAR_YEAR, OSCAR_CATEGORIES } from '../../../lib/constants';
-import { generateMockModelWeights } from '../../../lib/mock-data';
+import { REAL_MODEL_WEIGHTS_2025 } from '../../../lib/real-data-2025';
 
 /**
  * Native Next.js API route handler for model weights data
- * This replaces the Python backend with a TypeScript implementation
+ * Using real 2025 Oscar data (movies from 2024)
  */
 export async function GET(request: NextRequest) {
   try {
@@ -12,8 +12,8 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const year = parseInt(searchParams.get('year') || String(CURRENT_OSCAR_YEAR));
     
-    // Generate mock model weights
-    const modelWeights = generateMockModelWeights(year);
+    // Use real model weights
+    const modelWeights = REAL_MODEL_WEIGHTS_2025.filter(w => w.year === year);
     
     // Transform the data to match the expected format in the frontend
     const transformedData: Record<string, any[]> = {};
