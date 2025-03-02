@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { generateMockHistoricalData, generateMockAwardsData } from '../../../lib/mock-data';
 import { AWARD_VENUES, OSCAR_CATEGORIES } from '../../../lib/constants';
+import { getHistoricalAccuracyData } from '../../../lib/real-data-2025';
 import { HistoricalAccuracy } from '../../../lib/types';
 
 /**
  * Native Next.js API route handler for historical accuracy data
- * This replaces the Python backend with a TypeScript implementation
+ * Using real 2025 Oscar data (movies from 2024)
  */
 export async function GET(request: NextRequest) {
   try {
@@ -13,66 +13,8 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const recentYears = parseInt(searchParams.get('recentYears') || '10');
     
-    // Generate mock historical data
-    const historicalData = generateMockHistoricalData(recentYears);
-    const historicalAwardWins = generateMockAwardsData(historicalData);
-    
-    // Calculate historical accuracy for each venue and category
-    const accuracyData: HistoricalAccuracy[] = [];
-    
-    // Group nominations by year
-    const nominationsByYear: Record<number, typeof historicalData> = {};
-    for (const nomination of historicalData) {
-      if (!nominationsByYear[nomination.year]) {
-        nominationsByYear[nomination.year] = [];
-      }
-      nominationsByYear[nomination.year].push(nomination);
-    }
-    
-    // Calculate accuracy for each venue and category
-    for (const venue of AWARD_VENUES) {
-      for (const category of OSCAR_CATEGORIES) {
-        // Loop through each year and check accuracy
-        let correctPredictions = 0;
-        let totalYears = 0;
-        
-        for (const [year, yearNominations] of Object.entries(nominationsByYear)) {
-          // Find the Oscar winner for this category and year
-          const categoryNominations = yearNominations.filter(
-            n => n.category === category
-          );
-          
-          if (categoryNominations.length === 0) continue;
-          
-          const oscarWinner = categoryNominations.find(n => n.wonOscar);
-          if (!oscarWinner) continue;
-          
-          // Check if this venue correctly predicted the winner
-          const relevantAwardWins = historicalAwardWins.filter(
-            win => win.nominationId === oscarWinner.id && 
-                   win.awardVenue === venue
-          );
-          
-          if (relevantAwardWins.some(win => win.won)) {
-            correctPredictions++;
-          }
-          
-          totalYears++;
-        }
-        
-        // Calculate accuracy percentage
-        const accuracyValue = totalYears > 0 
-          ? (correctPredictions / totalYears) * 100 
-          : 0;
-        
-        accuracyData.push({
-          venue,
-          category,
-          accuracy: Math.round(accuracyValue * 10) / 10, // Round to 1 decimal place
-          year: new Date().getFullYear() - 1 // Previous year
-        });
-      }
-    }
+    // Get real historical accuracy data
+    const accuracyData = getHistoricalAccuracyData();
     
     // Group by venue for the frontend format
     const result = AWARD_VENUES.map(venue => {

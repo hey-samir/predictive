@@ -1,18 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { CURRENT_OSCAR_YEAR } from '../../../lib/constants';
-import {
-  generateMockHistoricalData,
-  generateMockNomineesData,
-  generateMockAwardsData,
-  generateMockBettingData,
-  generateMockPredictiveMarketsData
-} from '../../../lib/mock-data';
 import { OscarPredictor } from '../../../lib/predictor';
 import { PredictionResponse } from '../../../lib/types';
+import { 
+  REAL_NOMINEES_2025, 
+  REAL_AWARD_WINS_2025, 
+  REAL_BETTING_ODDS_2025, 
+  REAL_PREDICTIVE_MARKETS_2025,
+  getFormattedNominees
+} from '../../../lib/real-data-2025';
 
 /**
  * Native Next.js API route handler for running predictions
- * This replaces the Python backend with a TypeScript implementation
+ * Using real 2025 Oscar data (movies from 2024)
  */
 export async function POST(request: NextRequest) {
   try {
@@ -20,41 +20,19 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const year = body.year || CURRENT_OSCAR_YEAR;
     
-    // Generate mock historical data for training
-    const historicalData = generateMockHistoricalData(10); // Last 10 years
+    // For the real 2025 data, we'll use the actual nominees
+    const formattedNominees = getFormattedNominees(year);
     
-    // Generate current year data
-    const nominations = generateMockNomineesData(year);
-    const awardWins = generateMockAwardsData(nominations);
-    const bettingOdds = generateMockBettingData(nominations);
-    const predictiveMarkets = generateMockPredictiveMarketsData(nominations);
-    
-    // Generate historical award wins for training
-    const historicalAwardWins = generateMockAwardsData(historicalData);
-    
-    // Train and run prediction model
-    const predictor = new OscarPredictor();
-    predictor.train(historicalData, historicalAwardWins);
-    
-    const predictions = predictor.predict(
-      nominations,
-      awardWins,
-      bettingOdds,
-      predictiveMarkets
-    );
-    
-    const venueStrength = predictor.analyzeVenueStrength();
-    
-    // Format response
+    // For 2025, we'll return the pre-computed results directly since we already 
+    // know the winners (the Oscars already happened)
     const response: PredictionResponse = {
-      nominees: predictions,
-      venueStrength,
+      nominees: formattedNominees,
       updatedAt: new Date().toISOString()
     };
     
     return NextResponse.json({
       success: true,
-      message: 'Predictions calculated successfully',
+      message: 'Predictions retrieved successfully',
       data: response
     });
   } catch (error) {
