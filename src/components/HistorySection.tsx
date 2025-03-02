@@ -156,7 +156,7 @@ const HistorySection: React.FC = () => {
     : NOMINATION_TYPES[selectedCategory] || [];
 
   return (
-    <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+    <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
       {/* Header removed as requested */}
       
       {/* Precision Section - Model Weights Table */}
@@ -175,8 +175,8 @@ const HistorySection: React.FC = () => {
       
       {/* Depth Section - Donut Charts */}
       <div className="mb-8">
-        <div className="bg-app-card shadow rounded-xl p-4">
-          <h2 className="text-xl font-semibold mb-4 text-app-purple border-b border-gray-700 pb-2">Depth</h2>
+        <div className="bg-app-card shadow rounded-xl px-3 py-4 md:px-4">
+          <h2 className="text-xl font-semibold mb-4 text-app-purple border-b border-gray-700 pb-2 px-1">Depth</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
             {categoriesForDonutCharts.slice(0, 6).map(category => {

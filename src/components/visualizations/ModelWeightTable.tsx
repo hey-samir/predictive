@@ -66,10 +66,11 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
   };
 
   const rotatedCellStyle = {
-    width: '10px', // Extremely narrow width
+    width: '15px', // Slightly wider for better text visibility
     position: 'relative' as const,
     verticalAlign: 'middle' as const,
-    padding: 0,
+    paddingRight: '5px',
+    paddingLeft: '2px',
     backgroundColor: `${purpleColor}25`,
     height: '70px' // Shorter height for text
   };
@@ -89,9 +90,9 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
   };
 
   return (
-    <div className="bg-app-card shadow rounded-xl p-4 mb-8 overflow-x-auto">
-      <h2 className="text-xl font-semibold mb-4 text-app-purple border-b border-gray-700 pb-2">Precision</h2>
-      <table style={tableStyle}>
+    <div className="bg-app-card shadow rounded-xl px-3 py-4 md:px-4 mb-8 overflow-x-auto">
+      <h2 className="text-xl font-semibold mb-4 text-app-purple border-b border-gray-700 pb-2 px-1">Precision</h2>
+      <table style={tableStyle} className="min-w-full">
         <thead>
           <tr>
             <th style={{...tableHeaderStyle, width: '40px'}}></th>
