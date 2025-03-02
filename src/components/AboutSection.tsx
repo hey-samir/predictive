@@ -9,28 +9,18 @@ import {
 const AboutSection: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto">
-      <h1 className="text-3xl font-bold mb-2 text-app-purple">About Predictive</h1>
+      <h1 className="text-3xl font-bold mb-2 text-app-purple">And the Algorithm Goes To...</h1>
       <p className="text-lg text-gray-400 mb-8">
-        Predictive uses sophisticated algorithms to predict the top Academy Award winners.
+        Predictive uses data science to forecast Oscar winners, because even AI loves a good acceptance speech. 🎬
       </p>
       
       <div className="bg-app-card shadow rounded-xl overflow-hidden mb-8">
         <div className="h-1 bg-app-purple"></div>
         <div className="p-6">
-          <h2 className="text-xl font-semibold mb-4 text-app-purple">How It Works</h2>
+          <h2 className="text-xl font-semibold mb-4 text-app-purple">The Plot (How It Works)</h2>
           <p className="mb-4 text-gray-300">
-            Our prediction model analyzes historical data from {CURRENT_OSCAR_YEAR - 2000}+ years of Academy Award ceremonies 
-            and precursor awards to identify patterns and correlations that help predict this 
-            year's winners.
-          </p>
-          <p className="mb-4 text-gray-300">
-            We compare our algorithmic predictions with betting odds and predictive markets to give 
-            you a comprehensive view of the awards race.
-          </p>
-          <p className="text-gray-300">
-            Each award venue receives a predictive strength rating based on its historical accuracy in 
-            predicting Oscar winners. These weightings are then used to calculate the likelihood percentages 
-            for each nominee.
+            We crunch 25+ years of Academy Awards history and precursor awards data through our prediction engine. 
+            Think of it as "Moneyball" meets "La La Land" - where statistics take center stage.
           </p>
         </div>
       </div>
@@ -38,88 +28,53 @@ const AboutSection: React.FC = () => {
       <div className="bg-app-card shadow rounded-xl overflow-hidden mb-8">
         <div className="h-1 bg-app-purple"></div>
         <div className="p-6">
-          <h2 className="text-xl font-semibold mb-4 text-app-purple">Methodology</h2>
-          <p className="mb-4 text-gray-300">
-            Our machine learning model is trained on a dataset of past Oscar nominations, wins, and precursor 
-            award results from {CURRENT_OSCAR_YEAR - 2000} to {CURRENT_OSCAR_YEAR - 1}.
-          </p>
-          <p className="mb-4 text-gray-300">
-            The model identifies correlations between wins at other award venues (such as BAFTA, Golden Globes, 
-            and Critics Choice Awards) and ultimate Oscar success. Different weights are assigned to each award venue 
-            based on their historical predictive power for each Oscar category.
-          </p>
-          <p className="text-gray-300">
-            The final predictions incorporate both our algorithmic assessment and real-time data from betting markets 
-            to provide the most accurate forecast possible.
-          </p>
+          <h2 className="text-xl font-semibold mb-4 text-app-purple">Behind the Scenes</h2>
+          <ul className="mb-4 text-gray-300 list-disc pl-5 space-y-2">
+            <li>Machine learning model trained on Oscar data (1999-2024)</li>
+            <li>Real-time betting odds integration</li>
+            <li>Weighted analysis of precursor awards (BAFTA, Golden Globes, etc.)</li>
+            <li>Historical accuracy tracking for each award predictor</li>
+          </ul>
         </div>
       </div>
       
       <div className="bg-app-card shadow rounded-xl overflow-hidden mb-8">
         <div className="h-1 bg-app-purple"></div>
         <div className="p-6">
-          <h2 className="text-xl font-semibold mb-4 text-app-purple">Award Categories Glossary</h2>
+          <h2 className="text-xl font-semibold mb-4 text-app-purple">Award Categories</h2>
           
-          <div className="space-y-6">
-            <div>
-              <h3 className="font-semibold mb-2 text-app-purple">Makers</h3>
-              <p className="text-gray-300">{NOMINATION_TYPE_DETAILED_DESCRIPTIONS["Makers"]}</p>
-              <div className="mt-2 flex flex-wrap gap-1">
-                {["Best Picture", "Directing", "Animated Feature Film", "Documentary Feature", "International Feature Film"].map(cat => (
-                  <span 
-                    key={cat}
-                    className="px-2 py-1 text-xs rounded-full bg-app-purple/20 text-app-purple"
-                  >
-                    {cat}
-                  </span>
-                ))}
-              </div>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold mb-2 text-app-purple">Performers</h3>
-              <p className="text-gray-300">{NOMINATION_TYPE_DETAILED_DESCRIPTIONS["Performers"]}</p>
-              <div className="mt-2 flex flex-wrap gap-1">
-                {["Actor in a Leading Role", "Actress in a Leading Role", "Actor in a Supporting Role", "Actress in a Supporting Role"].map(cat => (
-                  <span 
-                    key={cat}
-                    className="px-2 py-1 text-xs rounded-full bg-app-purple/20 text-app-purple"
-                  >
-                    {cat}
-                  </span>
-                ))}
-              </div>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold mb-2 text-app-purple">Creators</h3>
-              <p className="text-gray-300">{NOMINATION_TYPE_DETAILED_DESCRIPTIONS["Creators"]}</p>
-              <div className="mt-2 flex flex-wrap gap-1">
-                {["Writing (Original Screenplay)", "Writing (Adapted Screenplay)", "Music (Original Score)", "Music (Original Song)"].map(cat => (
-                  <span 
-                    key={cat}
-                    className="px-2 py-1 text-xs rounded-full bg-app-purple/20 text-app-purple"
-                  >
-                    {cat}
-                  </span>
-                ))}
-              </div>
-            </div>
-            
-            <div>
-              <h3 className="font-semibold mb-2 text-app-purple">Crafters</h3>
-              <p className="text-gray-300">{NOMINATION_TYPE_DETAILED_DESCRIPTIONS["Crafters"]}</p>
-              <div className="mt-2 flex flex-wrap gap-1">
-                {["Cinematography", "Film Editing", "Production Design", "Costume Design", "Makeup and Hairstyling", "Sound", "Visual Effects"].map(cat => (
-                  <span 
-                    key={cat}
-                    className="px-2 py-1 text-xs rounded-full bg-app-purple/20 text-app-purple"
-                  >
-                    {cat}
-                  </span>
-                ))}
-              </div>
-            </div>
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-700">
+              <thead>
+                <tr>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-app-purple uppercase tracking-wider">Category Group</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-app-purple uppercase tracking-wider">What They Do</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-app-purple uppercase tracking-wider">Awards</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-700">
+                <tr>
+                  <td className="px-4 py-3 text-sm font-medium text-app-purple">Makers</td>
+                  <td className="px-4 py-3 text-sm text-gray-300">The big-picture visionaries</td>
+                  <td className="px-4 py-3 text-sm text-gray-300">Best Picture, Directing, Animated Feature, Documentary, International Film</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-3 text-sm font-medium text-app-purple">Performers</td>
+                  <td className="px-4 py-3 text-sm text-gray-300">The faces on screen</td>
+                  <td className="px-4 py-3 text-sm text-gray-300">Leading & Supporting Actor/Actress</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-3 text-sm font-medium text-app-purple">Creators</td>
+                  <td className="px-4 py-3 text-sm text-gray-300">The storytellers</td>
+                  <td className="px-4 py-3 text-sm text-gray-300">Original/Adapted Screenplay, Original Score/Song</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-3 text-sm font-medium text-app-purple">Crafters</td>
+                  <td className="px-4 py-3 text-sm text-gray-300">The technical wizards</td>
+                  <td className="px-4 py-3 text-sm text-gray-300">Cinematography, Editing, Production Design, Costume, Makeup, Sound, VFX</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -127,23 +82,23 @@ const AboutSection: React.FC = () => {
       <div className="bg-app-card shadow rounded-xl overflow-hidden">
         <div className="h-1 bg-app-purple"></div>
         <div className="p-6">
-          <h2 className="text-xl font-semibold mb-4 text-app-purple">About</h2>
-          <p className="mb-4 text-gray-300">
-            Built by{' '}
+          <hr className="border-gray-700 mb-6" />
+          <p className="text-gray-300 text-center italic">
+            Crafted by{' '}
             <a href="https://samir.xyz/ventures" 
                target="_blank" 
                rel="noopener noreferrer"
                className="font-medium text-app-purple hover:underline">
               Interspace Ventures
             </a>{' '}
-            for personal use using{' '}
+            using{' '}
             <a href="https://replit.com" 
                target="_blank" 
                rel="noopener noreferrer"
                className="font-medium text-app-purple hover:underline">
               Replit AI
             </a>{' '}
-            and Streamlit
+            & Streamlit - because even robots dream in technicolor
           </p>
         </div>
       </div>
