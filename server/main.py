@@ -4,15 +4,18 @@ This module starts the FastAPI server with the application.
 """
 
 import uvicorn
+from server.api import app
 
-if __name__ == "__main__":
-    # Import the app here to avoid circular imports
-    from server.api import app
-    
-    # Start the server
+# This function is used when the module is run directly
+def start_server():
+    """Start the uvicorn server."""
     uvicorn.run(
-        app,
+        "server.api:app",
         host="0.0.0.0",
         port=5001,
         reload=True
     )
+
+# When imported as a module, provide the app directly
+if __name__ == "__main__":
+    start_server()

@@ -6,6 +6,7 @@ This module provides FastAPI endpoints for accessing the application's functiona
 from typing import Dict, List, Optional, Any
 from datetime import datetime
 
+import pandas as pd
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
