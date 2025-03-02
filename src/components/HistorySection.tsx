@@ -175,7 +175,7 @@ const HistorySection: React.FC = () => {
       
       {/* Depth Section - Donut Charts */}
       <div className="mb-8">
-        <div className="bg-app-card shadow rounded-xl p-6">
+        <div className="bg-app-card shadow rounded-xl p-4">
           <h2 className="text-xl font-semibold mb-4 text-app-purple border-b border-gray-700 pb-2">Depth</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">

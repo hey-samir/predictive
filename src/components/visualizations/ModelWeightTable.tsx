@@ -70,24 +70,22 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
     position: 'relative' as const,
     verticalAlign: 'middle' as const,
     padding: 0,
-    backgroundColor: `${purpleColor}25`
+    backgroundColor: `${purpleColor}25`,
+    height: '100px' // Ensure cell has enough height for text
   };
 
   const rotatedTextStyle = {
     position: 'absolute' as const,
-    bottom: '0',
+    bottom: '50%',
     left: '50%',
-    height: '100%',
-    transformOrigin: 'bottom left',
-    transform: 'rotate(-90deg) translateY(-50%)',
+    transformOrigin: 'left center',
+    transform: 'translateX(-50%) rotate(-90deg)',
     whiteSpace: 'nowrap' as const,
     fontSize: '0.75rem', // Reduced font size
     fontWeight: 'bold',
     color: purpleColor,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%'
+    width: 'max-content',
+    textAlign: 'center' as const
   };
 
   return (
