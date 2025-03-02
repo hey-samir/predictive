@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="mt-64 pt-16 pb-10 px-8 md:px-12 border-t border-gray-800 text-center">
+    <footer className="mt-80 pt-20 pb-16 px-8 md:px-12 border-t border-gray-800 text-center">
       <div className="max-w-6xl mx-auto">
         <p style={{
           fontSize: '0.7rem', 
