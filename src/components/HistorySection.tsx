@@ -5,6 +5,7 @@ import {
   NOMINATION_CATEGORIES, 
   NOMINATION_TYPES 
 } from '../lib/constants';
+import LoadingCard from '@/components/ui/loading-card';
 import { ModelWeight, NomineeData, HistoricalAccuracy } from '../lib/types';
 import ModelWeightTable from './visualizations/ModelWeightTable';
 import AccuracyBarCharts from './visualizations/AccuracyBarCharts';
@@ -129,15 +130,27 @@ const HistorySection: React.FC = () => {
   const [nominees, setNominees] = useState<NomineeData[]>([]);
   const [modelWeights, setModelWeights] = useState<ModelWeight[]>([]);
   const [accuracyData, setAccuracyData] = useState<HistoricalAccuracy[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   
   // Get data for the selected venue
   const selectedVenueData = mockVenueAccuracy.find(v => v.venue === selectedVenue);
 
   useEffect(() => {
-    // Generate mock data
-    setNominees(generateMockNominees());
-    setModelWeights(generateMockModelWeights());
-    setAccuracyData(generateMockHistoricalAccuracy());
+    const loadData = async () => {
+      setIsLoading(true);
+      
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 800));
+      
+      // Generate mock data
+      setNominees(generateMockNominees());
+      setModelWeights(generateMockModelWeights());
+      setAccuracyData(generateMockHistoricalAccuracy());
+      
+      setIsLoading(false);
+    };
+    
+    loadData();
   }, []);
   
   // Group nominees by category for donut charts
@@ -154,6 +167,19 @@ const HistorySection: React.FC = () => {
   const categoriesForDonutCharts = selectedCategory === 'All'
     ? OSCAR_CATEGORIES
     : NOMINATION_TYPES[selectedCategory] || [];
+
+  if (isLoading) {
+    return (
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-12">
+        <LoadingCard 
+          title="Analytics Data" 
+          message="Loading visualization data..." 
+          spinnerSize="large"
+          className="max-w-md mx-auto mb-8"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">

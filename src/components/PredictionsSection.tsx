@@ -3,6 +3,7 @@ import {
   NOMINATION_TYPES, 
   CURRENT_OSCAR_YEAR 
 } from '../lib/constants';
+import LoadingCard from '@/components/ui/loading-card';
 
 // Define nominee data type
 export type NomineeData = {
@@ -587,9 +588,13 @@ const PredictionsSection: React.FC = () => {
   const renderContent = () => {
     if (isLoading) {
       return (
-        <div className="flex flex-col items-center justify-center py-12">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-purple-500 mb-4"></div>
-          <p className="text-lg">Loading predictions data...</p>
+        <div className="py-12">
+          <LoadingCard 
+            title="Oscar Predictions" 
+            message="Analyzing award data and calculating predictions..." 
+            spinnerSize="large"
+            className="max-w-md mx-auto"
+          />
         </div>
       );
     }
