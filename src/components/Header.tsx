@@ -26,9 +26,9 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
               <div key={section} className="relative">
                 <button
                   onClick={() => setActiveSection(section)}
-                  className="font-medium text-base uppercase tracking-wider transition-colors text-white px-1"
+                  className="font-medium text-base uppercase tracking-wider transition-colors text-white px-1 bg-transparent"
                 >
-                  {section}
+                  {section.toUpperCase()}
                 </button>
                 {activeSection === section && (
                   <div className="absolute bottom-[-8px] left-0 right-0 h-[2px] bg-[#8A3FFC]"></div>
