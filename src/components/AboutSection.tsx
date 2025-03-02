@@ -142,9 +142,9 @@ const AboutSection: React.FC = () => {
                 true
               )}
               {renderTableRow(
-                'IMDb Awards Central',
-                'Comprehensive awards coverage',
-                'Tracks 24 major film awards globally'
+                'IMDb',
+                'Fan ratings & user reviews',
+                'Public opinion metrics from millions of users'
               )}
               {renderTableRow(
                 'The Numbers',
@@ -153,20 +153,10 @@ const AboutSection: React.FC = () => {
                 true
               )}
               {renderTableRow(
-                'Variety Awards Circuit',
-                'Industry insider coverage',
-                'Breaking news and analysis'
-              )}
-              {renderTableRow(
                 'Rotten Tomatoes',
                 'Critics\' Metascore',
                 'Professional reception and consensus',
                 true
-              )}
-              {renderTableRow(
-                'IMDb Ratings',
-                'Audience Score',
-                'Public opinion and engagement'
               )}
               {renderTableRow(
                 'Kalshi',
@@ -257,12 +247,7 @@ const AboutSection: React.FC = () => {
               {renderTableRow(
                 'Screen Actors Guild (SAG)',
                 'SAG-AFTRA',
-                'February'
-              )}
-              {renderTableRow(
-                'Critics Choice Awards',
-                'Critics Choice Association',
-                'January',
+                'February',
                 true
               )}
               {renderTableRow(

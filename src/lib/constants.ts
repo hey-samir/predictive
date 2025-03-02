@@ -3,7 +3,6 @@ export const AWARD_VENUES = [
   "BAFTA",
   "Golden Globes",
   "SAG",
-  "Critics Choice",
   "PGA",
   "DGA",
   "WGA"
