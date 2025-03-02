@@ -17,43 +17,11 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Mkdir Command"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "List Database Directory"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
 args = "Next.js App"
 
-[[workflows.workflow]]
-name = "Mkdir Command"
-author = "agent"
-
-[workflows.workflow.metadata]
-agentRequireRestartOnSave = false
-
 [[workflows.workflow.tasks]]
-task = "packager.installForAll"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "mkdir -p database"
-
-[[workflows.workflow]]
-name = "List Database Directory"
-author = "agent"
-
-[workflows.workflow.metadata]
-agentRequireRestartOnSave = false
-
-[[workflows.workflow.tasks]]
-task = "packager.installForAll"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "ls -la database"
+task = "workflow.run"
+args = "Database Push"
 
 [[workflows.workflow]]
 name = "Next.js App"
@@ -70,6 +38,20 @@ task = "shell.exec"
 args = "npx next dev -p 5000 -H 0.0.0.0"
 waitForPort = 5000
 
+[[workflows.workflow]]
+name = "Database Push"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "packager.installForAll"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npx prisma db push"
+
 [[ports]]
 localPort = 3000
 externalPort = 3000
@@ -85,6 +67,10 @@ externalPort = 80
 [[ports]]
 localPort = 5001
 externalPort = 3002
+
+[[ports]]
+localPort = 5555
+externalPort = 3003
 
 [[ports]]
 localPort = 8000
