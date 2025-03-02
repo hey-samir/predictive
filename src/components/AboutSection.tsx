@@ -1,259 +1,312 @@
 import React from 'react';
-import { 
-  CURRENT_OSCAR_YEAR, 
-  AWARD_VENUES, 
-  NOMINATION_TYPE_DETAILED_DESCRIPTIONS, 
-  THEME_COLORS 
-} from '../lib/constants';
-
-const TableRow = ({ isHighlighted = false, name, description, details }: { isHighlighted?: boolean, name: string, description: string, details: string }) => (
-  <tr className={`${isHighlighted ? 'bg-[#8A3FFC]/10' : ''} border-b border-[#8A3FFC]/30`}>
-    <td className="px-6 py-4 text-sm font-medium text-[#8A3FFC]">{name}</td>
-    <td className="px-6 py-4 text-sm text-white text-center">{description}</td>
-    <td className="px-6 py-4 text-sm text-white">{details}</td>
-  </tr>
-);
 
 const AboutSection: React.FC = () => {
+  // Define styles directly in component to avoid conflicts
+  const purpleColor = '#8A3FFC';
+  const cardBgColor = '#2a3548';
+  const borderColor = '#4a5568';
+
+  // Card style
+  const cardStyle = {
+    backgroundColor: cardBgColor,
+    borderRadius: '0.75rem',
+    padding: '1.5rem',
+    marginBottom: '3rem',
+    boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+    border: `1px solid ${borderColor}`
+  };
+
+  // Section header style
+  const headerStyle = {
+    color: purpleColor,
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+    marginBottom: '1.5rem',
+    paddingBottom: '0.75rem',
+    borderBottom: `1px solid ${borderColor}`
+  };
+  
+  // Table styles
+  const tableStyle = {
+    width: '100%',
+    borderCollapse: 'separate',
+    borderSpacing: 0,
+    border: `2px solid ${purpleColor}30`,
+    borderRadius: '0.5rem',
+    overflow: 'hidden'
+  };
+  
+  const tableHeaderStyle = {
+    backgroundColor: purpleColor,
+    color: 'white',
+    textTransform: 'uppercase',
+    fontSize: '0.875rem',
+    fontWeight: 'bold',
+    padding: '1rem 1.5rem',
+    textAlign: 'left'
+  };
+  
+  const tableHeaderCenterStyle = {
+    ...tableHeaderStyle,
+    textAlign: 'center'
+  };
+  
+  // Render a table row with optional highlight
+  const renderTableRow = (name: string, description: string, details: string, isHighlighted: boolean = false) => {
+    const rowStyle = {
+      backgroundColor: isHighlighted ? `${purpleColor}15` : 'transparent',
+      borderBottom: `1px solid ${purpleColor}30`
+    };
+    
+    const cellStyle = {
+      padding: '1rem 1.5rem',
+      fontSize: '0.875rem',
+      color: 'white'
+    };
+    
+    const nameStyle = {
+      ...cellStyle,
+      fontWeight: 'bold',
+      color: purpleColor
+    };
+    
+    const centerStyle = {
+      ...cellStyle,
+      textAlign: 'center' as const
+    };
+    
+    return (
+      <tr style={rowStyle}>
+        <td style={nameStyle}>{name}</td>
+        <td style={centerStyle}>{description}</td>
+        <td style={cellStyle}>{details}</td>
+      </tr>
+    );
+  };
+
   return (
-    <div className="max-w-6xl mx-auto pb-20">
+    <div style={{ maxWidth: '1200px', margin: '0 auto', paddingBottom: '5rem' }}>
       {/* Page Title */}
-      <div className="text-center mb-16">
-        <h1 className="text-5xl font-bold mb-6 text-[#8A3FFC]">And the Algorithm Goes To...</h1>
-        <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+      <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+        <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1.5rem', color: purpleColor }}>
+          And the Algorithm Goes To...
+        </h1>
+        <p style={{ fontSize: '1.25rem', color: '#cbd5e0', maxWidth: '768px', margin: '0 auto' }}>
           Predictive uses data science to forecast Oscar winners, because even AI loves a good acceptance speech. 🎬
         </p>
       </div>
       
       {/* The Plot */}
-      <div className="bg-[#2a3548] rounded-xl p-6 mb-12 shadow-lg border border-gray-700">
-        <div className="flex items-center mb-5 border-b border-gray-700 pb-3">
-          <h2 className="text-2xl font-bold text-[#8A3FFC]">The Plot</h2>
-        </div>
-        <p className="mb-4 text-gray-200 text-lg leading-relaxed">
+      <div style={cardStyle}>
+        <h2 style={headerStyle}>The Plot</h2>
+        <p style={{ fontSize: '1.125rem', lineHeight: 1.7, color: '#f7fafc' }}>
           We crunch 25+ years of Academy Awards history and precursor awards data through our prediction engine. 
           Think of it as "Moneyball" meets "La La Land" - where statistics take center stage.
         </p>
       </div>
       
-      {/* The Screenplay (Behind the Scenes) */}
-      <div className="bg-[#2a3548] rounded-xl p-6 mb-12 shadow-lg border border-gray-700">
-        <div className="flex items-center mb-5 border-b border-gray-700 pb-3">
-          <h2 className="text-2xl font-bold text-[#8A3FFC]">The Screenplay</h2>
-        </div>
-        <ul className="mb-4 text-gray-200 pl-5 space-y-5 text-lg list-none">
-          <li className="flex items-start">
-            <span className="text-[#8A3FFC] mr-3 text-xl">⭐</span>
-            <span>Machine learning model trained on Oscar data (1999-2024)</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-[#8A3FFC] mr-3 text-xl">⭐</span>
-            <span>Real-time betting odds integration</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-[#8A3FFC] mr-3 text-xl">⭐</span>
-            <span>Weighted analysis of precursor awards (BAFTA, Golden Globes, etc.)</span>
-          </li>
-          <li className="flex items-start">
-            <span className="text-[#8A3FFC] mr-3 text-xl">⭐</span>
-            <span>Historical accuracy tracking for each award predictor</span>
-          </li>
+      {/* The Screenplay */}
+      <div style={cardStyle}>
+        <h2 style={headerStyle}>The Screenplay</h2>
+        <ul style={{ listStyle: 'none', padding: 0, color: '#f7fafc' }}>
+          {[
+            'Machine learning model trained on Oscar data (1999-2024)',
+            'Real-time betting odds integration',
+            'Weighted analysis of precursor awards (BAFTA, Golden Globes, etc.)',
+            'Historical accuracy tracking for each award predictor'
+          ].map((item, index) => (
+            <li key={index} style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '1.25rem', fontSize: '1.125rem' }}>
+              <span style={{ color: purpleColor, marginRight: '0.75rem', fontSize: '1.25rem' }}>⭐</span>
+              <span>{item}</span>
+            </li>
+          ))}
         </ul>
       </div>
       
-      {/* The Awards (Categories) */}
-      <div className="bg-[#2a3548] rounded-xl p-6 mb-12 shadow-lg border border-gray-700">
-        <div className="flex items-center mb-5 border-b border-gray-700 pb-3">
-          <h2 className="text-2xl font-bold text-[#8A3FFC]">The Awards</h2>
-        </div>
-        
-        <div className="overflow-x-auto mb-4">
-          <table className="min-w-full border-2 border-[#8A3FFC]/30 rounded-lg">
-            <thead className="bg-[#8A3FFC]">
+      {/* The Awards */}
+      <div style={cardStyle}>
+        <h2 style={headerStyle}>The Awards</h2>
+        <div style={{ overflowX: 'auto', marginBottom: '1rem' }}>
+          <table style={tableStyle}>
+            <thead>
               <tr>
-                <th className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider border-b border-[#8A3FFC]/30">Category Group</th>
-                <th className="px-6 py-4 text-center text-sm font-bold text-white uppercase tracking-wider border-b border-[#8A3FFC]/30">What They Do</th>
-                <th className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider border-b border-[#8A3FFC]/30">Awards</th>
+                <th style={tableHeaderStyle}>Category Group</th>
+                <th style={tableHeaderCenterStyle}>What They Do</th>
+                <th style={tableHeaderStyle}>Awards</th>
               </tr>
             </thead>
             <tbody>
-              <TableRow 
-                isHighlighted={true}
-                name="Makers" 
-                description="The big-picture visionaries" 
-                details="Best Picture, Directing, Animated Feature, Documentary, International Film" 
-              />
-              <TableRow 
-                name="Performers" 
-                description="The faces on screen" 
-                details="Leading & Supporting Actor/Actress" 
-              />
-              <TableRow 
-                isHighlighted={true}
-                name="Creators" 
-                description="The storytellers" 
-                details="Original/Adapted Screenplay, Original Score/Song" 
-              />
-              <TableRow 
-                name="Crafters" 
-                description="The technical wizards" 
-                details="Cinematography, Editing, Production Design, Costume, Makeup, Sound, VFX" 
-              />
+              {renderTableRow(
+                'Makers',
+                'The big-picture visionaries',
+                'Best Picture, Directing, Animated Feature, Documentary, International Film',
+                true
+              )}
+              {renderTableRow(
+                'Performers',
+                'The faces on screen',
+                'Leading & Supporting Actor/Actress'
+              )}
+              {renderTableRow(
+                'Creators',
+                'The storytellers',
+                'Original/Adapted Screenplay, Original Score/Song',
+                true
+              )}
+              {renderTableRow(
+                'Crafters',
+                'The technical wizards',
+                'Cinematography, Editing, Production Design, Costume, Makeup, Sound, VFX'
+              )}
             </tbody>
           </table>
         </div>
-        <div className="h-px bg-gray-600 w-full my-4"></div>
+        <div style={{ height: '1px', backgroundColor: borderColor, width: '100%', margin: '1rem 0' }}></div>
       </div>
       
-      {/* The Venues (Award Season Tour) */}
-      <div className="bg-[#2a3548] rounded-xl p-6 mb-12 shadow-lg border border-gray-700">
-        <div className="flex items-center mb-5 border-b border-gray-700 pb-3">
-          <h2 className="text-2xl font-bold text-[#8A3FFC]">The Venues</h2>
-        </div>
-        
-        <div className="overflow-x-auto mb-4">
-          <table className="min-w-full border-2 border-[#8A3FFC]/30 rounded-lg">
-            <thead className="bg-[#8A3FFC]">
+      {/* The Venues */}
+      <div style={cardStyle}>
+        <h2 style={headerStyle}>The Venues</h2>
+        <div style={{ overflowX: 'auto', marginBottom: '1rem' }}>
+          <table style={tableStyle}>
+            <thead>
               <tr>
-                <th className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider border-b border-[#8A3FFC]/30">Award Show</th>
-                <th className="px-6 py-4 text-center text-sm font-bold text-white uppercase tracking-wider border-b border-[#8A3FFC]/30">Hosted By</th>
-                <th className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider border-b border-[#8A3FFC]/30">When It Happens</th>
+                <th style={tableHeaderStyle}>Award Show</th>
+                <th style={tableHeaderCenterStyle}>Hosted By</th>
+                <th style={tableHeaderStyle}>When It Happens</th>
               </tr>
             </thead>
             <tbody>
-              <TableRow 
-                isHighlighted={true}
-                name="Academy Awards (Oscars)" 
-                description="Academy of Motion Picture Arts and Sciences" 
-                details="March" 
-              />
-              <TableRow 
-                name="Golden Globe Awards" 
-                description="Hollywood Foreign Press Association"
-                details="January" 
-              />
-              <TableRow 
-                isHighlighted={true}
-                name="BAFTA Awards" 
-                description="British Academy of Film and Television Arts" 
-                details="February" 
-              />
-              <TableRow 
-                name="Screen Actors Guild (SAG)" 
-                description="SAG-AFTRA" 
-                details="February" 
-              />
-              <TableRow 
-                isHighlighted={true}
-                name="Critics Choice Awards" 
-                description="Critics Choice Association" 
-                details="January" 
-              />
-              <TableRow 
-                name="Directors Guild (DGA)" 
-                description="Directors Guild of America" 
-                details="February" 
-              />
-              <TableRow 
-                isHighlighted={true}
-                name="Producers Guild (PGA)" 
-                description="Producers Guild of America" 
-                details="February" 
-              />
-              <TableRow 
-                name="Writers Guild (WGA)" 
-                description="Writers Guild of America" 
-                details="February" 
-              />
+              {renderTableRow(
+                'Academy Awards (Oscars)',
+                'Academy of Motion Picture Arts and Sciences',
+                'March',
+                true
+              )}
+              {renderTableRow(
+                'Golden Globe Awards',
+                'Hollywood Foreign Press Association',
+                'January'
+              )}
+              {renderTableRow(
+                'BAFTA Awards',
+                'British Academy of Film and Television Arts',
+                'February',
+                true
+              )}
+              {renderTableRow(
+                'Screen Actors Guild (SAG)',
+                'SAG-AFTRA',
+                'February'
+              )}
+              {renderTableRow(
+                'Critics Choice Awards',
+                'Critics Choice Association',
+                'January',
+                true
+              )}
+              {renderTableRow(
+                'Directors Guild (DGA)',
+                'Directors Guild of America',
+                'February'
+              )}
+              {renderTableRow(
+                'Producers Guild (PGA)',
+                'Producers Guild of America',
+                'February',
+                true
+              )}
+              {renderTableRow(
+                'Writers Guild (WGA)',
+                'Writers Guild of America',
+                'February'
+              )}
             </tbody>
           </table>
         </div>
-        <div className="h-px bg-gray-600 w-full my-4"></div>
+        <div style={{ height: '1px', backgroundColor: borderColor, width: '100%', margin: '1rem 0' }}></div>
       </div>
       
       {/* The Credits */}
-      <div className="bg-[#2a3548] rounded-xl p-6 mb-12 shadow-lg border border-gray-700">
-        <div className="flex items-center mb-5 border-b border-gray-700 pb-3">
-          <h2 className="text-2xl font-bold text-[#8A3FFC]">The Credits</h2>
-        </div>
-        
-        <div className="overflow-x-auto mb-4">
-          <table className="min-w-full border-2 border-[#8A3FFC]/30 rounded-lg">
-            <thead className="bg-[#8A3FFC]">
+      <div style={cardStyle}>
+        <h2 style={headerStyle}>The Credits</h2>
+        <div style={{ overflowX: 'auto', marginBottom: '1rem' }}>
+          <table style={tableStyle}>
+            <thead>
               <tr>
-                <th className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider border-b border-[#8A3FFC]/30">Data Source</th>
-                <th className="px-6 py-4 text-center text-sm font-bold text-white uppercase tracking-wider border-b border-[#8A3FFC]/30">What It Tells Us</th>
-                <th className="px-6 py-4 text-left text-sm font-bold text-white uppercase tracking-wider border-b border-[#8A3FFC]/30">Why It Matters</th>
+                <th style={tableHeaderStyle}>Data Source</th>
+                <th style={tableHeaderCenterStyle}>What It Tells Us</th>
+                <th style={tableHeaderStyle}>Why It Matters</th>
               </tr>
             </thead>
             <tbody>
-              <TableRow 
-                isHighlighted={true}
-                name="Academy Awards Database" 
-                description="Historical nominations and wins" 
-                details="Official Oscar records since 1927" 
-              />
-              <TableRow 
-                name="IMDb Awards Central" 
-                description="Comprehensive awards coverage" 
-                details="Tracks 24 major film awards globally" 
-              />
-              <TableRow 
-                isHighlighted={true}
-                name="The Numbers" 
-                description="Box office performance" 
-                details="Financial success metrics" 
-              />
-              <TableRow 
-                name="Variety Awards Circuit" 
-                description="Industry insider coverage" 
-                details="Breaking news and analysis" 
-              />
-              <TableRow 
-                isHighlighted={true}
-                name="Rotten Tomatoes" 
-                description="Critics' Metascore" 
-                details="Professional reception and consensus" 
-              />
-              <TableRow 
-                name="IMDb Ratings" 
-                description="Audience Score" 
-                details="Public opinion and engagement" 
-              />
-              <TableRow 
-                isHighlighted={true}
-                name="Kalshi" 
-                description="Prediction Markets" 
-                details="Crowd-sourced probability estimates" 
-              />
-              <TableRow 
-                name="Betting Markets" 
-                description="Real-time Odds" 
-                details="Market-driven likelihood assessments" 
-              />
+              {renderTableRow(
+                'Academy Awards Database',
+                'Historical nominations and wins',
+                'Official Oscar records since 1927',
+                true
+              )}
+              {renderTableRow(
+                'IMDb Awards Central',
+                'Comprehensive awards coverage',
+                'Tracks 24 major film awards globally'
+              )}
+              {renderTableRow(
+                'The Numbers',
+                'Box office performance',
+                'Financial success metrics',
+                true
+              )}
+              {renderTableRow(
+                'Variety Awards Circuit',
+                'Industry insider coverage',
+                'Breaking news and analysis'
+              )}
+              {renderTableRow(
+                'Rotten Tomatoes',
+                'Critics\' Metascore',
+                'Professional reception and consensus',
+                true
+              )}
+              {renderTableRow(
+                'IMDb Ratings',
+                'Audience Score',
+                'Public opinion and engagement'
+              )}
+              {renderTableRow(
+                'Kalshi',
+                'Prediction Markets',
+                'Crowd-sourced probability estimates',
+                true
+              )}
+              {renderTableRow(
+                'Betting Markets',
+                'Real-time Odds',
+                'Market-driven likelihood assessments'
+              )}
             </tbody>
           </table>
         </div>
-        <div className="h-px bg-gray-600 w-full my-4"></div>
+        <div style={{ height: '1px', backgroundColor: borderColor, width: '100%', margin: '1rem 0' }}></div>
       </div>
       
       {/* Footer */}
-      <div className="bg-[#2a3548] rounded-xl p-6 shadow-lg border border-gray-700">
-        <div className="p-4">
-          <div className="h-px bg-gray-600 w-full mb-8"></div>
-          <p className="text-gray-200 text-center italic text-lg">
+      <div style={cardStyle}>
+        <div style={{ padding: '1rem' }}>
+          <div style={{ height: '1px', backgroundColor: borderColor, width: '100%', marginBottom: '2rem' }}></div>
+          <p style={{ color: '#f7fafc', textAlign: 'center', fontStyle: 'italic', fontSize: '1.125rem' }}>
             Crafted by{' '}
             <a href="https://samir.xyz/ventures" 
                target="_blank" 
                rel="noopener noreferrer"
-               className="font-medium text-[#8A3FFC] hover:underline">
+               style={{ fontWeight: 500, color: purpleColor, textDecoration: 'none' }}>
               Interspace Ventures
             </a>{' '}
             using{' '}
             <a href="https://replit.com" 
                target="_blank" 
                rel="noopener noreferrer"
-               className="font-medium text-[#8A3FFC] hover:underline">
+               style={{ fontWeight: 500, color: purpleColor, textDecoration: 'none' }}>
               Replit AI
             </a>{' '}
             & Streamlit - because even robots dream in technicolor
