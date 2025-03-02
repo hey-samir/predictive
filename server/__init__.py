@@ -1,0 +1,1 @@
+"""Oscar Predictor server module."""
