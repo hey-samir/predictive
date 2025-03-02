@@ -3,13 +3,11 @@ import { cn } from '@/lib/utils';
 
 interface LoadingSpinnerProps {
   size?: 'small' | 'medium' | 'large';
-  message?: string;
   className?: string;
 }
 
 const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   size = 'medium',
-  message = 'Loading...',
   className
 }) => {
   const sizeClasses = {
@@ -27,9 +25,6 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
         )}
         aria-label="Loading"
       />
-      {message && (
-        <p className="mt-4 text-gray-300 font-medium">{message}</p>
-      )}
     </div>
   );
 };
