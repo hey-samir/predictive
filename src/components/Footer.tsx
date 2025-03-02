@@ -20,9 +20,26 @@ const Footer: React.FC = () => {
           <p style={{
             fontSize: '0.7rem', 
             color: '#9E9E9E',
-            textAlign: 'center'
+            textAlign: 'center',
+            fontStyle: 'italic'
           }}>
-            © 2025. Built by <a href="https://samir.xyz/ventures" target="_blank" rel="noopener noreferrer" style={{color: '#a0aec0', transition: 'color 0.2s'}} className="hover:text-white">Interspace Ventures</a> and coded with <a href="https://replit.com" target="_blank" rel="noopener noreferrer" style={{color: '#a0aec0', transition: 'color 0.2s'}} className="hover:text-white">Replit</a>
+            Crafted by{' '}
+            <a href="https://samir.xyz/ventures" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               style={{color: '#8A3FFC', transition: 'color 0.2s'}} 
+               className="hover:text-white">
+              Interspace Ventures
+            </a>{' '}
+            using{' '}
+            <a href="https://replit.com" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               style={{color: '#8A3FFC', transition: 'color 0.2s'}} 
+               className="hover:text-white">
+              Replit AI
+            </a>{' '}
+            & Streamlit - because even robots dream in technicolor © 2025
           </p>
         </div>
       </footer>

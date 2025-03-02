@@ -10,8 +10,8 @@ const AboutSection: React.FC = () => {
   const cardStyle = {
     backgroundColor: cardBgColor,
     borderRadius: 0,
-    padding: '1.75rem 2.5rem',
-    marginBottom: '2rem',
+    padding: '1.25rem 1.75rem',
+    marginBottom: '1.25rem',
     boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
     border: `1px solid ${borderColor}`
   };
@@ -19,10 +19,10 @@ const AboutSection: React.FC = () => {
   // Section header style
   const headerStyle = {
     color: purpleColor,
-    fontSize: '1.5rem',
+    fontSize: '1.25rem',
     fontWeight: 'bold',
-    marginBottom: '1.5rem',
-    paddingBottom: '0.75rem',
+    marginBottom: '1rem',
+    paddingBottom: '0.5rem',
     borderBottom: `1px solid ${borderColor}`
   };
   
@@ -38,9 +38,9 @@ const AboutSection: React.FC = () => {
     backgroundColor: purpleColor,
     color: 'white',
     textTransform: 'uppercase' as const,
-    fontSize: '0.875rem',
+    fontSize: '0.75rem',
     fontWeight: 'bold',
-    padding: '1rem 1.5rem',
+    padding: '0.75rem 1rem',
     textAlign: 'left' as const
   };
   
@@ -58,8 +58,8 @@ const AboutSection: React.FC = () => {
     };
     
     const cellStyle = {
-      padding: '1rem 1.5rem',
-      fontSize: '0.875rem',
+      padding: '0.75rem 1rem',
+      fontSize: '0.75rem',
       color: 'white'
     };
     
@@ -86,11 +86,11 @@ const AboutSection: React.FC = () => {
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', paddingBottom: '5rem' }}>
       {/* Page Title */}
-      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1.5rem', color: purpleColor }}>
+      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem', color: purpleColor }}>
           And the Algorithm Goes To...
         </h1>
-        <p style={{ fontSize: '1.25rem', color: '#cbd5e0', maxWidth: '768px', margin: '0 auto' }}>
+        <p style={{ fontSize: '1rem', color: '#cbd5e0', maxWidth: '768px', margin: '0 auto' }}>
           <strong>Predictive:film</strong> uses data science to forecast Oscar winners, because even AI loves a good acceptance speech. 🎬
         </p>
       </div>
@@ -98,7 +98,7 @@ const AboutSection: React.FC = () => {
       {/* The Plot */}
       <div style={cardStyle}>
         <h2 style={headerStyle}>The Plot</h2>
-        <p style={{ fontSize: '1.125rem', lineHeight: 1.7, color: '#f7fafc' }}>
+        <p style={{ fontSize: '0.875rem', lineHeight: 1.7, color: '#f7fafc' }}>
           We crunch 25+ years of Academy Awards history and precursor awards data through our prediction engine. 
           Think of it as "Moneyball" meets "La La Land" - where statistics take center stage.
         </p>
@@ -114,8 +114,8 @@ const AboutSection: React.FC = () => {
             'Weighted analysis of precursor awards (BAFTA, Golden Globes, etc.)',
             'Historical accuracy tracking for each award predictor'
           ].map((item, index) => (
-            <li key={index} style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '1.25rem', fontSize: '1rem' }}>
-              <span style={{ color: purpleColor, marginRight: '0.75rem', fontSize: '1.25rem' }}>⭐</span>
+            <li key={index} style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '0.75rem', fontSize: '0.75rem' }}>
+              <span style={{ color: purpleColor, marginRight: '0.5rem', fontSize: '1rem' }}>⭐</span>
               <span>{item}</span>
             </li>
           ))}
@@ -284,27 +284,6 @@ const AboutSection: React.FC = () => {
             </tbody>
           </table>
         </div>
-      </div>
-      
-      {/* Footer */}
-      <div style={cardStyle}>
-        <p style={{ color: '#f7fafc', textAlign: 'center', fontStyle: 'italic', fontSize: '1.125rem' }}>
-          Crafted by{' '}
-          <a href="https://samir.xyz/ventures" 
-             target="_blank" 
-             rel="noopener noreferrer"
-             style={{ fontWeight: 500, color: purpleColor, textDecoration: 'none' }}>
-            Interspace Ventures
-          </a>{' '}
-          using{' '}
-          <a href="https://replit.com" 
-             target="_blank" 
-             rel="noopener noreferrer"
-             style={{ fontWeight: 500, color: purpleColor, textDecoration: 'none' }}>
-            Replit AI
-          </a>{' '}
-          & Streamlit - because even robots dream in technicolor © 2025
-        </p>
       </div>
     </div>
   );
