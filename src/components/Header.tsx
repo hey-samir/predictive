@@ -7,60 +7,35 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
   return (
-    <header className="sticky top-0 z-10 py-6 px-6 md:px-12" style={{background: 'transparent'}}>
-      <div className="max-w-7xl mx-auto">
-        <div style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          width: '100%'
-        }}>
-          {/* Brand Name - Left-aligned */}
+    <header className="sticky top-0 z-10">
+      <div className="navbar">
+        <div className="logo-container">
           <div 
-            style={{cursor: 'pointer'}} 
+            className="cursor-pointer" 
             onClick={() => setActiveSection('awards')}
           >
             <h1 className="text-white text-xl font-bold lowercase tracking-tight">
               predictive
             </h1>
           </div>
-          
-          {/* Main Navigation - Right-aligned */}
-          <nav style={{ 
-            display: 'flex', 
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: '2.5rem',
-            justifyContent: 'flex-end' /* Right alignment */
-          }}>
-            {['awards', 'analysis', 'about'].map((section) => (
-              <div key={section} className="relative" style={{ display: 'inline-block' }}>
-                <button
-                  onClick={() => setActiveSection(section)}
-                  style={{
-                    fontWeight: 500,
-                    fontSize: '14px',
-                    letterSpacing: '0.05em',
-                    textTransform: 'uppercase',
-                    color: 'white',
-                    background: 'transparent',
-                    border: 'none',
-                    padding: '4px 2px',
-                    transition: 'all 0.2s ease',
-                    cursor: 'pointer'
-                  }}
-                >
-                  {section.toUpperCase()}
-                </button>
-                {activeSection === section && (
-                  <div className="absolute bottom-[-8px] left-0 right-0 h-[2px]" 
-                    style={{backgroundColor: '#8A3FFC'}}></div>
-                )}
-              </div>
-            ))}
-          </nav>
         </div>
+        
+        {/* Main Navigation - Right-aligned */}
+        <nav className="navbar-links">
+          {['awards', 'analysis', 'about'].map((section) => (
+            <div key={section} className="relative">
+              <button
+                onClick={() => setActiveSection(section)}
+                className={`navbar-link ${activeSection === section ? 'navbar-link-active' : ''}`}
+              >
+                {section.toUpperCase()}
+              </button>
+              {activeSection === section && (
+                <div className="absolute -bottom-2 left-0 w-full h-0.5 bg-[#8A3FFC]"></div>
+              )}
+            </div>
+          ))}
+        </nav>
       </div>
     </header>
   );

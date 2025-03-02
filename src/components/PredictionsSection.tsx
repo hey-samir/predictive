@@ -574,15 +574,9 @@ const PredictionsSection: React.FC = () => {
         </div>
       </div>
       
-      {/* Award Cards Grid - Using CSS Grid for guaranteed 2 per row layout */}
+      {/* Award Cards Grid - Using our guaranteed 2-column class */}
       <div className="max-w-5xl mx-auto py-6">
-        <div 
-          className="grid gap-5"
-          style={{
-            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, calc(50% - 16px)), 1fr))',
-            gridAutoRows: '1fr'
-          }}
-        >
+        <div className="awards-grid">
           {filteredCategories.map(category => (
             topNomineesMap[category] && (
               <div key={category} className="h-full">
