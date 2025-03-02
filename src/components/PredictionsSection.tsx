@@ -412,16 +412,23 @@ const AwardCard: React.FC<{
   category: string;
   topNominee: NomineeData;
 }> = ({ category, topNominee }) => {
+  // Calculate animation delay based on index (since we can't easily access index here)
+  // We'll use a random small delay instead
+  const randomDelay = Math.random() * 0.4;
+
   return (
-    <div style={{
-      backgroundColor: 'var(--app-card)',
-      border: '1px solid rgba(138, 63, 252, 0.15)',
-      padding: '1.25rem',
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between'
-    }}>
+    <div 
+      className="award-card animate-fadeInUp"
+      style={{
+        backgroundColor: 'var(--app-card)',
+        border: '1px solid rgba(138, 63, 252, 0.15)',
+        padding: '1.25rem',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        animationDelay: `${randomDelay}s`
+      }}>
       <div style={{textAlign: 'center', marginBottom: '12px'}}>
         <div style={{
           fontSize: '1rem',
@@ -551,9 +558,9 @@ const PredictionsSection: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-8 md:px-12 py-10 text-white">
-      {/* Category Filter with original styling */}
+      {/* Category Filter with tighter spacing and explicit centering */}
       <div className="max-w-5xl mx-auto mb-10 px-4">
-        <div className="flex justify-center items-center space-x-4">
+        <div className="flex justify-center items-center space-x-1">
           {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
             <button
               key={category}
