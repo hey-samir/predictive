@@ -1,12 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { CURRENT_OSCAR_YEAR } from '../../../lib/constants';
-
-// API Server URL
-const API_URL = process.env.API_URL || 'http://localhost:5001';
+import { CURRENT_OSCAR_YEAR, OSCAR_CATEGORIES } from '../../../lib/constants';
+import { generateMockModelWeights } from '../../../lib/mock-data';
 
 /**
- * Proxy route handler for model weights data
- * This forwards requests to the FastAPI backend
+ * Native Next.js API route handler for model weights data
+ * This replaces the Python backend with a TypeScript implementation
  */
 export async function GET(request: NextRequest) {
   try {
@@ -14,40 +12,30 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const year = parseInt(searchParams.get('year') || String(CURRENT_OSCAR_YEAR));
     
-    // Forward request to the FastAPI server
-    const apiUrl = `${API_URL}/api/model-weights?year=${year}`;
-    const response = await fetch(apiUrl, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    // Check if the response is ok
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.detail || 'Failed to fetch model weights data');
-    }
-
-    // Return the data
-    const data = await response.json();
+    // Generate mock model weights
+    const modelWeights = generateMockModelWeights(year);
     
     // Transform the data to match the expected format in the frontend
     const transformedData: Record<string, any[]> = {};
     
-    for (const [category, weights] of Object.entries(data)) {
-      transformedData[category] = (weights as any[]).map(weight => ({
-        venue: weight.venue,
-        weight: weight.weight,
-        accuracy: weight.accuracy
-      }));
+    // Group by category
+    for (const category of OSCAR_CATEGORIES) {
+      const categoryWeights = modelWeights.filter(w => w.category === category);
+      
+      if (categoryWeights.length > 0) {
+        transformedData[category] = categoryWeights.map(weight => ({
+          venue: weight.awardVenue,
+          weight: weight.weight,
+          accuracy: weight.accuracy
+        }));
+      }
     }
     
     return NextResponse.json(transformedData);
   } catch (error) {
-    console.error('Error fetching model weights:', error);
+    console.error('Error generating model weights:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch model weights data' },
+      { error: 'Failed to generate model weights data' },
       { status: 500 }
     );
   }

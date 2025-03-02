@@ -1,41 +1,61 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { CURRENT_OSCAR_YEAR } from '../../../lib/constants';
-
-// API Server URL
-const API_URL = process.env.API_URL || 'http://localhost:5001';
+import {
+  generateMockHistoricalData,
+  generateMockNomineesData,
+  generateMockAwardsData,
+  generateMockBettingData,
+  generateMockPredictiveMarketsData
+} from '../../../lib/mock-data';
+import { OscarPredictor } from '../../../lib/predictor';
+import { PredictionResponse } from '../../../lib/types';
 
 /**
- * Proxy route handler for running predictions
- * This forwards requests to the FastAPI backend
+ * Native Next.js API route handler for running predictions
+ * This replaces the Python backend with a TypeScript implementation
  */
 export async function POST(request: NextRequest) {
   try {
+    // Get year from request body
     const body = await request.json();
     const year = body.year || CURRENT_OSCAR_YEAR;
     
-    // Forward request to the FastAPI server
-    const apiUrl = `${API_URL}/api/run-predictions?year=${year}`;
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ year }),
-    });
-
-    // Check if the response is ok
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.detail || 'Failed to run predictions');
-    }
-
-    // Return the data
-    const data = await response.json();
+    // Generate mock historical data for training
+    const historicalData = generateMockHistoricalData(10); // Last 10 years
+    
+    // Generate current year data
+    const nominations = generateMockNomineesData(year);
+    const awardWins = generateMockAwardsData(nominations);
+    const bettingOdds = generateMockBettingData(nominations);
+    const predictiveMarkets = generateMockPredictiveMarketsData(nominations);
+    
+    // Generate historical award wins for training
+    const historicalAwardWins = generateMockAwardsData(historicalData);
+    
+    // Train and run prediction model
+    const predictor = new OscarPredictor();
+    predictor.train(historicalData, historicalAwardWins);
+    
+    const predictions = predictor.predict(
+      nominations,
+      awardWins,
+      bettingOdds,
+      predictiveMarkets
+    );
+    
+    const venueStrength = predictor.analyzeVenueStrength();
+    
+    // Format response
+    const response: PredictionResponse = {
+      nominees: predictions,
+      venueStrength,
+      updatedAt: new Date().toISOString()
+    };
     
     return NextResponse.json({
       success: true,
       message: 'Predictions calculated successfully',
-      data: data
+      data: response
     });
   } catch (error) {
     console.error('Error running predictions:', error);
