@@ -9,10 +9,16 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
   return (
     <header className="sticky top-0 z-10 py-6 px-6 md:px-12" style={{background: 'transparent'}}>
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between">
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          width: '100%'
+        }}>
           {/* Brand Name - Left-aligned */}
           <div 
-            className="flex items-center cursor-pointer" 
+            style={{cursor: 'pointer'}} 
             onClick={() => setActiveSection('awards')}
           >
             <h1 className="text-white text-xl font-bold lowercase tracking-tight">
@@ -23,9 +29,10 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
           {/* Main Navigation - Right-aligned */}
           <nav style={{ 
             display: 'flex', 
-            flexDirection: 'row', /* Explicitly set to row */
+            flexDirection: 'row',
             alignItems: 'center',
-            gap: '2.5rem' /* Using gap instead of space-x for better control */
+            gap: '2.5rem',
+            justifyContent: 'flex-end' /* Right alignment */
           }}>
             {['awards', 'analysis', 'about'].map((section) => (
               <div key={section} className="relative" style={{ display: 'inline-block' }}>
