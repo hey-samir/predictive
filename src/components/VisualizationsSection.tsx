@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ModelWeightTable from './visualizations/ModelWeightTable';
 import AccuracyBarCharts from './visualizations/AccuracyBarCharts';
 import NomineeDonutChart from './visualizations/NomineeDonutChart';
+import LoadingCard from '@/components/ui/loading-card';
 import { 
   AWARD_VENUES, 
   NOMINATION_TYPES, 
@@ -112,12 +113,24 @@ const VisualizationsSection: React.FC = () => {
   const [nominees, setNominees] = useState<NomineeData[]>([]);
   const [modelWeights, setModelWeights] = useState<ModelWeight[]>([]);
   const [accuracyData, setAccuracyData] = useState<HistoricalAccuracy[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   
   useEffect(() => {
-    // Generate mock data
-    setNominees(generateMockNominees());
-    setModelWeights(generateMockModelWeights());
-    setAccuracyData(generateMockHistoricalAccuracy());
+    const loadData = async () => {
+      setIsLoading(true);
+      
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 800));
+      
+      // Generate mock data
+      setNominees(generateMockNominees());
+      setModelWeights(generateMockModelWeights());
+      setAccuracyData(generateMockHistoricalAccuracy());
+      
+      setIsLoading(false);
+    };
+    
+    loadData();
   }, []);
   
   // Group nominees by category for donut charts
@@ -135,6 +148,24 @@ const VisualizationsSection: React.FC = () => {
     ? OSCAR_CATEGORIES
     : NOMINATION_TYPES[selectedCategory] || [];
   
+  if (isLoading) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        <h1 className="text-3xl font-bold mb-3 text-app-purple">Oscar Visualizations</h1>
+        <p className="text-lg text-gray-400 mb-8">
+          Explore the data behind Oscar predictions with interactive visualizations
+        </p>
+        
+        <LoadingCard 
+          title="Visualization Data" 
+          message="Loading analytics visualizations..." 
+          spinnerSize="large"
+          className="max-w-md mx-auto mb-8"
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
       <h1 className="text-3xl font-bold mb-3 text-app-purple">Oscar Visualizations</h1>
