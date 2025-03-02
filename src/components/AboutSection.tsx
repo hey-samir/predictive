@@ -38,7 +38,7 @@ const AboutSection: React.FC = () => {
     backgroundColor: purpleColor,
     color: 'white',
     textTransform: 'uppercase' as const,
-    fontSize: '0.75rem',
+    fontSize: '0.813rem',
     fontWeight: 'bold',
     padding: '0.75rem 1rem',
     textAlign: 'left' as const
@@ -59,7 +59,7 @@ const AboutSection: React.FC = () => {
     
     const cellStyle = {
       padding: '0.75rem 1rem',
-      fontSize: '0.75rem',
+      fontSize: '0.813rem',
       color: 'white'
     };
     
@@ -98,7 +98,7 @@ const AboutSection: React.FC = () => {
       {/* The Plot */}
       <div style={cardStyle}>
         <h2 style={headerStyle}>The Plot</h2>
-        <p style={{ fontSize: '0.875rem', lineHeight: 1.7, color: '#f7fafc' }}>
+        <p style={{ fontSize: '0.813rem', lineHeight: 1.7, color: '#f7fafc' }}>
           We crunch 25+ years of Academy Awards history and precursor awards data through our prediction engine. 
           Think of it as "Moneyball" meets "La La Land" - where statistics take center stage.
         </p>
@@ -114,8 +114,8 @@ const AboutSection: React.FC = () => {
             'Weighted analysis of precursor awards (BAFTA, Golden Globes, etc.)',
             'Historical accuracy tracking for each award predictor'
           ].map((item, index) => (
-            <li key={index} style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '0.75rem', fontSize: '0.75rem' }}>
-              <span style={{ color: purpleColor, marginRight: '0.5rem', fontSize: '1rem' }}>⭐</span>
+            <li key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '0.75rem', fontSize: '0.813rem' }}>
+              <span style={{ color: purpleColor, marginRight: '0.5rem', fontSize: '1rem', display: 'flex', alignItems: 'center' }}>⭐</span>
               <span>{item}</span>
             </li>
           ))}
