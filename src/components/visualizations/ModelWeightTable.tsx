@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { AWARD_VENUES, NOMINATION_TYPES } from '../../lib/constants';
 import { ModelWeight, NomineeData } from '../../lib/types';
 
@@ -28,6 +28,17 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
     nomineesByCategory[nominee.category].push(nominee);
   });
 
+  // Group categories by nomination type
+  const categoriesByType = useMemo(() => {
+    const result: Record<string, string[]> = {};
+    
+    Object.entries(NOMINATION_TYPES).forEach(([type, categories]) => {
+      result[type] = categories.filter(category => nomineesByCategory[category]);
+    });
+    
+    return result;
+  }, [nomineesByCategory]);
+
   // Define styles from About page table styling
   const purpleColor = '#8A3FFC';
   
@@ -53,14 +64,39 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
     textAlign: 'center' as const
   };
 
+  const rotatedCellStyle = {
+    width: '40px',
+    position: 'relative' as const,
+    verticalAlign: 'middle' as const,
+    padding: 0,
+    backgroundColor: `${purpleColor}25`
+  };
+
+  const rotatedTextStyle = {
+    position: 'absolute' as const,
+    bottom: '0',
+    left: '50%',
+    height: '100%',
+    transformOrigin: 'left bottom 0',
+    transform: 'rotate(-90deg) translate(-100%, 0)',
+    whiteSpace: 'nowrap' as const,
+    fontSize: '0.9rem',
+    fontWeight: 'bold',
+    color: purpleColor,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '0 0.75rem'
+  };
+
   return (
     <div className="bg-app-card shadow rounded-xl p-6 mb-8 overflow-x-auto">
       <h2 className="text-xl font-semibold mb-4 text-app-purple border-b border-gray-700 pb-2">Precision</h2>
       <table style={tableStyle}>
         <thead>
           <tr>
+            <th style={{...tableHeaderStyle, width: '40px'}}></th>
             <th style={tableHeaderStyle}>Category</th>
-            <th style={tableHeaderStyle}>Type</th>
             <th style={tableHeaderStyle}>Nomination</th>
             {AWARD_VENUES.filter(venue => venue !== 'Critics Choice').map(venue => (
               <th key={venue} style={tableHeaderCenterStyle}>{venue}</th>
@@ -68,72 +104,71 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
           </tr>
         </thead>
         <tbody>
-          {Object.entries(nomineesByCategory).map(([category, categoryNominees], categoryIndex) => {
-            // Get model weights for this category
-            const categoryWeights = modelWeights.filter(w => w.category === category);
+          {Object.entries(categoriesByType).map(([type, categories], typeIndex) => {
+            if (categories.length === 0) return null;
             
-            // Only show unique categories
-            if (categoryIndex > 0 && Object.keys(nomineesByCategory)[categoryIndex - 1] === category) {
-              return null;
-            }
-            
-            const rowStyle = {
-              backgroundColor: categoryIndex % 2 === 0 ? `${purpleColor}15` : 'transparent',
-              borderBottom: `1px solid ${purpleColor}30`
-            };
-            
-            const cellStyle = {
-              padding: '0.75rem 1rem',
-              fontSize: '0.813rem',
-              color: 'white'
-            };
-            
-            const nameStyle = {
-              ...cellStyle,
-              fontWeight: 'bold',
-              color: purpleColor
-            };
-            
-            const centerStyle = {
-              ...cellStyle,
-              textAlign: 'center' as const
-            };
-            
-            // Find nomination type for this category
-            let nominationType = "N/A";
-            Object.entries(NOMINATION_TYPES).forEach(([type, categories]) => {
-              if (categories.includes(category)) {
-                nominationType = type;
-              }
-            });
+            return categories.map((category, categoryIndex) => {
+              const categoryNominees = nomineesByCategory[category] || [];
+              // Get model weights for this category
+              const categoryWeights = modelWeights.filter(w => w.category === category);
+              
+              const rowStyle = {
+                backgroundColor: (typeIndex + categoryIndex) % 2 === 0 ? `${purpleColor}15` : 'transparent',
+                borderBottom: `1px solid ${purpleColor}30`
+              };
+              
+              const cellStyle = {
+                padding: '0.75rem 1rem',
+                fontSize: '0.813rem',
+                color: 'white'
+              };
+              
+              const nameStyle = {
+                ...cellStyle,
+                fontWeight: 'bold',
+                color: purpleColor
+              };
+              
+              const centerStyle = {
+                ...cellStyle,
+                textAlign: 'center' as const
+              };
 
-            // Generate a sample nominee for this category
-            const exampleNominee = categoryNominees.length > 0 ? 
-              `${categoryNominees[0].nomineeName}${categoryNominees[0].filmTitle ? ` (${categoryNominees[0].filmTitle})` : ''}` : 
-              'Example Nominee';
+              // Generate a sample nominee for this category
+              const exampleNominee = categoryNominees.length > 0 ? 
+                `${categoryNominees[0].nomineeName}${categoryNominees[0].filmTitle ? ` (${categoryNominees[0].filmTitle})` : ''}` : 
+                'Example Nominee';
 
-            return (
-              <tr key={category} style={rowStyle}>
-                <td style={nameStyle}>{category}</td>
-                <td style={cellStyle}>{nominationType}</td>
-                <td style={cellStyle}>{exampleNominee}</td>
-                {AWARD_VENUES.filter(venue => venue !== 'Critics Choice').map(venue => {
-                  // Find the weight for this venue and category
-                  const weight = categoryWeights.find(w => w.awardVenue === venue);
-                  const weightValue = weight ? weight.weight : 0;
-                  const weightPercent = (weightValue * 100).toFixed(0);
-                  
-                  return (
+              return (
+                <tr key={category} style={rowStyle}>
+                  {categoryIndex === 0 && (
                     <td 
-                      key={`${category}-${venue}`} 
-                      style={centerStyle}
+                      style={rotatedCellStyle} 
+                      rowSpan={categories.length}
                     >
-                      {weightPercent}%
+                      <div style={rotatedTextStyle}>{type}</div>
                     </td>
-                  );
-                })}
-              </tr>
-            );
+                  )}
+                  <td style={nameStyle}>{category}</td>
+                  <td style={cellStyle}>{exampleNominee}</td>
+                  {AWARD_VENUES.filter(venue => venue !== 'Critics Choice').map(venue => {
+                    // Find the weight for this venue and category
+                    const weight = categoryWeights.find(w => w.awardVenue === venue);
+                    const weightValue = weight ? weight.weight : 0;
+                    const weightPercent = (weightValue * 100).toFixed(0);
+                    
+                    return (
+                      <td 
+                        key={`${category}-${venue}`} 
+                        style={centerStyle}
+                      >
+                        {weightPercent}%
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            });
           })}
         </tbody>
       </table>
