@@ -1,40 +1,49 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '../../../lib/db';
 import { CURRENT_OSCAR_YEAR } from '../../../lib/constants';
 
+// API Server URL
+const API_URL = process.env.API_URL || 'http://localhost:5001';
+
+/**
+ * Proxy route handler for model weights data
+ * This forwards requests to the FastAPI backend
+ */
 export async function GET(request: NextRequest) {
   try {
     // Get year from query params, default to current year
     const searchParams = request.nextUrl.searchParams;
     const year = parseInt(searchParams.get('year') || String(CURRENT_OSCAR_YEAR));
     
-    // Fetch model weights from the database
-    const modelWeights = await prisma.modelWeight.findMany({
-      where: {
-        year
+    // Forward request to the FastAPI server
+    const apiUrl = `${API_URL}/api/model-weights?year=${year}`;
+    const response = await fetch(apiUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
       },
-      orderBy: [
-        { category: 'asc' },
-        { weight: 'desc' }
-      ]
     });
+
+    // Check if the response is ok
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.detail || 'Failed to fetch model weights data');
+    }
+
+    // Return the data
+    const data = await response.json();
     
-    // Format model weights by category and venue
-    const weightsByCategory: Record<string, any[]> = {};
+    // Transform the data to match the expected format in the frontend
+    const transformedData: Record<string, any[]> = {};
     
-    modelWeights.forEach(weight => {
-      if (!weightsByCategory[weight.category]) {
-        weightsByCategory[weight.category] = [];
-      }
-      
-      weightsByCategory[weight.category].push({
-        venue: weight.awardVenue,
+    for (const [category, weights] of Object.entries(data)) {
+      transformedData[category] = (weights as any[]).map(weight => ({
+        venue: weight.venue,
         weight: weight.weight,
         accuracy: weight.accuracy
-      });
-    });
+      }));
+    }
     
-    return NextResponse.json(weightsByCategory);
+    return NextResponse.json(transformedData);
   } catch (error) {
     console.error('Error fetching model weights:', error);
     return NextResponse.json(

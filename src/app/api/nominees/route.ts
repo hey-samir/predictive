@@ -1,73 +1,54 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '../../../lib/db';
 import { CURRENT_OSCAR_YEAR } from '../../../lib/constants';
 
+// API Server URL
+const API_URL = process.env.API_URL || 'http://localhost:5001';
+
+/**
+ * Proxy route handler for nominees data
+ * This forwards requests to the FastAPI backend
+ */
 export async function GET(request: NextRequest) {
   try {
     // Get year from query params, default to current year
     const searchParams = request.nextUrl.searchParams;
     const year = parseInt(searchParams.get('year') || String(CURRENT_OSCAR_YEAR));
     
-    // Get category from query params (optional)
-    const category = searchParams.get('category') || undefined;
-    
-    // Fetch nominations from the database
-    const nominations = await prisma.nomination.findMany({
-      where: {
-        year,
-        ...(category ? { category } : {})
+    // Forward request to the FastAPI server
+    const apiUrl = `${API_URL}/api/nominees?year=${year}`;
+    const response = await fetch(apiUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
       },
-      include: {
-        awards: true,
-        references: true
-      },
-      orderBy: {
-        category: 'asc'
-      }
     });
+
+    // Check if the response is ok
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.detail || 'Failed to fetch nominees data');
+    }
+
+    // Return the data
+    const data = await response.json();
     
-    // Format nominations by category
-    const nominationsByCategory: Record<string, any[]> = {};
+    // Transform the data to match the expected format in the frontend
+    const transformedData: Record<string, any[]> = {};
     
-    nominations.forEach(nomination => {
-      if (!nominationsByCategory[nomination.category]) {
-        nominationsByCategory[nomination.category] = [];
-      }
-      
-      // Get betting odds and predictive market values from references
-      const bettingOdds = nomination.references.find(
-        ref => ref.referenceType === 'betting_odds'
-      );
-      
-      const marketProbability = nomination.references.find(
-        ref => ref.referenceType === 'predictive_market'
-      );
-      
-      // Get model likelihood (if available)
-      const likelihood = nomination.references.find(
-        ref => ref.referenceType === 'model_likelihood'
-      );
-      
-      // Calculate award support string
-      const awardSupport = nomination.awards
-        .filter(award => award.won)
-        .map(award => award.awardVenue)
-        .join(', ');
-      
-      // Add formatted nominee to the category list
-      nominationsByCategory[nomination.category].push({
-        id: nomination.id,
-        nomineeName: nomination.nomineeName,
-        filmTitle: nomination.filmTitle,
-        wonOscar: nomination.wonOscar,
-        likelihood: likelihood?.value || undefined,
-        bettingOdds: bettingOdds?.source || undefined,
-        marketProbability: marketProbability?.value || undefined,
-        awardSupport: awardSupport || undefined
-      });
-    });
+    for (const [category, nominees] of Object.entries(data)) {
+      transformedData[category] = (nominees as any[]).map(nominee => ({
+        id: nominee.id,
+        nomineeName: nominee.nominee_name,
+        filmTitle: nominee.film_title,
+        wonOscar: nominee.won_oscar,
+        likelihood: nominee.likelihood,
+        bettingOdds: nominee.betting_odds,
+        marketProbability: nominee.market_probability,
+        awardSupport: nominee.award_support
+      }));
+    }
     
-    return NextResponse.json(nominationsByCategory);
+    return NextResponse.json(transformedData);
   } catch (error) {
     console.error('Error fetching nominees:', error);
     return NextResponse.json(
