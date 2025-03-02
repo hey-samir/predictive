@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import PredictionsSection from '../components/PredictionsSection';
 import HistorySection from '../components/HistorySection';
 import AboutSection from '../components/AboutSection';
+import VisualizationsSection from '../components/VisualizationsSection';
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('awards');
@@ -16,6 +17,7 @@ export default function Home() {
       
       <main className="flex-1 px-6 pt-6 pb-0 max-w-7xl mx-auto w-full">
         {activeSection === 'awards' && <PredictionsSection />}
+        {activeSection === 'visualizations' && <VisualizationsSection />}
         {activeSection === 'analysis' && <HistorySection />}
         {activeSection === 'about' && <AboutSection />}
       </main>
