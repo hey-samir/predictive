@@ -143,8 +143,9 @@ const AboutSection: React.FC = () => {
               )}
               {renderTableRow(
                 'IMDb',
-                'Fan ratings & user reviews',
-                'Public opinion metrics from millions of users'
+                'Fan ratings only',
+                'Public opinion metrics from millions of users',
+                false
               )}
               {renderTableRow(
                 'The Numbers',
@@ -167,7 +168,8 @@ const AboutSection: React.FC = () => {
               {renderTableRow(
                 'Betting Markets',
                 'Real-time Odds',
-                'Market-driven likelihood assessments'
+                'Market-driven likelihood assessments',
+                false
               )}
             </tbody>
           </table>
