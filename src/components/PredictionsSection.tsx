@@ -16,59 +16,59 @@ export type NomineeData = {
   category: string;
 };
 
-// Nominees data for 2024 (for 2025 Oscars)
+// Nominees data for 2024 (for 2025 Oscars) - Updated with 2024 films
 const generateMockNomineesData = (): NomineeData[] => {
   // Best Picture
   const bestPictureNominees = [
     {
       id: 101,
       category: "Best Picture",
-      nomineeName: "Oppenheimer",
-      filmTitle: "Universal Pictures",
-      likelihood: 92.8,
-      bettingOdds: "1/4",
-      marketProbability: 91.2,
-      awardSupport: "PGA, BAFTA, Critics Choice, Golden Globes"
+      nomineeName: "Dune: Part Two",
+      filmTitle: "Warner Bros.",
+      likelihood: 88.5,
+      bettingOdds: "3/1",
+      marketProbability: 85.2,
+      awardSupport: "NBR, Critics Choice, PGA"
     },
     {
       id: 102,
       category: "Best Picture",
-      nomineeName: "Poor Things",
-      filmTitle: "Searchlight Pictures",
-      likelihood: 64.3,
-      bettingOdds: "6/1",
-      marketProbability: 62.4,
-      awardSupport: "Golden Globes"
+      nomineeName: "Challengers",
+      filmTitle: "MGM/Amazon",
+      likelihood: 76.3,
+      bettingOdds: "5/1",
+      marketProbability: 72.4,
+      awardSupport: "Venice Film Festival, Golden Globes"
     },
     {
       id: 103,
       category: "Best Picture",
-      nomineeName: "The Holdovers",
-      filmTitle: "Focus Features",
-      likelihood: 47.5,
-      bettingOdds: "12/1",
-      marketProbability: 45.2,
-      awardSupport: "Critics Choice"
+      nomineeName: "Furiosa: A Mad Max Saga",
+      filmTitle: "Warner Bros.",
+      likelihood: 68.5,
+      bettingOdds: "8/1",
+      marketProbability: 65.2,
+      awardSupport: "Critics Choice, BAFTA"
     },
     {
       id: 104,
       category: "Best Picture",
-      nomineeName: "Killers of the Flower Moon",
-      filmTitle: "Apple/Paramount",
-      likelihood: 42.6,
-      bettingOdds: "16/1",
-      marketProbability: 40.3,
+      nomineeName: "The Bikeriders",
+      filmTitle: "Focus Features",
+      likelihood: 62.6,
+      bettingOdds: "10/1",
+      marketProbability: 60.3,
       awardSupport: "NBR"
     },
     {
       id: 105,
       category: "Best Picture",
-      nomineeName: "American Fiction",
-      filmTitle: "MGM",
-      likelihood: 38.1,
-      bettingOdds: "20/1",
-      marketProbability: 35.8,
-      awardSupport: "WGA"
+      nomineeName: "Gladiator II",
+      filmTitle: "Paramount Pictures",
+      likelihood: 58.1,
+      bettingOdds: "12/1",
+      marketProbability: 55.8,
+      awardSupport: "PGA nom"
     }
   ];
   
@@ -77,32 +77,32 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 201,
       category: "Directing",
-      nomineeName: "Christopher Nolan",
-      filmTitle: "Oppenheimer",
-      likelihood: 96.5,
-      bettingOdds: "1/9",
-      marketProbability: 95.8,
-      awardSupport: "BAFTA, DGA, Golden Globes, Critics Choice"
+      nomineeName: "Denis Villeneuve",
+      filmTitle: "Dune: Part Two",
+      likelihood: 87.5,
+      bettingOdds: "5/2",
+      marketProbability: 85.8,
+      awardSupport: "NBR, DGA, Critics Choice"
     },
     {
       id: 202,
       category: "Directing",
-      nomineeName: "Martin Scorsese",
-      filmTitle: "Killers of the Flower Moon",
-      likelihood: 48.3,
-      bettingOdds: "12/1",
-      marketProbability: 46.7,
-      awardSupport: "NBR"
+      nomineeName: "Luca Guadagnino",
+      filmTitle: "Challengers",
+      likelihood: 76.3,
+      bettingOdds: "4/1",
+      marketProbability: 72.7,
+      awardSupport: "Venice, Golden Globes"
     },
     {
       id: 203,
       category: "Directing",
-      nomineeName: "Yorgos Lanthimos",
-      filmTitle: "Poor Things",
-      likelihood: 38.9,
-      bettingOdds: "18/1",
-      marketProbability: 36.2,
-      awardSupport: "Golden Globes"
+      nomineeName: "George Miller",
+      filmTitle: "Furiosa: A Mad Max Saga",
+      likelihood: 68.9,
+      bettingOdds: "6/1",
+      marketProbability: 66.2,
+      awardSupport: "BAFTA nom"
     }
   ];
   
@@ -111,22 +111,22 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 301,
       category: "Actor in a Leading Role",
-      nomineeName: "Cillian Murphy",
-      filmTitle: "Oppenheimer",
-      likelihood: 88.2,
-      bettingOdds: "1/3",
-      marketProbability: 86.5,
-      awardSupport: "BAFTA, SAG, Golden Globes"
+      nomineeName: "Timothée Chalamet",
+      filmTitle: "Dune: Part Two",
+      likelihood: 84.2,
+      bettingOdds: "3/1",
+      marketProbability: 82.5,
+      awardSupport: "Critics Choice, Golden Globes"
     },
     {
       id: 302,
       category: "Actor in a Leading Role",
-      nomineeName: "Paul Giamatti",
-      filmTitle: "The Holdovers",
-      likelihood: 73.6,
+      nomineeName: "Austin Butler",
+      filmTitle: "The Bikeriders",
+      likelihood: 78.6,
       bettingOdds: "4/1",
-      marketProbability: 71.2,
-      awardSupport: "Critics Choice, Golden Globes (Comedy)"
+      marketProbability: 76.2,
+      awardSupport: "SAG, NBR"
     }
   ];
   
@@ -135,22 +135,22 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 401,
       category: "Actress in a Leading Role",
-      nomineeName: "Emma Stone",
-      filmTitle: "Poor Things",
-      likelihood: 82.7,
-      bettingOdds: "2/5",
-      marketProbability: 80.3,
+      nomineeName: "Zendaya",
+      filmTitle: "Challengers",
+      likelihood: 88.7,
+      bettingOdds: "5/2",
+      marketProbability: 86.3,
       awardSupport: "Golden Globes, Critics Choice, BAFTA"
     },
     {
       id: 402,
       category: "Actress in a Leading Role",
-      nomineeName: "Lily Gladstone",
-      filmTitle: "Killers of the Flower Moon",
-      likelihood: 71.1,
-      bettingOdds: "7/2",
-      marketProbability: 69.2,
-      awardSupport: "SAG, Golden Globes (Drama)"
+      nomineeName: "Anya Taylor-Joy",
+      filmTitle: "Furiosa: A Mad Max Saga",
+      likelihood: 81.1,
+      bettingOdds: "3/1",
+      marketProbability: 79.2,
+      awardSupport: "SAG, Critics Choice"
     }
   ];
   
@@ -159,22 +159,22 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 501,
       category: "Actor in a Supporting Role",
-      nomineeName: "Robert Downey Jr.",
-      filmTitle: "Oppenheimer",
-      likelihood: 94.8,
-      bettingOdds: "1/8",
-      marketProbability: 93.9,
-      awardSupport: "BAFTA, SAG, Golden Globes, Critics Choice"
+      nomineeName: "Josh O'Connor",
+      filmTitle: "Challengers",
+      likelihood: 87.8,
+      bettingOdds: "3/1",
+      marketProbability: 85.9,
+      awardSupport: "BAFTA, SAG, Golden Globes"
     },
     {
       id: 502,
       category: "Actor in a Supporting Role",
-      nomineeName: "Ryan Gosling",
-      filmTitle: "Barbie",
-      likelihood: 42.5,
-      bettingOdds: "16/1",
-      marketProbability: 40.7,
-      awardSupport: "Critics Choice"
+      nomineeName: "Josh Brolin",
+      filmTitle: "Dune: Part Two",
+      likelihood: 78.5,
+      bettingOdds: "4/1",
+      marketProbability: 76.7,
+      awardSupport: "Critics Choice, SAG nom"
     }
   ];
   
@@ -183,21 +183,21 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 601,
       category: "Actress in a Supporting Role",
-      nomineeName: "Da'Vine Joy Randolph",
-      filmTitle: "The Holdovers",
-      likelihood: 95.2,
-      bettingOdds: "1/12",
-      marketProbability: 94.7,
-      awardSupport: "SAG, BAFTA, Golden Globes, Critics Choice"
+      nomineeName: "Florence Pugh",
+      filmTitle: "Dune: Part Two",
+      likelihood: 85.2,
+      bettingOdds: "5/2",
+      marketProbability: 83.7,
+      awardSupport: "SAG, BAFTA, Critics Choice"
     },
     {
       id: 602,
       category: "Actress in a Supporting Role",
-      nomineeName: "Emily Blunt",
-      filmTitle: "Oppenheimer",
-      likelihood: 38.6,
-      bettingOdds: "20/1",
-      marketProbability: 36.4,
+      nomineeName: "Mike Faist",
+      filmTitle: "Challengers",
+      likelihood: 75.6,
+      bettingOdds: "4/1",
+      marketProbability: 73.4,
       awardSupport: "BAFTA nom, SAG nom"
     }
   ];
@@ -207,21 +207,21 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 701,
       category: "Writing (Original Screenplay)",
-      nomineeName: "Anatomy of a Fall",
-      filmTitle: "Justine Triet, Arthur Harari",
-      likelihood: 82.4,
-      bettingOdds: "1/2",
-      marketProbability: 80.8,
-      awardSupport: "WGA, BAFTA, Golden Globes"
+      nomineeName: "Challengers",
+      filmTitle: "Justin Kuritzkes",
+      likelihood: 86.4,
+      bettingOdds: "5/2",
+      marketProbability: 84.8,
+      awardSupport: "WGA, Golden Globes"
     },
     {
       id: 702,
       category: "Writing (Adapted Screenplay)",
-      nomineeName: "American Fiction",
-      filmTitle: "Cord Jefferson",
-      likelihood: 76.3,
-      bettingOdds: "2/3",
-      marketProbability: 74.4,
+      nomineeName: "Dune: Part Two",
+      filmTitle: "Denis Villeneuve, Jon Spaihts",
+      likelihood: 82.3,
+      bettingOdds: "3/1",
+      marketProbability: 80.4,
       awardSupport: "WGA, BAFTA, USC Scripter"
     }
   ];
@@ -231,31 +231,31 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 801,
       category: "Cinematography",
-      nomineeName: "Hoyte van Hoytema",
-      filmTitle: "Oppenheimer",
+      nomineeName: "Greig Fraser",
+      filmTitle: "Dune: Part Two",
       likelihood: 89.2,
-      bettingOdds: "1/3",
+      bettingOdds: "2/1",
       marketProbability: 88.4,
       awardSupport: "BAFTA, ASC"
     },
     {
       id: 802,
       category: "Film Editing",
-      nomineeName: "Jennifer Lame",
-      filmTitle: "Oppenheimer",
+      nomineeName: "Joe Walker",
+      filmTitle: "Dune: Part Two",
       likelihood: 87.3,
-      bettingOdds: "1/2",
+      bettingOdds: "2/1",
       marketProbability: 84.7,
       awardSupport: "ACE Eddie, BAFTA, Critics Choice"
     },
     {
       id: 803,
       category: "Visual Effects",
-      nomineeName: "Godzilla Minus One",
-      filmTitle: "Takashi Yamazaki",
-      likelihood: 76.8,
-      bettingOdds: "4/5",
-      marketProbability: 75.6,
+      nomineeName: "Dune: Part Two",
+      filmTitle: "DNEG, Wylie Co.",
+      likelihood: 92.8,
+      bettingOdds: "2/1",
+      marketProbability: 90.6,
       awardSupport: "VES Awards, Critics Choice"
     }
   ];
@@ -265,12 +265,12 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 901,
       category: "International Feature Film",
-      nomineeName: "The Zone of Interest",
-      filmTitle: "United Kingdom",
-      likelihood: 88.3,
-      bettingOdds: "1/3",
-      marketProbability: 86.9,
-      awardSupport: "BAFTA, Critics Choice"
+      nomineeName: "All We Imagine as Light",
+      filmTitle: "India",
+      likelihood: 83.3,
+      bettingOdds: "3/1",
+      marketProbability: 81.9,
+      awardSupport: "Cannes Grand Prix, BAFTA"
     }
   ];
   
@@ -279,11 +279,11 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 1001,
       category: "Animated Feature Film",
-      nomineeName: "The Boy and the Heron",
-      filmTitle: "Hayao Miyazaki",
-      likelihood: 85.9,
-      bettingOdds: "2/5",
-      marketProbability: 84.3,
+      nomineeName: "Inside Out 2",
+      filmTitle: "Pixar",
+      likelihood: 91.9,
+      bettingOdds: "2/1",
+      marketProbability: 90.3,
       awardSupport: "PGA, Golden Globes, Critics Choice, Annie Awards"
     }
   ];
@@ -293,11 +293,11 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 1101,
       category: "Documentary Feature Film",
-      nomineeName: "20 Days in Mariupol",
-      filmTitle: "Mstyslav Chernov",
-      likelihood: 76.2,
-      bettingOdds: "4/6",
-      marketProbability: 74.8,
+      nomineeName: "Quiet on Set",
+      filmTitle: "Mary Robertson, Emma Schwartz",
+      likelihood: 82.2,
+      bettingOdds: "3/1",
+      marketProbability: 80.8,
       awardSupport: "DGA, Critics Choice"
     }
   ];
@@ -307,11 +307,11 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 1201,
       category: "Production Design",
-      nomineeName: "Poor Things",
-      filmTitle: "James Price, Shona Heath",
-      likelihood: 86.7,
-      bettingOdds: "1/3",
-      marketProbability: 85.4,
+      nomineeName: "Dune: Part Two",
+      filmTitle: "Patrice Vermette",
+      likelihood: 90.7,
+      bettingOdds: "2/1",
+      marketProbability: 89.4,
       awardSupport: "BAFTA, ADG, Critics Choice"
     }
   ];
@@ -321,11 +321,11 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 1301,
       category: "Costume Design",
-      nomineeName: "Poor Things",
-      filmTitle: "Holly Waddington",
-      likelihood: 82.9,
-      bettingOdds: "2/5",
-      marketProbability: 81.6,
+      nomineeName: "Dune: Part Two",
+      filmTitle: "Jacqueline West",
+      likelihood: 86.9,
+      bettingOdds: "5/2",
+      marketProbability: 84.6,
       awardSupport: "BAFTA, CDG"
     }
   ];
@@ -335,12 +335,12 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 1401,
       category: "Makeup and Hairstyling",
-      nomineeName: "Poor Things",
-      filmTitle: "Nadia Stacey, Mark Coulier",
-      likelihood: 90.4,
-      bettingOdds: "1/4",
-      marketProbability: 89.8,
-      awardSupport: "BAFTA, Critics Choice"
+      nomineeName: "Furiosa: A Mad Max Saga",
+      filmTitle: "Lesley Vanderwalt, Damian Martin",
+      likelihood: 88.4,
+      bettingOdds: "2/1",
+      marketProbability: 86.8,
+      awardSupport: "BAFTA, MUAHS Guild"
     }
   ];
   
@@ -349,11 +349,11 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 1501,
       category: "Sound",
-      nomineeName: "Oppenheimer",
-      filmTitle: "Willie Burton, Richard King",
-      likelihood: 88.1,
-      bettingOdds: "1/3",
-      marketProbability: 87.5,
+      nomineeName: "Dune: Part Two",
+      filmTitle: "Mark Mangini, Theo Green, Ron Bartlett",
+      likelihood: 90.1,
+      bettingOdds: "2/1",
+      marketProbability: 89.5,
       awardSupport: "BAFTA, MPSE, CAS"
     }
   ];
@@ -363,11 +363,11 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 1601,
       category: "Music (Original Score)",
-      nomineeName: "Ludwig Göransson",
-      filmTitle: "Oppenheimer",
-      likelihood: 93.8,
-      bettingOdds: "1/5",
-      marketProbability: 92.6,
+      nomineeName: "Hans Zimmer",
+      filmTitle: "Dune: Part Two",
+      likelihood: 89.8,
+      bettingOdds: "2/1",
+      marketProbability: 88.6,
       awardSupport: "Golden Globes, Critics Choice, BAFTA"
     }
   ];
@@ -377,12 +377,12 @@ const generateMockNomineesData = (): NomineeData[] => {
     {
       id: 1701,
       category: "Music (Original Song)",
-      nomineeName: "What Was I Made For?",
-      filmTitle: "Barbie",
+      nomineeName: "For the Throne",
+      filmTitle: "Challengers",
       likelihood: 82.6,
-      bettingOdds: "1/2",
+      bettingOdds: "5/2",
       marketProbability: 81.3,
-      awardSupport: "Golden Globes, Critics Choice, Grammy"
+      awardSupport: "Golden Globes, Critics Choice"
     }
   ];
   
@@ -551,124 +551,41 @@ const PredictionsSection: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-8 md:px-12 py-10 text-white">
-      {/* Category Filter - Adaptive based on viewport width */}
+      {/* Category Filter - Always visible with responsive sizing */}
       <div className="max-w-5xl mx-auto mb-10 px-4">
-        {/* CSS for responsiveness */}
-        <style jsx>{`
-          /* Filter button styles */
-          .category-filter {
-            font-size: 0.875rem;
-            padding: 0.5rem 0.75rem;
-            border-radius: 0.375rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-          }
-          
-          /* Dropdown styles */
-          .filter-dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background-color: #222;
-            border-radius: 0.375rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            z-index: 50;
-            padding: 0.5rem;
-            margin-top: 0.5rem;
-          }
-          
-          .filter-dropdown button {
-            width: 100%;
-            text-align: left;
-            padding: 0.5rem 0.75rem;
-            border-radius: 0.25rem;
-            margin: 0.25rem 0;
-          }
-          
-          /* Responsive behaviors */
-          @media (max-width: 640px) {
-            .filter-button-group {
-              display: none;
-            }
-            .filter-dropdown-container {
-              display: block;
-            }
-          }
-          
-          @media (min-width: 641px) {
-            .filter-button-group {
-              display: flex;
-            }
-            .filter-dropdown-container {
-              display: none;
-            }
-          }
-        `}</style>
-        
-        {/* Desktop/tablet view - All buttons in a row */}
-        <div className="filter-button-group justify-center items-center space-x-4">
+        <div className="flex justify-center items-center flex-wrap">
           {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`category-filter ${
+              className={`m-1 px-3 py-2 rounded-md transition-all duration-200 text-center ${
                 activeCategory === category 
-                  ? 'category-filter-active' 
-                  : 'category-filter-inactive'
+                  ? 'bg-[#8A3FFC]/20 text-white border border-[#8A3FFC]' 
+                  : 'bg-gray-800/30 text-gray-300 border border-gray-700 hover:border-gray-500'
               }`}
+              style={{
+                fontSize: 'clamp(0.7rem, 2vw, 0.875rem)', // Responsive font size
+                whiteSpace: 'nowrap'
+              }}
             >
               {category}
             </button>
           ))}
         </div>
-        
-        {/* Mobile view - Dropdown menu */}
-        <div className="filter-dropdown-container relative text-center">
-          <button 
-            className="category-filter category-filter-active uppercase tracking-wider"
-            onClick={(e) => {
-              e.stopPropagation();
-              setFilterDropdownOpen(!filterDropdownOpen);
-            }}
-          >
-            FILTER: {activeCategory}
-          </button>
-          
-          {filterDropdownOpen && (
-            <div className="filter-dropdown">
-              {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
-                <button
-                  key={category}
-                  onClick={() => {
-                    setActiveCategory(category);
-                    setFilterDropdownOpen(false);
-                  }}
-                  className={`hover:bg-gray-700 ${
-                    activeCategory === category ? 'text-[#8A3FFC]' : 'text-white'
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
       </div>
       
-      {/* Award Cards Grid - using flexbox for 2 per row with consistent layout */}
+      {/* Award Cards Grid - Using CSS Grid for guaranteed 2 per row layout */}
       <div className="max-w-5xl mx-auto py-6">
-        <div className="flex flex-wrap" style={{ margin: "-10px" }}>
+        <div 
+          className="grid gap-5"
+          style={{
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, calc(50% - 16px)), 1fr))',
+            gridAutoRows: '1fr'
+          }}
+        >
           {filteredCategories.map(category => (
             topNomineesMap[category] && (
-              <div key={category} 
-                style={{ 
-                  width: "100%", 
-                  padding: "10px", 
-                  boxSizing: "border-box" 
-                }}
-                className="sm:!w-1/2"
-              >
+              <div key={category} className="h-full">
                 <AwardCard 
                   category={category}
                   topNominee={topNomineesMap[category]}
