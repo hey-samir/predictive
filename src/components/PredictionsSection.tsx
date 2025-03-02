@@ -534,27 +534,22 @@ const PredictionsSection: React.FC = () => {
   const filteredCategories = getFilteredCategories();
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-8 text-white">
+    <div className="max-w-6xl mx-auto px-8 md:px-12 py-10 text-white">
       {/* Category Filter - Responsive and stays on one line */}
-      <div className="max-w-5xl mx-auto mb-10">
-        {/* Desktop and Tablet View - Horizontal */}
-        <div className="hidden sm:flex justify-center items-center space-x-3" 
+      <div className="max-w-5xl mx-auto mb-10 px-8">
+        {/* Single responsive filter that changes layout based on screen size */}
+        <div className="flex sm:flex-row flex-col sm:justify-center items-center sm:space-x-4 space-y-2 sm:space-y-0" 
           style={{
-            whiteSpace: 'nowrap',
-            overflowX: 'auto', /* Allow horizontal scroll if needed */
-            scrollbarWidth: 'none', /* Hide scrollbar for Firefox */
-            msOverflowStyle: 'none' /* Hide scrollbar for IE/Edge */
+            whiteSpace: 'nowrap'
           }}
         >
-          {/* Custom CSS to hide scrollbar for Chrome/Safari */}
           <style jsx>{`
-            div::-webkit-scrollbar {
-              display: none;
-            }
             @media (max-width: 768px) {
-              .category-filter-responsive {
+              .category-filter {
                 font-size: clamp(0.7rem, 2vw, 0.875rem);
                 padding: 0.5rem 0.75rem;
+                width: 100%;
+                text-align: center;
               }
             }
           `}</style>
@@ -563,24 +558,7 @@ const PredictionsSection: React.FC = () => {
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`category-filter category-filter-responsive ${
-                activeCategory === category 
-                  ? 'category-filter-active' 
-                  : 'category-filter-inactive'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-        
-        {/* Mobile View - Vertical */}
-        <div className="flex sm:hidden flex-col items-center space-y-2">
-          {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`category-filter w-full ${
+              className={`category-filter ${
                 activeCategory === category 
                   ? 'category-filter-active' 
                   : 'category-filter-inactive'
