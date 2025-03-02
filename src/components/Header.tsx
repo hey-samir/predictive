@@ -15,7 +15,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection }) => {
       backgroundColor: '#1a202c',
       borderBottom: '1px solid #2D3748'
     }}>
-      <div className="navbar">
+      <div className="navbar max-w-7xl mx-auto w-full px-6">
         <div className="logo-container">
           <div 
             className="cursor-pointer" 

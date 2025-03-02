@@ -10,7 +10,7 @@ const AboutSection: React.FC = () => {
   const cardStyle = {
     backgroundColor: cardBgColor,
     borderRadius: 0,
-    padding: '1.25rem 1.75rem',
+    padding: '1.25rem 1.5rem',
     marginBottom: '1.25rem',
     boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
     border: `1px solid ${borderColor}`
@@ -84,9 +84,9 @@ const AboutSection: React.FC = () => {
   };
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', paddingBottom: '5rem' }}>
+    <div style={{ width: '100%', margin: '0 auto', paddingBottom: '5rem', paddingTop: '1.5rem' }}>
       {/* Page Title */}
-      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
         <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem', color: purpleColor }}>
           And the Algorithm Goes To...
         </h1>
