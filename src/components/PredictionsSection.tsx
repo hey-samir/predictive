@@ -667,7 +667,7 @@ const PredictionsSection: React.FC = () => {
           width: '100%',
           maxWidth: '650px',
           margin: '0 auto',
-          padding: '1.5rem 0'
+          padding: '1.5rem 2rem' /* Added horizontal padding to match gap */
         }}>
           <div style={{
             display: 'grid',
