@@ -638,10 +638,10 @@ const PredictionsSection: React.FC = () => {
           <div 
             style={{
               display: 'flex', 
-              flexWrap: 'wrap', 
+              flexWrap: 'nowrap', 
               justifyContent: 'center', 
               alignItems: 'center',
-              gap: '12px',
+              gap: '6px',
               margin: '0 auto',
               width: 'fit-content'
             }}
@@ -665,22 +665,24 @@ const PredictionsSection: React.FC = () => {
         {/* Award Cards Grid - Force 2-column layout with inline styles */}
         <div style={{
           width: '100%',
-          maxWidth: '650px',
+          maxWidth: '700px',
           margin: '0 auto',
-          padding: '1.5rem 2rem' /* Added horizontal padding to match gap */
+          padding: '1.5rem 1rem' /* Reduced horizontal padding */
         }}>
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: '2rem',
-            width: '100%'
+            gap: '1rem', /* Reduced gap to fit better on screen */
+            width: '100%',
+            boxSizing: 'border-box'
           }}>
             {filteredCategories.map(category => (
               topNomineesMap[category] && (
                 <div key={category} style={{
                   height: '100%',
                   width: '100%',
-                  minWidth: '280px'
+                  minWidth: 'unset', /* Remove fixed minimum width */
+                  boxSizing: 'border-box'
                 }}>
                   <AwardCard 
                     category={category}
