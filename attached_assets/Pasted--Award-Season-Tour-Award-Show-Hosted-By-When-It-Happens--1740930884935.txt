@@ -1,0 +1,37 @@
+## Award Season Tour 🏆
+| Award Show | Hosted By | When It Happens |
+|------------|-----------|-----------------|
+| Academy Awards (Oscars) | Academy of Motion Picture Arts and Sciences | March |
+| Golden Globe Awards | Hollywood Foreign Press Association | January |
+| BAFTA Awards | British Academy of Film and Television Arts | February |
+| Screen Actors Guild (SAG) | SAG-AFTRA | February |
+| Critics Choice Awards | Critics Choice Association | January |
+| Directors Guild (DGA) | Directors Guild of America | February |
+| Producers Guild (PGA) | Producers Guild of America | February |
+| Writers Guild (WGA) | Writers Guild of America | February |
+
+## The Credits Roll 🎬
+| Data Source | What It Tells Us | Why It Matters |
+|-------------|------------------|----------------|
+| Academy Awards Database | Historical nominations and wins | Official Oscar records since 1927 |
+| IMDb Awards Central | Comprehensive awards coverage | Tracks 24 major film awards globally |
+| The Numbers | Box office performance | Financial success metrics |
+| Variety Awards Circuit | Industry insider coverage | Breaking news and analysis |
+| Rotten Tomatoes | Critics' Metascore | Professional reception and consensus |
+| IMDb Ratings | Audience Score | Public opinion and engagement |
+| Kalshi | Prediction Markets | Crowd-sourced probability estimates |
+| Betting Markets | Real-time Odds | Market-driven likelihood assessments |
+
+## Award Categories
+| Category Group | What They Do | Awards |
+|---------------|--------------|---------|
+| Makers | The big-picture visionaries | Best Picture, Directing, Animated Feature, Documentary, International Film |
+| Performers | The faces on screen | Leading & Supporting Actor/Actress |
+| Creators | The storytellers | Original/Adapted Screenplay, Original Score/Song |
+| Crafters | The technical wizards | Cinematography, Editing, Production Design, Costume, Makeup, Sound, VFX |
+
+## Behind the Scenes
+- Machine learning model trained on Oscar data (1999-2024)
+- Real-time betting odds integration
+- Weighted analysis of precursor awards
+- Historical accuracy tracking for each predictor
