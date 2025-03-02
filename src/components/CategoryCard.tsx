@@ -29,11 +29,6 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, nominees, nominat
     <div className="bg-app-card rounded-xl p-5 mb-8 shadow-lg border border-gray-800">
       <div className="flex items-center mb-4">
         <h3 className="text-xl font-semibold text-white">{category}</h3>
-        {nominationType && (
-          <span className={`ml-2 px-2 py-0.5 text-xs font-medium rounded-full ${badgeColor} text-white`}>
-            {nominationType}
-          </span>
-        )}
       </div>
       
       <div className="space-y-3">
