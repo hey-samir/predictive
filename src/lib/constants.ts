@@ -10,6 +10,7 @@ export const AWARD_VENUES = [
 
 // Oscar categories tracked by the application
 export const OSCAR_CATEGORIES = [
+  // Main Categories
   "Best Picture",
   "Directing",
   "Actor in a Leading Role",
@@ -18,6 +19,8 @@ export const OSCAR_CATEGORIES = [
   "Actress in a Supporting Role",
   "Writing (Original Screenplay)",
   "Writing (Adapted Screenplay)",
+  
+  // Craft Categories
   "Cinematography",
   "Film Editing",
   "Production Design",
@@ -25,44 +28,56 @@ export const OSCAR_CATEGORIES = [
   "Makeup and Hairstyling",
   "Sound",
   "Visual Effects",
+  
+  // Music Categories
   "Music (Original Score)",
   "Music (Original Song)",
+  
+  // Feature Categories
   "Animated Feature Film",
   "Documentary Feature",
-  "International Feature Film" 
+  "International Feature Film",
+  
+  // Short Film Categories
+  "Documentary Short Film",
+  "Animated Short Film",
+  "Live Action Short Film"
 ];
 
 // Nomination categories for portfolio style view
 export const NOMINATION_CATEGORIES = [
   "All",
-  "Makers",
-  "Performers",
-  "Creators",
-  "Crafters"
+  "Maker",
+  "Performer",
+  "Creator",
+  "Crafter"
 ];
 
 // Nomination types (for grouping categories)
 export const NOMINATION_TYPES: Record<string, string[]> = {
-  "Makers": [
+  "Maker": [
     "Best Picture",
     "Directing",
     "Animated Feature Film",
     "Documentary Feature",
-    "International Feature Film"
+    "International Feature Film",
+    "Documentary Short Film",
+    "Animated Short Film",
+    "Live Action Short Film"
   ],
-  "Performers": [
+  "Performer": [
     "Actor in a Leading Role",
     "Actress in a Leading Role",
     "Actor in a Supporting Role",
     "Actress in a Supporting Role"
   ],
-  "Creators": [
+  "Creator": [
     "Writing (Original Screenplay)",
     "Writing (Adapted Screenplay)",
     "Music (Original Score)",
     "Music (Original Song)"
   ],
-  "Crafters": [
+  "Crafter": [
     "Cinematography",
     "Film Editing",
     "Production Design",
@@ -99,16 +114,16 @@ export const APP_SECTIONS = {
 
 // Nomination type descriptions for the UI
 export const NOMINATION_TYPE_DESCRIPTIONS = {
-  "Makers": "Directors, Producers, and full Film categories",
-  "Performers": "Lead & Supporting Actors/Actresses",
-  "Creators": "Writers (Screenplays) and Musicians (Score/Song)",
-  "Crafters": "Technical artists including Cinematographers, Editors, Production Designers, etc."
+  "Maker": "Directors, Producers, and full Film categories",
+  "Performer": "Lead & Supporting Actors/Actresses",
+  "Creator": "Writers (Screenplays) and Musicians (Score/Song)",
+  "Crafter": "Technical artists including Cinematographers, Editors, Production Designers, etc."
 };
 
 // Detailed nomination type descriptions for About section
 export const NOMINATION_TYPE_DETAILED_DESCRIPTIONS = {
-  "Makers": "Directors who guide the creative vision of the film, Producers who oversee the production process, and categories that recognize the overall film achievement.",
-  "Performers": "Actors and actresses in both leading and supporting roles who bring characters to life through their performances.",
-  "Creators": "Writers who craft original or adapted screenplays, and musicians who compose original scores or songs for films.",
-  "Crafters": "Technical artists including Cinematographers (camera work), Editors (film assembly), Production Designers (sets/environments), Costume Designers, Makeup & Hair Artists, Sound Artists, and Visual Effects Artists."
+  "Maker": "Directors who guide the creative vision of the film, Producers who oversee the production process, and categories that recognize the overall film achievement.",
+  "Performer": "Actors and actresses in both leading and supporting roles who bring characters to life through their performances.",
+  "Creator": "Writers who craft original or adapted screenplays, and musicians who compose original scores or songs for films.",
+  "Crafter": "Technical artists including Cinematographers (camera work), Editors (film assembly), Production Designers (sets/environments), Costume Designers, Makeup & Hair Artists, Sound Artists, and Visual Effects Artists."
 };
