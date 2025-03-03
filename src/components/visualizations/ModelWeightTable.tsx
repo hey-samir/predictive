@@ -161,19 +161,20 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
                   )}
                   <td style={nameStyle}>{category}</td>
                   <td style={cellStyle}>{exampleNominee}</td>
-                  <td style={likelihoodStyle}>{topNominee?.likelihood || 0}%</td>
+                  <td style={likelihoodStyle}>{Math.round(topNominee?.likelihood || 0)}%</td>
                   {AWARD_VENUES.filter(venue => venue !== 'Critics Choice').map(venue => {
                     // Find the weight for this venue and category
                     const weight = categoryWeights.find(w => w.awardVenue === venue);
                     const weightValue = weight ? weight.weight : 0;
-                    const weightPercent = (weightValue * 100).toFixed(0);
+                    // Format as "0.xx" or "0.0x" depending on value
+                    const formattedWeight = weightValue.toFixed(2);
                     
                     return (
                       <td 
                         key={`${category}-${venue}`} 
                         style={centerStyle}
                       >
-                        {weightPercent}%
+                        {formattedWeight}
                       </td>
                     );
                   })}

@@ -1060,10 +1060,30 @@ export function getRealNomineesData(year: number = CURRENT_OSCAR_YEAR): NomineeD
       const marketProbValue = marketProbRef?.value || 0;
       const awardWinCount = awardWins.filter(win => win.won).length;
       
-      // Weighted average: 30% betting odds, 30% market probability, 40% award wins
-      // Award wins have a much higher weight since they're historically more predictive
-      // Multiple by a higher factor to make the likelihood more significant
-      const likelihood = Math.round((bettingOddsValue * 0.3) + (marketProbValue * 0.3) + (awardWinCount * 10 * 0.4));
+      // Calculate a base value using weighted inputs
+      const baseValue = (bettingOddsValue * 0.3) + (marketProbValue * 0.3) + (awardWinCount * 15 * 0.4);
+      
+      // Scale up the likelihood to a reasonable range (50%+ for top nominees)
+      // Use a sigmoid-like curve that pushes values up more aggressively
+      let likelihood = 0;
+      
+      // Different scaling based on number of award wins
+      if (awardWinCount >= 3) {
+        // High confidence (3+ award wins) - at least 75% likelihood
+        likelihood = Math.min(95, 75 + (baseValue * 0.2));
+      } else if (awardWinCount >= 2) {
+        // Medium confidence (2 award wins) - 65-85% likelihood
+        likelihood = Math.min(85, 65 + (baseValue * 0.2));
+      } else if (awardWinCount >= 1) {
+        // Some confidence (1 award win) - 50-70% likelihood
+        likelihood = Math.min(70, 50 + (baseValue * 0.2));
+      } else {
+        // Lower confidence (0 award wins) - scale based on betting/market values
+        likelihood = Math.min(60, 30 + (baseValue * 0.3));
+      }
+      
+      // Round to nearest integer
+      likelihood = Math.round(likelihood);
       
       // Convert betting odds value to fractional format
       const bettingOdds = bettingOddsValue > 80 ? "1/10" :

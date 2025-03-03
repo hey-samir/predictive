@@ -27,7 +27,7 @@ const formatLikelihood = (value?: number): ReactElement | null => {
   else if (value > 20) colorClass = 'text-gray-300';
   else colorClass = 'text-gray-400';
   
-  return <span className={colorClass}>{value.toFixed(1)}%</span>;
+  return <span className={colorClass}>{Math.round(value)}%</span>;
 };
 
 const NomineeCard: React.FC<NomineeCardProps> = ({ nominee, isWinner = false }) => {
