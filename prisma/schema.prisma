@@ -24,6 +24,7 @@ model Nomination {
   
   awards         AwardWin[]
   references     Reference[]
+  predictions    Predictive[]
 
   @@map("nominations")
 }
@@ -50,6 +51,18 @@ model Reference {
   nomination      Nomination   @relation(fields: [nominationId], references: [id], onDelete: Cascade)
 
   @@map("references")
+}
+
+model Predictive {
+  id              Int          @id @default(autoincrement())
+  nominationId    Int          @map("nomination_id")
+  likelihood      Float
+  awardSupport    String?      @map("award_support") @db.VarChar(255)
+  calculatedAt    DateTime     @default(now()) @map("calculated_at")
+  
+  nomination      Nomination   @relation(fields: [nominationId], references: [id], onDelete: Cascade)
+
+  @@map("predictive")
 }
 
 model ModelWeight {
