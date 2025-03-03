@@ -1,6 +1,4 @@
 {
   "/page": "app/page.js",
-  "/api/nominees/route": "app/api/nominees/route.js",
-  "/api/model-weights/route": "app/api/model-weights/route.js",
-  "/api/historical-accuracy/route": "app/api/historical-accuracy/route.js"
+  "/api/nominees/route": "app/api/nominees/route.js"
 }

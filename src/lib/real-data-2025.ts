@@ -227,33 +227,13 @@ export const REAL_NOMINEES_2025: Nomination[] = [
     year: 2025,
     category: "Actress in a Leading Role",
     nominationType: "Performer",
-    nomineeName: "Saoirse Ronan",
-    filmTitle: "The Outrun",
+    nomineeName: "Cynthia Erivo",
+    filmTitle: "Wicked",
     wonOscar: false,
     createdAt: new Date().toISOString()
   },
   {
     id: 22,
-    year: 2025,
-    category: "Actress in a Leading Role",
-    nominationType: "Performer",
-    nomineeName: "Angelina Jolie",
-    filmTitle: "Maria",
-    wonOscar: false,
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: 23,
-    year: 2025,
-    category: "Actress in a Leading Role",
-    nominationType: "Performer",
-    nomineeName: "Zendaya",
-    filmTitle: "Challengers",
-    wonOscar: false,
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: 24,
     year: 2025,
     category: "Actress in a Leading Role",
     nominationType: "Performer",
@@ -263,12 +243,32 @@ export const REAL_NOMINEES_2025: Nomination[] = [
     createdAt: new Date().toISOString()
   },
   {
-    id: 25,
+    id: 23,
+    year: 2025,
+    category: "Actress in a Leading Role",
+    nominationType: "Performer",
+    nomineeName: "Mikey Madison",
+    filmTitle: "Anora",
+    wonOscar: false,
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 24,
     year: 2025,
     category: "Actress in a Leading Role",
     nominationType: "Performer",
     nomineeName: "Demi Moore",
     filmTitle: "The Substance",
+    wonOscar: false,
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 25,
+    year: 2025,
+    category: "Actress in a Leading Role",
+    nominationType: "Performer",
+    nomineeName: "Fernanda Torres",
+    filmTitle: "I'm Still Here",
     wonOscar: false,
     createdAt: new Date().toISOString()
   },
@@ -279,8 +279,8 @@ export const REAL_NOMINEES_2025: Nomination[] = [
     year: 2025,
     category: "Actor in a Supporting Role",
     nominationType: "Performer",
-    nomineeName: "Selton Mello",
-    filmTitle: "Emilia Pérez",
+    nomineeName: "Yura Borisov",
+    filmTitle: "Anora",
     wonOscar: false,
     createdAt: new Date().toISOString()
   },
@@ -289,8 +289,8 @@ export const REAL_NOMINEES_2025: Nomination[] = [
     year: 2025,
     category: "Actor in a Supporting Role",
     nominationType: "Performer",
-    nomineeName: "Jesse Plemons",
-    filmTitle: "Civil War",
+    nomineeName: "Kieran Culkin",
+    filmTitle: "A Real Pain",
     wonOscar: false,
     createdAt: new Date().toISOString()
   },
@@ -299,8 +299,8 @@ export const REAL_NOMINEES_2025: Nomination[] = [
     year: 2025,
     category: "Actor in a Supporting Role",
     nominationType: "Performer",
-    nomineeName: "Richard E. Grant",
-    filmTitle: "Broke",
+    nomineeName: "Edward Norton",
+    filmTitle: "A Complete Unknown",
     wonOscar: false,
     createdAt: new Date().toISOString()
   },
@@ -309,8 +309,8 @@ export const REAL_NOMINEES_2025: Nomination[] = [
     year: 2025,
     category: "Actor in a Supporting Role",
     nominationType: "Performer",
-    nomineeName: "Charles Melton",
-    filmTitle: "May December",
+    nomineeName: "Guy Pearce",
+    filmTitle: "The Brutalist",
     wonOscar: false,
     createdAt: new Date().toISOString()
   },
@@ -319,8 +319,8 @@ export const REAL_NOMINEES_2025: Nomination[] = [
     year: 2025,
     category: "Actor in a Supporting Role",
     nominationType: "Performer",
-    nomineeName: "John Magaro",
-    filmTitle: "Past Lives",
+    nomineeName: "Jeremy Strong",
+    filmTitle: "The Apprentice",
     wonOscar: false,
     createdAt: new Date().toISOString()
   },
