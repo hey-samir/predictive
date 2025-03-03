@@ -119,15 +119,38 @@ const VisualizationsSection: React.FC = () => {
     const loadData = async () => {
       setIsLoading(true);
       
-      // Simulate network delay
-      await new Promise(resolve => setTimeout(resolve, 800));
-      
-      // Generate mock data
-      setNominees(generateMockNominees());
-      setModelWeights(generateMockModelWeights());
-      setAccuracyData(generateMockHistoricalAccuracy());
-      
-      setIsLoading(false);
+      try {
+        // Import api functions
+        const { getNominees, getModelWeights, getHistoricalAccuracy } = await import('../lib/api');
+        
+        // Get real data from API
+        const nomineesData = await getNominees();
+        const modelWeightsData = await getModelWeights();
+        const historicalAccuracyData = await getHistoricalAccuracy();
+        
+        // Transform the nominees data to flat array
+        const nomineesList: NomineeData[] = [];
+        Object.entries(nomineesData).forEach(([category, nominees]) => {
+          nominees.forEach((nominee) => {
+            nomineesList.push({
+              ...nominee,
+              category
+            });
+          });
+        });
+        
+        setNominees(nomineesList);
+        setModelWeights(modelWeightsData);
+        setAccuracyData(historicalAccuracyData);
+      } catch (error) {
+        console.error('Error loading visualization data:', error);
+        // Fallback to mock data if API fails
+        setNominees(generateMockNominees());
+        setModelWeights(generateMockModelWeights());
+        setAccuracyData(generateMockHistoricalAccuracy());
+      } finally {
+        setIsLoading(false);
+      }
     };
     
     loadData();

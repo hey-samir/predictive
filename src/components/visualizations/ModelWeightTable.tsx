@@ -97,7 +97,7 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
             <th style={{...tableHeaderStyle, width: '40px'}}></th>
             <th style={tableHeaderStyle}>Category</th>
             <th style={tableHeaderStyle}>Nomination</th>
-            <th style={{...tableHeaderCenterStyle, backgroundColor: '#3B82F6'}}>Overall Likelihood</th>
+            <th style={{...tableHeaderCenterStyle, backgroundColor: '#4B5563'}}>Overall Likelihood</th>
             {AWARD_VENUES.filter(venue => venue !== 'Critics Choice').map(venue => (
               <th key={venue} style={tableHeaderCenterStyle}>{venue}</th>
             ))}
@@ -140,7 +140,7 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
               
               const likelihoodStyle = {
                 ...centerStyle,
-                color: '#3B82F6',
+                color: '#9CA3AF',
                 fontWeight: 'bold'
               };
 
