@@ -5,15 +5,17 @@ import { ModelWeight, NomineeData } from '../../lib/types';
 // Define prop types for the component
 interface ModelWeightTableProps {
   nominees: NomineeData[];
-  modelWeights: ModelWeight[];
+  modelWeights: ModelWeight[] | any; // Ensure it accepts array or any other structure
   nominationType?: string;
 }
 
 const ModelWeightTable: React.FC<ModelWeightTableProps> = ({ 
   nominees, 
-  modelWeights,
+  modelWeights = [],
   nominationType = 'All'
 }) => {
+  // Ensure modelWeights is always an array to prevent .filter errors
+  const weightsArray = Array.isArray(modelWeights) ? modelWeights : [];
   // Filter nominees based on nomination type if specified
   const filteredNominees = nominationType === 'All' 
     ? nominees
@@ -110,7 +112,7 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
             return categories.map((category, categoryIndex) => {
               const categoryNominees = nomineesByCategory[category] || [];
               // Get model weights for this category
-              const categoryWeights = modelWeights.filter(w => w.category === category);
+              const categoryWeights = weightsArray.filter((w: ModelWeight) => w.category === category);
               
               // Sort nominees by likelihood
               const sortedNominees = [...categoryNominees].sort((a, b) => (b.likelihood || 0) - (a.likelihood || 0));
@@ -164,7 +166,7 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
                   <td style={likelihoodStyle}>{Math.round(topNominee?.likelihood || 0)}%</td>
                   {AWARD_VENUES.filter(venue => venue !== 'Critics Choice').map(venue => {
                     // Find the weight for this venue and category
-                    const weight = categoryWeights.find(w => w.awardVenue === venue);
+                    const weight = categoryWeights.find((w: ModelWeight) => w.awardVenue === venue);
                     const weightValue = weight ? weight.weight : 0;
                     // Format as "0.xx" or "0.0x" depending on value
                     const formattedWeight = weightValue.toFixed(2);
