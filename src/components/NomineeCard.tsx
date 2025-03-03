@@ -4,7 +4,9 @@ export type NomineeData = {
   id: number;
   nomineeName: string;
   filmTitle?: string;
-  category?: string;
+  category: string;
+  nominationType: string;
+  year: number;
   likelihood?: number;
   bettingOdds?: string;
   marketProbability?: number;

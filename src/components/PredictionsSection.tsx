@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { 
   NOMINATION_TYPES, 
+  NOMINATION_CATEGORIES,
   CURRENT_OSCAR_YEAR 
 } from '../lib/constants';
 import LoadingCard from '@/components/ui/loading-card';
+import NomineeCard from './NomineeCard';
+import CategoryCard from './CategoryCard';
+import { getNominees } from '@/lib/api';
 
 // Define nominee data type
 export type NomineeData = {
@@ -15,397 +19,9 @@ export type NomineeData = {
   marketProbability?: number;
   awardSupport?: string;
   category: string;
-};
-
-// Nominees data for 2024 (for 2025 Oscars) - Updated with 2024 films
-const generateMockNomineesData = (): NomineeData[] => {
-  // Best Picture
-  const bestPictureNominees = [
-    {
-      id: 101,
-      category: "Best Picture",
-      nomineeName: "Dune: Part Two",
-      filmTitle: "Warner Bros.",
-      likelihood: 88.5,
-      bettingOdds: "3/1",
-      marketProbability: 85.2,
-      awardSupport: "NBR, Critics Choice, PGA"
-    },
-    {
-      id: 102,
-      category: "Best Picture",
-      nomineeName: "Challengers",
-      filmTitle: "MGM/Amazon",
-      likelihood: 76.3,
-      bettingOdds: "5/1",
-      marketProbability: 72.4,
-      awardSupport: "Venice Film Festival, Golden Globes"
-    },
-    {
-      id: 103,
-      category: "Best Picture",
-      nomineeName: "Furiosa: A Mad Max Saga",
-      filmTitle: "Warner Bros.",
-      likelihood: 68.5,
-      bettingOdds: "8/1",
-      marketProbability: 65.2,
-      awardSupport: "Critics Choice, BAFTA"
-    },
-    {
-      id: 104,
-      category: "Best Picture",
-      nomineeName: "The Bikeriders",
-      filmTitle: "Focus Features",
-      likelihood: 62.6,
-      bettingOdds: "10/1",
-      marketProbability: 60.3,
-      awardSupport: "NBR"
-    },
-    {
-      id: 105,
-      category: "Best Picture",
-      nomineeName: "Gladiator II",
-      filmTitle: "Paramount Pictures",
-      likelihood: 58.1,
-      bettingOdds: "12/1",
-      marketProbability: 55.8,
-      awardSupport: "PGA nom"
-    }
-  ];
-  
-  // Directing
-  const directingNominees = [
-    {
-      id: 201,
-      category: "Directing",
-      nomineeName: "Denis Villeneuve",
-      filmTitle: "Dune: Part Two",
-      likelihood: 87.5,
-      bettingOdds: "5/2",
-      marketProbability: 85.8,
-      awardSupport: "NBR, DGA, Critics Choice"
-    },
-    {
-      id: 202,
-      category: "Directing",
-      nomineeName: "Luca Guadagnino",
-      filmTitle: "Challengers",
-      likelihood: 76.3,
-      bettingOdds: "4/1",
-      marketProbability: 72.7,
-      awardSupport: "Venice, Golden Globes"
-    },
-    {
-      id: 203,
-      category: "Directing",
-      nomineeName: "George Miller",
-      filmTitle: "Furiosa: A Mad Max Saga",
-      likelihood: 68.9,
-      bettingOdds: "6/1",
-      marketProbability: 66.2,
-      awardSupport: "BAFTA nom"
-    }
-  ];
-  
-  // Actor in a Leading Role
-  const actorLeadingNominees = [
-    {
-      id: 301,
-      category: "Actor in a Leading Role",
-      nomineeName: "Timothée Chalamet",
-      filmTitle: "Dune: Part Two",
-      likelihood: 84.2,
-      bettingOdds: "3/1",
-      marketProbability: 82.5,
-      awardSupport: "Critics Choice, Golden Globes"
-    },
-    {
-      id: 302,
-      category: "Actor in a Leading Role",
-      nomineeName: "Austin Butler",
-      filmTitle: "The Bikeriders",
-      likelihood: 78.6,
-      bettingOdds: "4/1",
-      marketProbability: 76.2,
-      awardSupport: "SAG, NBR"
-    }
-  ];
-  
-  // Actress in a Leading Role
-  const actressLeadingNominees = [
-    {
-      id: 401,
-      category: "Actress in a Leading Role",
-      nomineeName: "Zendaya",
-      filmTitle: "Challengers",
-      likelihood: 88.7,
-      bettingOdds: "5/2",
-      marketProbability: 86.3,
-      awardSupport: "Golden Globes, Critics Choice, BAFTA"
-    },
-    {
-      id: 402,
-      category: "Actress in a Leading Role",
-      nomineeName: "Anya Taylor-Joy",
-      filmTitle: "Furiosa: A Mad Max Saga",
-      likelihood: 81.1,
-      bettingOdds: "3/1",
-      marketProbability: 79.2,
-      awardSupport: "SAG, Critics Choice"
-    }
-  ];
-  
-  // Supporting Actor
-  const actorSupportingNominees = [
-    {
-      id: 501,
-      category: "Actor in a Supporting Role",
-      nomineeName: "Josh O'Connor",
-      filmTitle: "Challengers",
-      likelihood: 87.8,
-      bettingOdds: "3/1",
-      marketProbability: 85.9,
-      awardSupport: "BAFTA, SAG, Golden Globes"
-    },
-    {
-      id: 502,
-      category: "Actor in a Supporting Role",
-      nomineeName: "Josh Brolin",
-      filmTitle: "Dune: Part Two",
-      likelihood: 78.5,
-      bettingOdds: "4/1",
-      marketProbability: 76.7,
-      awardSupport: "Critics Choice, SAG nom"
-    }
-  ];
-  
-  // Supporting Actress
-  const actressSupportingNominees = [
-    {
-      id: 601,
-      category: "Actress in a Supporting Role",
-      nomineeName: "Florence Pugh",
-      filmTitle: "Dune: Part Two",
-      likelihood: 85.2,
-      bettingOdds: "5/2",
-      marketProbability: 83.7,
-      awardSupport: "SAG, BAFTA, Critics Choice"
-    },
-    {
-      id: 602,
-      category: "Actress in a Supporting Role",
-      nomineeName: "Mike Faist",
-      filmTitle: "Challengers",
-      likelihood: 75.6,
-      bettingOdds: "4/1",
-      marketProbability: 73.4,
-      awardSupport: "BAFTA nom, SAG nom"
-    }
-  ];
-  
-  // Screenplay nominees
-  const screenplayNominees = [
-    {
-      id: 701,
-      category: "Writing (Original Screenplay)",
-      nomineeName: "Challengers",
-      filmTitle: "Justin Kuritzkes",
-      likelihood: 86.4,
-      bettingOdds: "5/2",
-      marketProbability: 84.8,
-      awardSupport: "WGA, Golden Globes"
-    },
-    {
-      id: 702,
-      category: "Writing (Adapted Screenplay)",
-      nomineeName: "Dune: Part Two",
-      filmTitle: "Denis Villeneuve, Jon Spaihts",
-      likelihood: 82.3,
-      bettingOdds: "3/1",
-      marketProbability: 80.4,
-      awardSupport: "WGA, BAFTA, USC Scripter"
-    }
-  ];
-  
-  // Technical categories
-  const technicalNominees = [
-    {
-      id: 801,
-      category: "Cinematography",
-      nomineeName: "Greig Fraser",
-      filmTitle: "Dune: Part Two",
-      likelihood: 89.2,
-      bettingOdds: "2/1",
-      marketProbability: 88.4,
-      awardSupport: "BAFTA, ASC"
-    },
-    {
-      id: 802,
-      category: "Film Editing",
-      nomineeName: "Joe Walker",
-      filmTitle: "Dune: Part Two",
-      likelihood: 87.3,
-      bettingOdds: "2/1",
-      marketProbability: 84.7,
-      awardSupport: "ACE Eddie, BAFTA, Critics Choice"
-    },
-    {
-      id: 803,
-      category: "Visual Effects",
-      nomineeName: "Dune: Part Two",
-      filmTitle: "DNEG, Wylie Co.",
-      likelihood: 92.8,
-      bettingOdds: "2/1",
-      marketProbability: 90.6,
-      awardSupport: "VES Awards, Critics Choice"
-    }
-  ];
-  
-  // International Feature
-  const internationalNominees = [
-    {
-      id: 901,
-      category: "International Feature Film",
-      nomineeName: "All We Imagine as Light",
-      filmTitle: "India",
-      likelihood: 83.3,
-      bettingOdds: "3/1",
-      marketProbability: 81.9,
-      awardSupport: "Cannes Grand Prix, BAFTA"
-    }
-  ];
-  
-  // Animated Feature
-  const animatedNominees = [
-    {
-      id: 1001,
-      category: "Animated Feature Film",
-      nomineeName: "Inside Out 2",
-      filmTitle: "Pixar",
-      likelihood: 91.9,
-      bettingOdds: "2/1",
-      marketProbability: 90.3,
-      awardSupport: "PGA, Golden Globes, Critics Choice, Annie Awards"
-    }
-  ];
-  
-  // Documentary Feature
-  const documentaryNominees = [
-    {
-      id: 1101,
-      category: "Documentary Feature Film",
-      nomineeName: "Quiet on Set",
-      filmTitle: "Mary Robertson, Emma Schwartz",
-      likelihood: 82.2,
-      bettingOdds: "3/1",
-      marketProbability: 80.8,
-      awardSupport: "DGA, Critics Choice"
-    }
-  ];
-  
-  // Production Design
-  const productionDesignNominees = [
-    {
-      id: 1201,
-      category: "Production Design",
-      nomineeName: "Dune: Part Two",
-      filmTitle: "Patrice Vermette",
-      likelihood: 90.7,
-      bettingOdds: "2/1",
-      marketProbability: 89.4,
-      awardSupport: "BAFTA, ADG, Critics Choice"
-    }
-  ];
-  
-  // Costume Design
-  const costumeDesignNominees = [
-    {
-      id: 1301,
-      category: "Costume Design",
-      nomineeName: "Dune: Part Two",
-      filmTitle: "Jacqueline West",
-      likelihood: 86.9,
-      bettingOdds: "5/2",
-      marketProbability: 84.6,
-      awardSupport: "BAFTA, CDG"
-    }
-  ];
-  
-  // Makeup and Hairstyling
-  const makeupNominees = [
-    {
-      id: 1401,
-      category: "Makeup and Hairstyling",
-      nomineeName: "Furiosa: A Mad Max Saga",
-      filmTitle: "Lesley Vanderwalt, Damian Martin",
-      likelihood: 88.4,
-      bettingOdds: "2/1",
-      marketProbability: 86.8,
-      awardSupport: "BAFTA, MUAHS Guild"
-    }
-  ];
-  
-  // Sound
-  const soundNominees = [
-    {
-      id: 1501,
-      category: "Sound",
-      nomineeName: "Dune: Part Two",
-      filmTitle: "Mark Mangini, Theo Green, Ron Bartlett",
-      likelihood: 90.1,
-      bettingOdds: "2/1",
-      marketProbability: 89.5,
-      awardSupport: "BAFTA, MPSE, CAS"
-    }
-  ];
-  
-  // Original Score
-  const scoreNominees = [
-    {
-      id: 1601,
-      category: "Music (Original Score)",
-      nomineeName: "Hans Zimmer",
-      filmTitle: "Dune: Part Two",
-      likelihood: 89.8,
-      bettingOdds: "2/1",
-      marketProbability: 88.6,
-      awardSupport: "Golden Globes, Critics Choice, BAFTA"
-    }
-  ];
-  
-  // Original Song
-  const songNominees = [
-    {
-      id: 1701,
-      category: "Music (Original Song)",
-      nomineeName: "For the Throne",
-      filmTitle: "Challengers",
-      likelihood: 82.6,
-      bettingOdds: "5/2",
-      marketProbability: 81.3,
-      awardSupport: "Golden Globes, Critics Choice"
-    }
-  ];
-  
-  return [
-    ...bestPictureNominees,
-    ...directingNominees,
-    ...actorLeadingNominees,
-    ...actressLeadingNominees,
-    ...actorSupportingNominees,
-    ...actressSupportingNominees,
-    ...screenplayNominees,
-    ...technicalNominees,
-    ...internationalNominees,
-    ...animatedNominees,
-    ...documentaryNominees,
-    ...productionDesignNominees,
-    ...costumeDesignNominees,
-    ...makeupNominees,
-    ...soundNominees,
-    ...scoreNominees,
-    ...songNominees
-  ];
+  nominationType: string;
+  year: number;
+  wonOscar?: boolean;
 };
 
 // Award Card component
@@ -413,13 +29,11 @@ const AwardCard: React.FC<{
   category: string;
   topNominee: NomineeData;
 }> = ({ category, topNominee }) => {
-  // Calculate animation delay based on index (since we can't easily access index here)
-  // We'll use a random small delay instead
   const randomDelay = Math.random() * 0.4;
 
   return (
     <div 
-      className="award-card animate-fadeInUp"
+      className="award-card animate-fadeInUp rounded-lg"
       style={{
         backgroundColor: 'var(--app-card)',
         border: '1px solid rgba(138, 63, 252, 0.15)',
@@ -449,7 +63,9 @@ const AwardCard: React.FC<{
             {topNominee.filmTitle}
           </div>
         )}
-
+        <div className="mt-2 text-xs bg-gray-700/60 rounded p-1 inline-block">
+          <span className="font-medium text-app-purple">{topNominee.category}</span>
+        </div>
       </div>
       <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '12px'}}>
         <div style={{
@@ -499,11 +115,9 @@ const PredictionsSection: React.FC = () => {
       try {
         setIsLoading(true);
         setError(null);
-        // Import api functions
-        const { getNominees, runPredictions } = await import('../lib/api');
         
         // Fetch nominees data
-        const nomineesData = await getNominees();
+        const nomineesData = await getNominees(CURRENT_OSCAR_YEAR);
         
         // Transform the data to flat array format
         const nomineesList: NomineeData[] = [];
@@ -516,13 +130,11 @@ const PredictionsSection: React.FC = () => {
           });
         });
         
-        setPredictions(nomineesList);
+        setPredictions(nomineesList.filter(nominee => nominee.year === CURRENT_OSCAR_YEAR));
         setLastUpdated(new Date().toLocaleString());
       } catch (err) {
         console.error('Error fetching data:', err);
-        setError('Failed to load predictions data. Using mock data instead.');
-        // Fallback to mock data
-        setPredictions(generateMockNomineesData());
+        setError('Failed to load predictions data.');
       } finally {
         setIsLoading(false);
       }
@@ -566,7 +178,9 @@ const PredictionsSection: React.FC = () => {
         return b.likelihood - a.likelihood;
       });
       
-      result[category] = sortedNominees[0];
+      if (sortedNominees.length > 0) {
+        result[category] = sortedNominees[0];
+      }
     });
     
     return result;
@@ -575,10 +189,15 @@ const PredictionsSection: React.FC = () => {
   // Get categories filtered by nomination type
   const getFilteredCategories = () => {
     if (activeCategory === "All") {
-      return Object.values(NOMINATION_TYPES).flat();
+      return Object.keys(NOMINATION_TYPES).flatMap(type => NOMINATION_TYPES[type]);
     }
     
     return NOMINATION_TYPES[activeCategory] || [];
+  };
+
+  // Group nominees by category
+  const getNomineesByCategory = (category: string) => {
+    return predictions.filter(nominee => nominee.category === category);
   };
 
   const topNomineesMap = getTopNomineesMap();
@@ -601,111 +220,110 @@ const PredictionsSection: React.FC = () => {
       return (
         <div className="flex flex-col items-center justify-center py-12">
           <div className="bg-red-900/20 border border-red-500/50 rounded-lg p-6 max-w-md">
-            <p className="text-red-400 mb-4">{error}</p>
-            <p className="text-sm opacity-80">Showing mock data as fallback.</p>
+            <h3 className="text-red-500 font-semibold text-lg mb-2">Error Loading Data</h3>
+            <p className="text-gray-300">{error}</p>
           </div>
-        </div>
-      );
-    }
-
-    if (predictions.length === 0) {
-      return (
-        <div className="flex flex-col items-center justify-center py-12">
-          <p className="text-lg mb-4">No prediction data available.</p>
-          <button 
-            className="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-md transition"
-            onClick={async () => {
-              try {
-                setIsLoading(true);
-                const { runPredictions } = await import('../lib/api');
-                await runPredictions();
-                // Reload the page to get fresh data
-                window.location.reload();
-              } catch (err) {
-                console.error('Error running predictions:', err);
-                setError('Failed to run predictions.');
-                setIsLoading(false);
-              }
-            }}
-          >
-            Generate Predictions
-          </button>
         </div>
       );
     }
 
     return (
-      <>
-        {/* Category Filter with larger buttons and proper spacing */}
-        <div className="w-full mx-auto mb-16 mt-8 text-center">
-          <div 
-            style={{
-              display: 'flex', 
-              flexWrap: 'nowrap', 
-              justifyContent: 'center', 
-              alignItems: 'center',
-              gap: '6px',
-              margin: '0 auto',
-              width: 'fit-content'
-            }}
-          >
-            {["All", "Makers", "Performers", "Creators", "Crafters"].map(category => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`category-filter ${
-                  activeCategory === category 
-                    ? 'category-filter-active' 
-                    : 'category-filter-inactive'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
-        
-        {/* Award Cards Grid - Force 2-column layout with inline styles */}
-        <div style={{
-          width: '100%',
-          maxWidth: '700px',
-          margin: '0 auto',
-          padding: '1.5rem 1rem' /* Reduced horizontal padding */
-        }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: '1rem', /* Reduced gap to fit better on screen */
-            width: '100%',
-            boxSizing: 'border-box'
-          }}>
-            {filteredCategories.map(category => (
-              topNomineesMap[category] && (
-                <div key={category} style={{
-                  height: '100%',
-                  width: '100%',
-                  minWidth: 'unset', /* Remove fixed minimum width */
-                  boxSizing: 'border-box'
-                }}>
-                  <AwardCard 
-                    category={category}
-                    topNominee={topNomineesMap[category]}
+      <div className="py-6">
+        {filteredCategories.length === 0 ? (
+          <p className="text-center text-gray-400 py-8">No categories found for this filter.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredCategories.map((category) => {
+              const nominees = getNomineesByCategory(category);
+              if (nominees.length === 0) return null;
+              
+              return (
+                <div key={category} className="category-container">
+                  <CategoryCard 
+                    category={category} 
+                    nominees={nominees}
+                    nominationType={nominees[0]?.nominationType} 
                   />
                 </div>
-              )
-            ))}
+              );
+            })}
           </div>
-        </div>
-        
-
-      </>
+        )}
+      </div>
     );
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-8 md:px-12 pt-8 pb-0 text-white">
-      {renderContent()}
-    </div>
+    <section id="predictions" className="py-16 relative">
+      <div className="max-w-screen-xl mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-white mb-4">
+            {CURRENT_OSCAR_YEAR} Oscar Predictions
+          </h2>
+          <p className="text-gray-400 max-w-3xl mx-auto mb-8">
+            Our predictions for the {CURRENT_OSCAR_YEAR} Academy Awards, based on data from other award shows, 
+            betting markets, and historical correlations.
+          </p>
+          
+          {/* Category filter */}
+          <div className="filter-container relative z-20 max-w-xs mx-auto mb-10">
+            <div className="filter-dropdown-container">
+              <div 
+                className="filter-dropdown-header bg-gray-800 text-white p-3 rounded-lg cursor-pointer flex items-center justify-between"
+                onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
+              >
+                <span>{activeCategory} Categories</span>
+                <svg 
+                  className={`transform transition-transform duration-300 ${filterDropdownOpen ? 'rotate-180' : ''}`}
+                  width="16" 
+                  height="10" 
+                  viewBox="0 0 16 10" 
+                  fill="none" 
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M1 1L8 8L15 1" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </div>
+              
+              {filterDropdownOpen && (
+                <div className="filter-dropdown-content absolute left-0 right-0 mt-2 bg-gray-900 border border-gray-700 rounded-lg overflow-hidden shadow-xl z-20">
+                  <div 
+                    className={`p-3 cursor-pointer hover:bg-purple-900/30 ${activeCategory === 'All' ? 'bg-purple-900/30' : ''}`}
+                    onClick={() => {
+                      setActiveCategory('All');
+                      setFilterDropdownOpen(false);
+                    }}
+                  >
+                    All Categories
+                  </div>
+                  {Object.keys(NOMINATION_TYPES).map((type) => (
+                    <div 
+                      key={type}
+                      className={`p-3 cursor-pointer hover:bg-purple-900/30 ${activeCategory === type ? 'bg-purple-900/30' : ''}`}
+                      onClick={() => {
+                        setActiveCategory(type);
+                        setFilterDropdownOpen(false);
+                      }}
+                    >
+                      {type} Categories
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+          
+          {/* Last updated timestamp */}
+          {lastUpdated && (
+            <div className="text-sm text-gray-500 mb-6">
+              Last updated: {lastUpdated}
+            </div>
+          )}
+        </div>
+        
+        {renderContent()}
+      </div>
+    </section>
   );
 };
 
