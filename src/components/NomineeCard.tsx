@@ -4,6 +4,7 @@ export type NomineeData = {
   id: number;
   nomineeName: string;
   filmTitle?: string;
+  category?: string;
   likelihood?: number;
   bettingOdds?: string;
   marketProbability?: number;
@@ -76,6 +77,13 @@ const NomineeCard: React.FC<NomineeCardProps> = ({ nominee, isWinner = false }) 
           </div>
         </div>
       </div>
+      
+      {/* Show award category */}
+      {nominee.category && (
+        <div className="mt-2 text-xs bg-gray-700/60 rounded p-1 inline-block">
+          <span className="font-medium text-app-purple">{nominee.category}</span>
+        </div>
+      )}
       
       {nominee.awardSupport && (
         <div className="mt-3 text-xs text-gray-400 border-t border-gray-700 pt-2">
