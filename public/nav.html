@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Oscar Predictions | Navigation</title>
+    <style>
+        :root {
+          --app-background: #1e2638;
+          --app-card: #2a3548;
+          --app-purple: #8A3FFC;
+          --app-text-primary: #ffffff;
+          --app-text-secondary: #a0aec0;
+        }
+        
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 20px;
+            background-color: var(--app-background);
+            color: var(--app-text-primary);
+        }
+        
+        h1 {
+            color: var(--app-purple);
+            margin-bottom: 30px;
+        }
+        
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background-color: var(--app-card);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(138, 63, 252, 0.15);
+        }
+        
+        a {
+            color: var(--app-text-primary);
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: rgba(138, 63, 252, 0.1);
+            transition: all 0.2s;
+        }
+        
+        a:hover {
+            background-color: rgba(138, 63, 252, 0.3);
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+<body>
+    <h1>Oscar Predictions | Navigation</h1>
+    
+    <div class="nav-links">
+        <a href="/">Home - Predictions Demo</a>
+        <a href="/config-summary.html">Configuration Files Summary</a>
+    </div>
+</body>
+</html>

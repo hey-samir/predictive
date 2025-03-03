@@ -1,14 +1,19 @@
-#!/bin/bash
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
 
-echo "Starting Oscar Predictions app in demonstration mode..."
+const PORT = 5000;
+const PUBLIC_DIR = path.join(__dirname, 'public');
 
-# Create a simple static HTML file to show the app
-STATIC_DIR="/tmp/static_content"
-mkdir -p "$STATIC_DIR"
+// Ensure public directory exists
+if (!fs.existsSync(PUBLIC_DIR)) {
+  fs.mkdirSync(PUBLIC_DIR, { recursive: true });
+}
 
-# Create index.html file
-cat > "$STATIC_DIR/index.html" << 'EOF'
-<!DOCTYPE html>
+// Create the index.html file if it doesn't exist
+const indexPath = path.join(PUBLIC_DIR, 'index.html');
+if (!fs.existsSync(indexPath)) {
+  const htmlContent = `<!DOCTYPE html>
 <html>
 <head>
     <title>Oscar Predictions | Predictive.film</title>
@@ -160,7 +165,7 @@ cat > "$STATIC_DIR/index.html" << 'EOF'
     </div>
     
     <div class="message">
-        <p>This is a demonstration version of the Oscar Predictions app. The Next.js configuration is being simplified.</p>
+        <p>This is a simplified version of the Oscar Predictions app using a basic HTTP server.</p>
     </div>
     
     <div class="section">
@@ -198,18 +203,54 @@ cat > "$STATIC_DIR/index.html" << 'EOF'
         &copy; 2025 Predictive.film | Oscar predictions made using machine learning
     </div>
 </body>
-</html>
-EOF
+</html>`;
+  
+  fs.writeFileSync(indexPath, htmlContent);
+}
 
-# Display message about the static content
-echo "Created static content in $STATIC_DIR/index.html"
-echo "This is a placeholder for the full Next.js application."
-echo "The Next.js configuration files have been simplified:"
-echo "  - next.config.js: Minimal settings for Next.js functionality"
-echo "  - tailwind.config.js: Essential Tailwind CSS configuration"
-echo "  - postcss.config.js: Basic PostCSS setup for Tailwind"
-echo "These files are now properly configured but minimalistic."
+const server = http.createServer((req, res) => {
+  try {
+    console.log(`Request: ${req.method} ${req.url}`);
+    
+    // Default to index.html
+    let filePath = path.join(PUBLIC_DIR, req.url === '/' ? 'index.html' : req.url);
+    
+    if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+      const contentType = getContentType(filePath);
+      const content = fs.readFileSync(filePath);
+      
+      res.writeHead(200, { 'Content-Type': contentType });
+      res.end(content);
+    } else {
+      // Return 404
+      res.writeHead(404, { 'Content-Type': 'text/html' });
+      res.end('<h1>404 Not Found</h1>');
+    }
+  } catch (err) {
+    console.error('Server error:', err);
+    res.writeHead(500, { 'Content-Type': 'text/html' });
+    res.end(`<h1>500 Internal Server Error</h1><p>${err.message}</p>`);
+  }
+});
 
-# Keep the script running to simulate a server process
-echo "Simulating server process. Press Ctrl+C to exit."
-tail -f /dev/null
+function getContentType(filePath) {
+  const ext = path.extname(filePath).toLowerCase();
+  const types = {
+    '.html': 'text/html',
+    '.css': 'text/css',
+    '.js': 'text/javascript',
+    '.png': 'image/png',
+    '.jpg': 'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.gif': 'image/gif',
+    '.svg': 'image/svg+xml',
+    '.json': 'application/json'
+  };
+  
+  return types[ext] || 'text/plain';
+}
+
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running at http://0.0.0.0:${PORT}/`);
+  console.log(`Serving content from ${PUBLIC_DIR}`);
+});

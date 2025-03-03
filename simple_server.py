@@ -1,14 +1,17 @@
-#!/bin/bash
+import http.server
+import socketserver
+import os
 
-echo "Starting Oscar Predictions app in demonstration mode..."
+PORT = 5000
 
-# Create a simple static HTML file to show the app
-STATIC_DIR="/tmp/static_content"
-mkdir -p "$STATIC_DIR"
+# Create public directory if it doesn't exist
+if not os.path.exists('public'):
+    os.makedirs('public')
 
-# Create index.html file
-cat > "$STATIC_DIR/index.html" << 'EOF'
-<!DOCTYPE html>
+# Create index.html file if it doesn't exist
+if not os.path.exists('public/index.html'):
+    with open('public/index.html', 'w') as f:
+        f.write("""<!DOCTYPE html>
 <html>
 <head>
     <title>Oscar Predictions | Predictive.film</title>
@@ -160,7 +163,8 @@ cat > "$STATIC_DIR/index.html" << 'EOF'
     </div>
     
     <div class="message">
-        <p>This is a demonstration version of the Oscar Predictions app. The Next.js configuration is being simplified.</p>
+        <p>This is a demonstration version of the Oscar Predictions app.</p>
+        <p>Current status: Running with minimal dependencies on simplified configuration.</p>
     </div>
     
     <div class="section">
@@ -198,18 +202,27 @@ cat > "$STATIC_DIR/index.html" << 'EOF'
         &copy; 2025 Predictive.film | Oscar predictions made using machine learning
     </div>
 </body>
-</html>
-EOF
+</html>""")
 
-# Display message about the static content
-echo "Created static content in $STATIC_DIR/index.html"
-echo "This is a placeholder for the full Next.js application."
-echo "The Next.js configuration files have been simplified:"
-echo "  - next.config.js: Minimal settings for Next.js functionality"
-echo "  - tailwind.config.js: Essential Tailwind CSS configuration"
-echo "  - postcss.config.js: Basic PostCSS setup for Tailwind"
-echo "These files are now properly configured but minimalistic."
+class CustomHandler(http.server.SimpleHTTPRequestHandler):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, directory='public', **kwargs)
 
-# Keep the script running to simulate a server process
-echo "Simulating server process. Press Ctrl+C to exit."
-tail -f /dev/null
+    def log_message(self, format, *args):
+        print(f"[{self.log_date_time_string()}] {format % args}")
+
+    def end_headers(self):
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept')
+        super().end_headers()
+
+print(f"Starting server on port {PORT}...")
+print(f"Serving content from {os.path.abspath('public')}")
+
+httpd = socketserver.TCPServer(("0.0.0.0", PORT), CustomHandler)
+try:
+    httpd.serve_forever()
+except KeyboardInterrupt:
+    print("\nServer stopped.")
+    httpd.server_close()

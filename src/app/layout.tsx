@@ -1,37 +1,24 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import React from 'react';
-import { inter } from '../lib/fonts';
+import './globals.css'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Predictive | Oscar Predictions',
-  description: 'Predictive uses sophisticated algorithms to predict the top Academy Award winners',
-  icons: {
-    icon: [
-      {
-        url: '/images/predictive_logo.svg',
-        type: 'image/svg+xml',
-      }
-    ],
-    apple: [
-      {
-        url: '/images/predictive_logo.svg',
-        type: 'image/svg+xml',
-      }
-    ],
-  },
-};
+  title: 'Predictive.film - Oscar Predictions',
+  description: 'Machine learning Oscar predictions with historical data analysis',
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable}`}>
-      <body className={`${inter.className} antialiased bg-app-background text-white min-h-screen flex flex-col`}>
+    <html lang="en">
+      <body className={inter.className}>
         {children}
       </body>
     </html>
-  );
+  )
 }

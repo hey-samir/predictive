@@ -1,13 +1,12 @@
 #!/bin/bash
 
-echo "Starting Oscar Predictions app in demonstration mode..."
+echo "Starting simple HTTP server on port 5000..."
 
-# Create a simple static HTML file to show the app
-STATIC_DIR="/tmp/static_content"
-mkdir -p "$STATIC_DIR"
+# Create public directory if it doesn't exist
+mkdir -p public
 
 # Create index.html file
-cat > "$STATIC_DIR/index.html" << 'EOF'
+cat > public/index.html << 'EOF'
 <!DOCTYPE html>
 <html>
 <head>
@@ -160,7 +159,8 @@ cat > "$STATIC_DIR/index.html" << 'EOF'
     </div>
     
     <div class="message">
-        <p>This is a demonstration version of the Oscar Predictions app. The Next.js configuration is being simplified.</p>
+        <p>This is a demonstration version of the Oscar Predictions app.</p>
+        <p>Current status: Running with minimal dependencies on simplified configuration.</p>
     </div>
     
     <div class="section">
@@ -201,15 +201,29 @@ cat > "$STATIC_DIR/index.html" << 'EOF'
 </html>
 EOF
 
-# Display message about the static content
-echo "Created static content in $STATIC_DIR/index.html"
-echo "This is a placeholder for the full Next.js application."
-echo "The Next.js configuration files have been simplified:"
-echo "  - next.config.js: Minimal settings for Next.js functionality"
-echo "  - tailwind.config.js: Essential Tailwind CSS configuration"
-echo "  - postcss.config.js: Basic PostCSS setup for Tailwind"
-echo "These files are now properly configured but minimalistic."
+# Create response with header
+cat > response_header.txt << 'EOF'
+HTTP/1.0 200 OK
+Content-Type: text/html
 
-# Keep the script running to simulate a server process
-echo "Simulating server process. Press Ctrl+C to exit."
-tail -f /dev/null
+EOF
+
+# Combine header and content
+cat response_header.txt public/index.html > response.txt
+
+# Use netcat to serve the content
+if command -v nc &> /dev/null; then
+    echo "Using netcat to serve static content..."
+    while true; do
+        cat response.txt | nc -l -p 5000
+    done
+else
+    echo "Netcat not found. Creating a socat server..."
+    if command -v socat &> /dev/null; then
+        socat TCP-LISTEN:5000,fork,reuseaddr SYSTEM:"cat response.txt"
+    else
+        echo "ERROR: Neither netcat nor socat is available."
+        echo "Cannot start a HTTP server."
+        exit 1
+    fi
+fi

@@ -1,24 +1,19 @@
-import React from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import LoadingSpinner from '@/components/ui/loading-spinner';
-import { cn } from '@/lib/utils';
+import { Card } from "@/components/ui/card"
+import { LoadingSpinner } from "@/components/ui/loading-spinner"
+import { cn } from "@/lib/utils"
 
 interface LoadingCardProps {
   className?: string;
   spinnerSize?: 'small' | 'medium' | 'large';
 }
 
-const LoadingCard: React.FC<LoadingCardProps> = ({
-  className,
-  spinnerSize = 'medium'
-}) => {
+export function LoadingCard({ className, spinnerSize = 'medium' }: LoadingCardProps) {
   return (
-    <Card className={cn("bg-app-card/80 border border-gray-700/50 shadow-lg backdrop-blur-sm", className)}>
-      <CardContent className="flex flex-col items-center justify-center py-8">
+    <Card className={cn("flex items-center justify-center p-8", className)}>
+      <div className="flex flex-col items-center gap-4">
         <LoadingSpinner size={spinnerSize} />
-      </CardContent>
+        <p className="text-app-text-secondary text-sm">Loading data...</p>
+      </div>
     </Card>
-  );
-};
-
-export default LoadingCard;
+  )
+}
