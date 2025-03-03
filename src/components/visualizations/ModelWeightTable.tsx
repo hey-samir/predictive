@@ -97,6 +97,7 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
             <th style={{...tableHeaderStyle, width: '40px'}}></th>
             <th style={tableHeaderStyle}>Category</th>
             <th style={tableHeaderStyle}>Nomination</th>
+            <th style={{...tableHeaderCenterStyle, backgroundColor: '#3B82F6'}}>Overall Likelihood</th>
             {AWARD_VENUES.filter(venue => venue !== 'Critics Choice').map(venue => (
               <th key={venue} style={tableHeaderCenterStyle}>{venue}</th>
             ))}
@@ -110,6 +111,10 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
               const categoryNominees = nomineesByCategory[category] || [];
               // Get model weights for this category
               const categoryWeights = modelWeights.filter(w => w.category === category);
+              
+              // Sort nominees by likelihood
+              const sortedNominees = [...categoryNominees].sort((a, b) => (b.likelihood || 0) - (a.likelihood || 0));
+              const topNominee = sortedNominees.length > 0 ? sortedNominees[0] : null;
               
               const rowStyle = {
                 backgroundColor: (typeIndex + categoryIndex) % 2 === 0 ? `${purpleColor}15` : 'transparent',
@@ -132,10 +137,16 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
                 ...cellStyle,
                 textAlign: 'center' as const
               };
+              
+              const likelihoodStyle = {
+                ...centerStyle,
+                color: '#3B82F6',
+                fontWeight: 'bold'
+              };
 
               // Generate a sample nominee for this category
-              const exampleNominee = categoryNominees.length > 0 ? 
-                `${categoryNominees[0].nomineeName}${categoryNominees[0].filmTitle ? ` (${categoryNominees[0].filmTitle})` : ''}` : 
+              const exampleNominee = topNominee ? 
+                `${topNominee.nomineeName}${topNominee.filmTitle ? ` (${topNominee.filmTitle})` : ''}` : 
                 'Example Nominee';
 
               return (
@@ -150,6 +161,7 @@ const ModelWeightTable: React.FC<ModelWeightTableProps> = ({
                   )}
                   <td style={nameStyle}>{category}</td>
                   <td style={cellStyle}>{exampleNominee}</td>
+                  <td style={likelihoodStyle}>{topNominee?.likelihood || 0}%</td>
                   {AWARD_VENUES.filter(venue => venue !== 'Critics Choice').map(venue => {
                     // Find the weight for this venue and category
                     const weight = categoryWeights.find(w => w.awardVenue === venue);

@@ -799,49 +799,49 @@ export const REAL_NOMINEES_2025: Nomination[] = [
  */
 export const REAL_AWARD_WINS_2025: AwardWin[] = [
   // Best Picture
-  { id: 1, nominationId: 7, awardVenue: "BAFTA", awardCategory: "Best Film", won: true },
-  { id: 2, nominationId: 7, awardVenue: "Golden Globes", awardCategory: "Best Motion Picture - Drama", won: true },
-  { id: 3, nominationId: 7, awardVenue: "PGA", awardCategory: "Best Theatrical Motion Picture", won: true },
-  { id: 4, nominationId: 5, awardVenue: "Golden Globes", awardCategory: "Best Motion Picture - Drama", won: false },
-  { id: 5, nominationId: 3, awardVenue: "Golden Globes", awardCategory: "Best Motion Picture - Musical or Comedy", won: true },
-  { id: 6, nominationId: 9, awardVenue: "Golden Globes", awardCategory: "Best Motion Picture - Musical or Comedy", won: false },
-  { id: 7, nominationId: 9, awardVenue: "BAFTA", awardCategory: "Best Film", won: false },
-  { id: 8, nominationId: 2, awardVenue: "BAFTA", awardCategory: "Best Film", won: false },
-  { id: 9, nominationId: 10, awardVenue: "BAFTA", awardCategory: "Best Film", won: false },
+  { id: 1, nominationId: 1, awardVenue: "BAFTA", awardCategory: "Best Film", won: true },
+  { id: 2, nominationId: 6, awardVenue: "Golden Globes", awardCategory: "Best Motion Picture - Drama", won: true },
+  { id: 3, nominationId: 1, awardVenue: "PGA", awardCategory: "Best Theatrical Motion Picture", won: true },
+  { id: 4, nominationId: 2, awardVenue: "Critics Choice", awardCategory: "Best Picture", won: true },
+  { id: 5, nominationId: 10, awardVenue: "Golden Globes", awardCategory: "Best Motion Picture - Musical or Comedy", won: true },
+  { id: 6, nominationId: 9, awardVenue: "Independent Spirit", awardCategory: "Best Feature", won: true },
+  { id: 7, nominationId: 5, awardVenue: "BAFTA", awardCategory: "Best Film", won: false },
+  { id: 8, nominationId: 3, awardVenue: "BAFTA", awardCategory: "Best Film", won: false },
+  { id: 9, nominationId: 4, awardVenue: "PGA", awardCategory: "Best Theatrical Motion Picture", won: false },
   
   // Directing
-  { id: 10, nominationId: 13, awardVenue: "DGA", awardCategory: "Outstanding Directorial Achievement", won: true },
-  { id: 11, nominationId: 13, awardVenue: "BAFTA", awardCategory: "Best Director", won: true },
-  { id: 12, nominationId: 13, awardVenue: "Golden Globes", awardCategory: "Best Director", won: true },
-  { id: 13, nominationId: 12, awardVenue: "DGA", awardCategory: "Outstanding Directorial Achievement", won: false },
-  { id: 14, nominationId: 15, awardVenue: "BAFTA", awardCategory: "Best Director", won: false },
+  { id: 10, nominationId: 12, awardVenue: "DGA", awardCategory: "Outstanding Directorial Achievement", won: true },
+  { id: 11, nominationId: 11, awardVenue: "BAFTA", awardCategory: "Best Director", won: true },
+  { id: 12, nominationId: 14, awardVenue: "Golden Globes", awardCategory: "Best Director", won: true },
+  { id: 13, nominationId: 13, awardVenue: "Critics Choice", awardCategory: "Best Director", won: true },
+  { id: 14, nominationId: 15, awardVenue: "Independent Spirit", awardCategory: "Best Director", won: false },
   
   // Actor in a Leading Role
-  { id: 15, nominationId: 19, awardVenue: "SAG", awardCategory: "Outstanding Performance by a Male Actor in a Leading Role", won: true },
-  { id: 16, nominationId: 19, awardVenue: "BAFTA", awardCategory: "Best Actor in a Leading Role", won: true },
-  { id: 17, nominationId: 19, awardVenue: "Golden Globes", awardCategory: "Best Actor in a Motion Picture - Drama", won: true },
-  { id: 18, nominationId: 18, awardVenue: "Golden Globes", awardCategory: "Best Actor in a Motion Picture - Comedy", won: true },
-  { id: 19, nominationId: 18, awardVenue: "SAG", awardCategory: "Outstanding Performance by a Male Actor in a Leading Role", won: false },
+  { id: 15, nominationId: 16, awardVenue: "SAG", awardCategory: "Outstanding Performance by a Male Actor in a Leading Role", won: true },
+  { id: 16, nominationId: 16, awardVenue: "BAFTA", awardCategory: "Best Actor in a Leading Role", won: true },
+  { id: 17, nominationId: 17, awardVenue: "Golden Globes", awardCategory: "Best Actor in a Motion Picture - Drama", won: true },
+  { id: 18, nominationId: 19, awardVenue: "Critics Choice", awardCategory: "Best Actor", won: true },
+  { id: 19, nominationId: 18, awardVenue: "Independent Spirit", awardCategory: "Best Male Lead", won: true },
   
   // Actress in a Leading Role
-  { id: 20, nominationId: 25, awardVenue: "SAG", awardCategory: "Outstanding Performance by a Female Actor in a Leading Role", won: true },
-  { id: 21, nominationId: 25, awardVenue: "BAFTA", awardCategory: "Best Actress in a Leading Role", won: true },
-  { id: 22, nominationId: 25, awardVenue: "Golden Globes", awardCategory: "Best Actress in a Motion Picture - Comedy", won: true },
-  { id: 23, nominationId: 22, awardVenue: "Golden Globes", awardCategory: "Best Actress in a Motion Picture - Drama", won: true },
-  { id: 24, nominationId: 23, awardVenue: "Golden Globes", awardCategory: "Best Actress in a Motion Picture - Drama", won: false },
+  { id: 20, nominationId: 84, awardVenue: "SAG", awardCategory: "Outstanding Performance by a Female Actor in a Leading Role", won: true },
+  { id: 21, nominationId: 84, awardVenue: "BAFTA", awardCategory: "Best Actress in a Leading Role", won: true },
+  { id: 22, nominationId: 82, awardVenue: "Golden Globes", awardCategory: "Best Actress in a Motion Picture - Drama", won: true },
+  { id: 23, nominationId: 79, awardVenue: "Critics Choice", awardCategory: "Best Actress", won: true },
+  { id: 24, nominationId: 85, awardVenue: "Independent Spirit", awardCategory: "Best Female Lead", won: true },
   
   // Actor in a Supporting Role
-  { id: 25, nominationId: 28, awardVenue: "SAG", awardCategory: "Outstanding Performance by a Male Actor in a Supporting Role", won: true },
-  { id: 26, nominationId: 28, awardVenue: "BAFTA", awardCategory: "Best Actor in a Supporting Role", won: true },
-  { id: 27, nominationId: 28, awardVenue: "Golden Globes", awardCategory: "Best Actor in a Supporting Role", won: true },
-  { id: 28, nominationId: 29, awardVenue: "Golden Globes", awardCategory: "Best Actor in a Supporting Role", won: false },
-  { id: 29, nominationId: 27, awardVenue: "Golden Globes", awardCategory: "Best Actor in a Supporting Role", won: false },
+  { id: 25, nominationId: 98, awardVenue: "SAG", awardCategory: "Outstanding Performance by a Male Actor in a Supporting Role", won: true },
+  { id: 26, nominationId: 106, awardVenue: "BAFTA", awardCategory: "Best Actor in a Supporting Role", won: true },
+  { id: 27, nominationId: 101, awardVenue: "Golden Globes", awardCategory: "Best Actor in a Supporting Role", won: true },
+  { id: 28, nominationId: 104, awardVenue: "Critics Choice", awardCategory: "Best Supporting Actor", won: true },
+  { id: 29, nominationId: 98, awardVenue: "Independent Spirit", awardCategory: "Best Supporting Male Performance", won: true },
   
   // Actress in a Supporting Role
-  { id: 30, nominationId: 35, awardVenue: "SAG", awardCategory: "Outstanding Performance by a Female Actor in a Supporting Role", won: true },
-  { id: 31, nominationId: 35, awardVenue: "BAFTA", awardCategory: "Best Actress in a Supporting Role", won: true },
-  { id: 32, nominationId: 35, awardVenue: "Golden Globes", awardCategory: "Best Actress in a Supporting Role", won: true },
-  { id: 33, nominationId: 31, awardVenue: "Golden Globes", awardCategory: "Best Actress in a Supporting Role", won: false },
+  { id: 30, nominationId: 118, awardVenue: "SAG", awardCategory: "Outstanding Performance by a Female Actor in a Supporting Role", won: true },
+  { id: 31, nominationId: 127, awardVenue: "BAFTA", awardCategory: "Best Actress in a Supporting Role", won: true },
+  { id: 32, nominationId: 119, awardVenue: "Golden Globes", awardCategory: "Best Actress in a Supporting Role", won: true },
+  { id: 33, nominationId: 124, awardVenue: "Critics Choice", awardCategory: "Best Supporting Actress", won: true },
   
   // Other categories
   { id: 34, nominationId: 49, awardVenue: "BAFTA", awardCategory: "Best Cinematography", won: true },
@@ -859,51 +859,51 @@ export const REAL_AWARD_WINS_2025: AwardWin[] = [
  */
 export const REAL_BETTING_ODDS_2025: Reference[] = [
   // Best Picture
-  { id: 1, nominationId: 7, referenceType: "betting_odds", value: 85, source: "BettingAverage" },
-  { id: 2, nominationId: 9, referenceType: "betting_odds", value: 7, source: "BettingAverage" },
-  { id: 3, nominationId: 5, referenceType: "betting_odds", value: 3, source: "BettingAverage" },
-  { id: 4, nominationId: 2, referenceType: "betting_odds", value: 2, source: "BettingAverage" },
-  { id: 5, nominationId: 4, referenceType: "betting_odds", value: 1, source: "BettingAverage" },
-  { id: 6, nominationId: 1, referenceType: "betting_odds", value: 0.8, source: "BettingAverage" },
-  { id: 7, nominationId: 10, referenceType: "betting_odds", value: 0.7, source: "BettingAverage" },
-  { id: 8, nominationId: 3, referenceType: "betting_odds", value: 0.3, source: "BettingAverage" },
-  { id: 9, nominationId: 6, referenceType: "betting_odds", value: 0.1, source: "BettingAverage" },
-  { id: 10, nominationId: 8, referenceType: "betting_odds", value: 0.1, source: "BettingAverage" },
+  { id: 1, nominationId: 1, referenceType: "betting_odds", value: 35, source: "BettingAverage" },
+  { id: 2, nominationId: 2, referenceType: "betting_odds", value: 25, source: "BettingAverage" },
+  { id: 3, nominationId: 3, referenceType: "betting_odds", value: 15, source: "BettingAverage" },
+  { id: 4, nominationId: 6, referenceType: "betting_odds", value: 10, source: "BettingAverage" },
+  { id: 5, nominationId: 9, referenceType: "betting_odds", value: 8, source: "BettingAverage" },
+  { id: 6, nominationId: 4, referenceType: "betting_odds", value: 4, source: "BettingAverage" },
+  { id: 7, nominationId: 5, referenceType: "betting_odds", value: 1.5, source: "BettingAverage" },
+  { id: 8, nominationId: 7, referenceType: "betting_odds", value: 0.8, source: "BettingAverage" },
+  { id: 9, nominationId: 8, referenceType: "betting_odds", value: 0.5, source: "BettingAverage" },
+  { id: 10, nominationId: 10, referenceType: "betting_odds", value: 0.2, source: "BettingAverage" },
   
   // Director
-  { id: 11, nominationId: 13, referenceType: "betting_odds", value: 92, source: "BettingAverage" },
-  { id: 12, nominationId: 15, referenceType: "betting_odds", value: 3, source: "BettingAverage" },
-  { id: 13, nominationId: 14, referenceType: "betting_odds", value: 2.5, source: "BettingAverage" },
-  { id: 14, nominationId: 11, referenceType: "betting_odds", value: 1.5, source: "BettingAverage" },
-  { id: 15, nominationId: 12, referenceType: "betting_odds", value: 1, source: "BettingAverage" },
+  { id: 11, nominationId: 11, referenceType: "betting_odds", value: 30, source: "BettingAverage" },
+  { id: 12, nominationId: 12, referenceType: "betting_odds", value: 28, source: "BettingAverage" },
+  { id: 13, nominationId: 13, referenceType: "betting_odds", value: 20, source: "BettingAverage" },
+  { id: 14, nominationId: 14, referenceType: "betting_odds", value: 18, source: "BettingAverage" },
+  { id: 15, nominationId: 15, referenceType: "betting_odds", value: 4, source: "BettingAverage" },
   
   // Actor in a Leading Role
-  { id: 16, nominationId: 19, referenceType: "betting_odds", value: 70, source: "BettingAverage" },
-  { id: 17, nominationId: 18, referenceType: "betting_odds", value: 26, source: "BettingAverage" },
-  { id: 18, nominationId: 20, referenceType: "betting_odds", value: 2, source: "BettingAverage" },
-  { id: 19, nominationId: 16, referenceType: "betting_odds", value: 1, source: "BettingAverage" },
-  { id: 20, nominationId: 17, referenceType: "betting_odds", value: 1, source: "BettingAverage" },
+  { id: 16, nominationId: 16, referenceType: "betting_odds", value: 40, source: "BettingAverage" },
+  { id: 17, nominationId: 17, referenceType: "betting_odds", value: 25, source: "BettingAverage" },
+  { id: 18, nominationId: 18, referenceType: "betting_odds", value: 20, source: "BettingAverage" },
+  { id: 19, nominationId: 19, referenceType: "betting_odds", value: 10, source: "BettingAverage" },
+  { id: 20, nominationId: 20, referenceType: "betting_odds", value: 5, source: "BettingAverage" },
   
   // Actress in a Leading Role
-  { id: 21, nominationId: 25, referenceType: "betting_odds", value: 77, source: "BettingAverage" },
+  { id: 21, nominationId: 21, referenceType: "betting_odds", value: 10, source: "BettingAverage" },
   { id: 22, nominationId: 22, referenceType: "betting_odds", value: 18, source: "BettingAverage" },
-  { id: 23, nominationId: 23, referenceType: "betting_odds", value: 3, source: "BettingAverage" },
-  { id: 24, nominationId: 21, referenceType: "betting_odds", value: 1, source: "BettingAverage" },
-  { id: 25, nominationId: 24, referenceType: "betting_odds", value: 1, source: "BettingAverage" },
+  { id: 23, nominationId: 23, referenceType: "betting_odds", value: 25, source: "BettingAverage" },
+  { id: 24, nominationId: 24, referenceType: "betting_odds", value: 30, source: "BettingAverage" },
+  { id: 25, nominationId: 25, referenceType: "betting_odds", value: 17, source: "BettingAverage" },
   
   // Actor in a Supporting Role
-  { id: 26, nominationId: 28, referenceType: "betting_odds", value: 95, source: "BettingAverage" },
-  { id: 27, nominationId: 29, referenceType: "betting_odds", value: 2, source: "BettingAverage" },
-  { id: 28, nominationId: 26, referenceType: "betting_odds", value: 1, source: "BettingAverage" },
-  { id: 29, nominationId: 27, referenceType: "betting_odds", value: 1, source: "BettingAverage" },
-  { id: 30, nominationId: 30, referenceType: "betting_odds", value: 1, source: "BettingAverage" },
+  { id: 26, nominationId: 26, referenceType: "betting_odds", value: 15, source: "BettingAverage" },
+  { id: 27, nominationId: 27, referenceType: "betting_odds", value: 25, source: "BettingAverage" },
+  { id: 28, nominationId: 28, referenceType: "betting_odds", value: 35, source: "BettingAverage" },
+  { id: 29, nominationId: 29, referenceType: "betting_odds", value: 20, source: "BettingAverage" },
+  { id: 30, nominationId: 30, referenceType: "betting_odds", value: 5, source: "BettingAverage" },
   
   // Actress in a Supporting Role
-  { id: 31, nominationId: 35, referenceType: "betting_odds", value: 90, source: "BettingAverage" },
-  { id: 32, nominationId: 31, referenceType: "betting_odds", value: 5, source: "BettingAverage" },
-  { id: 33, nominationId: 33, referenceType: "betting_odds", value: 2, source: "BettingAverage" },
-  { id: 34, nominationId: 34, referenceType: "betting_odds", value: 2, source: "BettingAverage" },
-  { id: 35, nominationId: 32, referenceType: "betting_odds", value: 1, source: "BettingAverage" },
+  { id: 31, nominationId: 31, referenceType: "betting_odds", value: 22, source: "BettingAverage" },
+  { id: 32, nominationId: 32, referenceType: "betting_odds", value: 18, source: "BettingAverage" },
+  { id: 33, nominationId: 33, referenceType: "betting_odds", value: 30, source: "BettingAverage" },
+  { id: 34, nominationId: 34, referenceType: "betting_odds", value: 25, source: "BettingAverage" },
+  { id: 35, nominationId: 35, referenceType: "betting_odds", value: 5, source: "BettingAverage" },
 ];
 
 /**
@@ -911,51 +911,51 @@ export const REAL_BETTING_ODDS_2025: Reference[] = [
  */
 export const REAL_PREDICTIVE_MARKETS_2025: Reference[] = [
   // Best Picture
-  { id: 36, nominationId: 7, referenceType: "predictive_market", value: 90, source: "PredictWise" },
-  { id: 37, nominationId: 9, referenceType: "predictive_market", value: 5, source: "PredictWise" },
-  { id: 38, nominationId: 5, referenceType: "predictive_market", value: 2, source: "PredictWise" },
-  { id: 39, nominationId: 2, referenceType: "predictive_market", value: 1, source: "PredictWise" },
-  { id: 40, nominationId: 4, referenceType: "predictive_market", value: 0.8, source: "PredictWise" },
-  { id: 41, nominationId: 1, referenceType: "predictive_market", value: 0.5, source: "PredictWise" },
-  { id: 42, nominationId: 10, referenceType: "predictive_market", value: 0.4, source: "PredictWise" },
-  { id: 43, nominationId: 3, referenceType: "predictive_market", value: 0.2, source: "PredictWise" },
-  { id: 44, nominationId: 6, referenceType: "predictive_market", value: 0.1, source: "PredictWise" },
-  { id: 45, nominationId: 8, referenceType: "predictive_market", value: 0, source: "PredictWise" },
+  { id: 36, nominationId: 1, referenceType: "predictive_market", value: 30, source: "PredictWise" },
+  { id: 37, nominationId: 2, referenceType: "predictive_market", value: 25, source: "PredictWise" },
+  { id: 38, nominationId: 3, referenceType: "predictive_market", value: 18, source: "PredictWise" },
+  { id: 39, nominationId: 6, referenceType: "predictive_market", value: 12, source: "PredictWise" },
+  { id: 40, nominationId: 9, referenceType: "predictive_market", value: 7, source: "PredictWise" },
+  { id: 41, nominationId: 4, referenceType: "predictive_market", value: 5, source: "PredictWise" },
+  { id: 42, nominationId: 5, referenceType: "predictive_market", value: 2, source: "PredictWise" },
+  { id: 43, nominationId: 7, referenceType: "predictive_market", value: 0.5, source: "PredictWise" },
+  { id: 44, nominationId: 8, referenceType: "predictive_market", value: 0.3, source: "PredictWise" },
+  { id: 45, nominationId: 10, referenceType: "predictive_market", value: 0.2, source: "PredictWise" },
   
   // Director
-  { id: 46, nominationId: 13, referenceType: "predictive_market", value: 95, source: "PredictWise" },
-  { id: 47, nominationId: 15, referenceType: "predictive_market", value: 2, source: "PredictWise" },
-  { id: 48, nominationId: 14, referenceType: "predictive_market", value: 1.5, source: "PredictWise" },
-  { id: 49, nominationId: 11, referenceType: "predictive_market", value: 1, source: "PredictWise" },
-  { id: 50, nominationId: 12, referenceType: "predictive_market", value: 0.5, source: "PredictWise" },
+  { id: 46, nominationId: 11, referenceType: "predictive_market", value: 32, source: "PredictWise" },
+  { id: 47, nominationId: 12, referenceType: "predictive_market", value: 28, source: "PredictWise" },
+  { id: 48, nominationId: 13, referenceType: "predictive_market", value: 20, source: "PredictWise" },
+  { id: 49, nominationId: 14, referenceType: "predictive_market", value: 15, source: "PredictWise" },
+  { id: 50, nominationId: 15, referenceType: "predictive_market", value: 5, source: "PredictWise" },
   
   // Actor in a Leading Role
-  { id: 51, nominationId: 19, referenceType: "predictive_market", value: 75, source: "PredictWise" },
-  { id: 52, nominationId: 18, referenceType: "predictive_market", value: 22, source: "PredictWise" },
-  { id: 53, nominationId: 20, referenceType: "predictive_market", value: 1.5, source: "PredictWise" },
-  { id: 54, nominationId: 16, referenceType: "predictive_market", value: 1, source: "PredictWise" },
-  { id: 55, nominationId: 17, referenceType: "predictive_market", value: 0.5, source: "PredictWise" },
+  { id: 51, nominationId: 16, referenceType: "predictive_market", value: 38, source: "PredictWise" },
+  { id: 52, nominationId: 17, referenceType: "predictive_market", value: 28, source: "PredictWise" },
+  { id: 53, nominationId: 18, referenceType: "predictive_market", value: 18, source: "PredictWise" },
+  { id: 54, nominationId: 19, referenceType: "predictive_market", value: 12, source: "PredictWise" },
+  { id: 55, nominationId: 20, referenceType: "predictive_market", value: 4, source: "PredictWise" },
   
   // Actress in a Leading Role
-  { id: 56, nominationId: 25, referenceType: "predictive_market", value: 80, source: "PredictWise" },
-  { id: 57, nominationId: 22, referenceType: "predictive_market", value: 15, source: "PredictWise" },
-  { id: 58, nominationId: 23, referenceType: "predictive_market", value: 3, source: "PredictWise" },
-  { id: 59, nominationId: 21, referenceType: "predictive_market", value: 1, source: "PredictWise" },
-  { id: 60, nominationId: 24, referenceType: "predictive_market", value: 1, source: "PredictWise" },
+  { id: 56, nominationId: 24, referenceType: "predictive_market", value: 32, source: "PredictWise" },
+  { id: 57, nominationId: 23, referenceType: "predictive_market", value: 28, source: "PredictWise" },
+  { id: 58, nominationId: 22, referenceType: "predictive_market", value: 18, source: "PredictWise" },
+  { id: 59, nominationId: 25, referenceType: "predictive_market", value: 15, source: "PredictWise" },
+  { id: 60, nominationId: 21, referenceType: "predictive_market", value: 7, source: "PredictWise" },
   
   // Actor in a Supporting Role
-  { id: 61, nominationId: 28, referenceType: "predictive_market", value: 96, source: "PredictWise" },
-  { id: 62, nominationId: 29, referenceType: "predictive_market", value: 1.5, source: "PredictWise" },
-  { id: 63, nominationId: 26, referenceType: "predictive_market", value: 1, source: "PredictWise" },
-  { id: 64, nominationId: 27, referenceType: "predictive_market", value: 1, source: "PredictWise" },
-  { id: 65, nominationId: 30, referenceType: "predictive_market", value: 0.5, source: "PredictWise" },
+  { id: 61, nominationId: 28, referenceType: "predictive_market", value: 34, source: "PredictWise" },
+  { id: 62, nominationId: 27, referenceType: "predictive_market", value: 27, source: "PredictWise" },
+  { id: 63, nominationId: 29, referenceType: "predictive_market", value: 22, source: "PredictWise" },
+  { id: 64, nominationId: 26, referenceType: "predictive_market", value: 13, source: "PredictWise" },
+  { id: 65, nominationId: 30, referenceType: "predictive_market", value: 4, source: "PredictWise" },
   
   // Actress in a Supporting Role
-  { id: 66, nominationId: 35, referenceType: "predictive_market", value: 92, source: "PredictWise" },
-  { id: 67, nominationId: 31, referenceType: "predictive_market", value: 4, source: "PredictWise" },
-  { id: 68, nominationId: 33, referenceType: "predictive_market", value: 2, source: "PredictWise" },
-  { id: 69, nominationId: 34, referenceType: "predictive_market", value: 1.5, source: "PredictWise" },
-  { id: 70, nominationId: 32, referenceType: "predictive_market", value: 0.5, source: "PredictWise" },
+  { id: 66, nominationId: 33, referenceType: "predictive_market", value: 32, source: "PredictWise" },
+  { id: 67, nominationId: 34, referenceType: "predictive_market", value: 28, source: "PredictWise" },
+  { id: 68, nominationId: 31, referenceType: "predictive_market", value: 20, source: "PredictWise" },
+  { id: 69, nominationId: 32, referenceType: "predictive_market", value: 15, source: "PredictWise" },
+  { id: 70, nominationId: 35, referenceType: "predictive_market", value: 5, source: "PredictWise" },
 ];
 
 /**
@@ -1060,8 +1060,10 @@ export function getRealNomineesData(year: number = CURRENT_OSCAR_YEAR): NomineeD
       const marketProbValue = marketProbRef?.value || 0;
       const awardWinCount = awardWins.filter(win => win.won).length;
       
-      // Weighted average: 40% betting odds, 40% market probability, 20% award wins
-      const likelihood = (bettingOddsValue * 0.4) + (marketProbValue * 0.4) + (awardWinCount * 5 * 0.2);
+      // Weighted average: 30% betting odds, 30% market probability, 40% award wins
+      // Award wins have a much higher weight since they're historically more predictive
+      // Multiple by a higher factor to make the likelihood more significant
+      const likelihood = Math.round((bettingOddsValue * 0.3) + (marketProbValue * 0.3) + (awardWinCount * 10 * 0.4));
       
       // Convert betting odds value to fractional format
       const bettingOdds = bettingOddsValue > 80 ? "1/10" :
