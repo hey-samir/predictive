@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
                className="hover:text-white">
               Replit AI
             </a>{' '}
-            & Streamlit - because even robots dream in technicolor © 2025
+            - because even robots dream in technicolor © 2025
           </p>
         </div>
       </footer>
