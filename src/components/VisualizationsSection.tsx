@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ModelWeightTable from './visualizations/ModelWeightTable';
 import AccuracyBarCharts from './visualizations/AccuracyBarCharts';
 import NomineeDonutChart from './visualizations/NomineeDonutChart';
-import LoadingCard from '@/components/ui/loading-card';
+import { LoadingCard } from '@/components/ui/loading-card';
 import { 
   AWARD_VENUES, 
   NOMINATION_TYPES, 

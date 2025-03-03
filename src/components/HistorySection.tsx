@@ -5,7 +5,7 @@ import {
   NOMINATION_CATEGORIES, 
   NOMINATION_TYPES 
 } from '../lib/constants';
-import LoadingCard from '@/components/ui/loading-card';
+import { LoadingCard } from '@/components/ui/loading-card';
 import { ModelWeight, NomineeData, HistoricalAccuracy } from '../lib/types';
 import ModelWeightTable from './visualizations/ModelWeightTable';
 import AccuracyBarCharts from './visualizations/AccuracyBarCharts';
