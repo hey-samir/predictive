@@ -26,12 +26,15 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, nominees, nominat
   if (nominationType === 'Crafters') badgeColor = 'bg-amber-500';
 
   return (
-    <div className="bg-app-card rounded-xl p-5 mb-8 shadow-lg border border-gray-800">
-      <div className="flex items-center mb-4">
-        <h3 className="text-xl font-semibold text-white">{category}</h3>
+    <div className="bg-app-card rounded-xl p-4 shadow-lg border border-gray-800 transform transition-all hover:shadow-xl hover:border-app-purple/30">
+      <div className="flex items-center mb-3 border-b border-gray-700 pb-2">
+        <h3 className="text-lg font-semibold text-app-purple">{category}</h3>
+        <div className={`ml-auto px-1 py-0.5 text-xs rounded ${badgeColor} text-white text-opacity-90`}>
+          {nominationType || 'Award'}
+        </div>
       </div>
       
-      <div className="space-y-3">
+      <div className="space-y-2">
         {sortedNominees.map((nominee) => (
           <NomineeCard 
             key={nominee.id} 

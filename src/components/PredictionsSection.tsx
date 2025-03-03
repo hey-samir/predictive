@@ -186,69 +186,29 @@ const PredictionsSection: React.FC = () => {
   return (
     <section id="predictions" className="py-16 relative">
       <div className="max-w-screen-xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            {CURRENT_OSCAR_YEAR} Oscar Predictions
-          </h2>
-          <p className="text-gray-400 max-w-3xl mx-auto mb-8">
-            Our predictions for the {CURRENT_OSCAR_YEAR} Academy Awards, based on data from other award shows, 
-            betting markets, and historical correlations.
-          </p>
-          
-          {/* Category filter */}
-          <div className="filter-container relative z-20 max-w-xs mx-auto mb-10">
-            <div className="filter-dropdown-container">
-              <div 
-                className="filter-dropdown-header bg-gray-800 text-white p-3 rounded-lg cursor-pointer flex items-center justify-between"
-                onClick={() => setFilterDropdownOpen(!filterDropdownOpen)}
-              >
-                <span>{activeCategory} Categories</span>
-                <svg 
-                  className={`transform transition-transform duration-300 ${filterDropdownOpen ? 'rotate-180' : ''}`}
-                  width="16" 
-                  height="10" 
-                  viewBox="0 0 16 10" 
-                  fill="none" 
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M1 1L8 8L15 1" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </div>
-              
-              {filterDropdownOpen && (
-                <div className="filter-dropdown-content absolute left-0 right-0 mt-2 bg-gray-900 border border-gray-700 rounded-lg overflow-hidden shadow-xl z-20">
-                  <div 
-                    className={`p-3 cursor-pointer hover:bg-purple-900/30 ${activeCategory === 'All' ? 'bg-purple-900/30' : ''}`}
-                    onClick={() => {
-                      setActiveCategory('All');
-                      setFilterDropdownOpen(false);
-                    }}
-                  >
-                    All Categories
-                  </div>
-                  {Object.keys(NOMINATION_TYPES).map((type) => (
-                    <div 
-                      key={type}
-                      className={`p-3 cursor-pointer hover:bg-purple-900/30 ${activeCategory === type ? 'bg-purple-900/30' : ''}`}
-                      onClick={() => {
-                        setActiveCategory(type);
-                        setFilterDropdownOpen(false);
-                      }}
-                    >
-                      {type} Categories
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-          
-          {/* Last updated timestamp */}
-          {lastUpdated && (
-            <div className="text-sm text-gray-500 mb-6">
-              Last updated: {lastUpdated}
-            </div>
-          )}
+        {/* Simple filter buttons at the top */}
+        <div className="mb-8 flex flex-wrap gap-2 justify-center">
+          <button
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-all
+              ${activeCategory === 'All' 
+                ? 'bg-app-purple text-white shadow-md' 
+                : 'bg-app-card text-gray-300 hover:bg-gray-700'}`}
+            onClick={() => setActiveCategory('All')}
+          >
+            All
+          </button>
+          {Object.keys(NOMINATION_TYPES).map((type) => (
+            <button
+              key={type}
+              className={`px-4 py-2 rounded-md text-sm font-medium transition-all
+                ${activeCategory === type 
+                  ? 'bg-app-purple text-white shadow-md' 
+                  : 'bg-app-card text-gray-300 hover:bg-gray-700'}`}
+              onClick={() => setActiveCategory(type)}
+            >
+              {type}
+            </button>
+          ))}
         </div>
         
         {renderContent()}
