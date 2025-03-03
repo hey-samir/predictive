@@ -98,10 +98,36 @@ const AboutSection: React.FC = () => {
       {/* The Plot */}
       <div style={cardStyle}>
         <h2 style={headerStyle}>The Plot</h2>
-        <p style={{ fontSize: '0.813rem', lineHeight: 1.7, color: '#f7fafc' }}>
+        <p style={{ fontSize: '0.813rem', lineHeight: 1.7, color: '#f7fafc', marginBottom: '1rem' }}>
           We crunch 25+ years of Academy Awards history and precursor awards data through our prediction engine. 
           Think of it as "Moneyball" meets "La La Land" - where statistics take center stage.
         </p>
+        
+        <h3 style={{ color: purpleColor, fontSize: '1rem', fontWeight: 'bold', marginTop: '1.25rem', marginBottom: '0.75rem' }}>
+          Our Methodology
+        </h3>
+        
+        <div style={{ fontSize: '0.813rem', lineHeight: 1.7, color: '#f7fafc' }}>
+          <p style={{ marginBottom: '0.75rem' }}>
+            Our Oscar prediction system works in three distinct phases:
+          </p>
+          
+          <ol style={{ paddingLeft: '1.5rem', marginBottom: '1rem' }}>
+            <li style={{ marginBottom: '0.5rem' }}>
+              <strong style={{ color: purpleColor }}>Historical Analysis:</strong> We analyze 25+ years of historical data to understand how precursor awards correlate with Oscar wins. For example, we've found that SAG Awards correctly predict Oscar acting winners about 80% of the time.
+            </li>
+            <li style={{ marginBottom: '0.5rem' }}>
+              <strong style={{ color: purpleColor }}>Feature Extraction:</strong> For current nominees, we collect real data from other award shows (BAFTA, Golden Globes, SAG, etc.) that have already taken place, plus betting odds and predictive markets data.
+            </li>
+            <li style={{ marginBottom: '0.5rem' }}>
+              <strong style={{ color: purpleColor }}>Predictive Modeling:</strong> Our algorithm assigns weights to each precursor award based on its historical predictive power for each specific category, generating a likelihood score for each nominee.
+            </li>
+          </ol>
+          
+          <p>
+            Unlike simple polling or opinion-based forecasts, our system is entirely data-driven, using real award results from the current season combined with historical correlation patterns to make objective predictions about which nominees are most likely to win.
+          </p>
+        </div>
       </div>
       
       {/* The Screenplay */}
