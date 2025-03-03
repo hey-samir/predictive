@@ -24,77 +24,7 @@ export type NomineeData = {
   wonOscar?: boolean;
 };
 
-// Award Card component
-const AwardCard: React.FC<{ 
-  category: string;
-  topNominee: NomineeData;
-}> = ({ category, topNominee }) => {
-  const randomDelay = Math.random() * 0.4;
-
-  return (
-    <div 
-      className="award-card animate-fadeInUp rounded-lg"
-      style={{
-        backgroundColor: 'var(--app-card)',
-        border: '1px solid rgba(138, 63, 252, 0.15)',
-        padding: '1.25rem',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        animationDelay: `${randomDelay}s`
-      }}>
-      <div style={{textAlign: 'center', marginBottom: '12px'}}>
-        <div style={{
-          fontSize: '1rem',
-          fontWeight: 600,
-          color: 'white',
-          marginBottom: '8px'
-        }}>
-          {topNominee.nomineeName}
-        </div>
-        {topNominee.filmTitle && (
-          <div style={{
-            fontSize: '0.8rem',
-            color: '#a0aec0',
-            marginBottom: '8px',
-            fontStyle: 'italic'
-          }}>
-            {topNominee.filmTitle}
-          </div>
-        )}
-        <div className="mt-2 text-xs bg-gray-700/60 rounded p-1 inline-block">
-          <span className="font-medium text-app-purple">{topNominee.category}</span>
-        </div>
-      </div>
-      <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '12px'}}>
-        <div style={{
-          fontSize: '1.5rem',
-          fontWeight: 700,
-          color: 'var(--app-purple)',
-          marginTop: '8px'
-        }}>
-          {topNominee.likelihood?.toFixed(0)}%
-        </div>
-        {topNominee.awardSupport && (
-          <div style={{
-            fontSize: '0.7rem',
-            color: '#a0aec0',
-            textAlign: 'center',
-            lineHeight: 1.4,
-            marginTop: '8px',
-            display: '-webkit-box',
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: 'vertical',
-            overflow: 'hidden'
-          }}>
-            {topNominee.awardSupport}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
+// This component has been removed and replaced with CategoryCard which is imported above
 
 const PredictionsSection: React.FC = () => {
   // Filter category state
