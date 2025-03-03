@@ -4,8 +4,9 @@ const nextConfig = {
   reactStrictMode: true,
   // Use SWC minifier for faster builds
   swcMinify: true,
-  // Ensure we're using the correct port for Replit
+  // Port configuration handled by Replit automatically
   experimental: {
+    // Enable server-side minification for better performance
     serverMinification: true
   }
 }
