@@ -260,44 +260,50 @@ const AboutSection: React.FC = () => {
               {renderTableRow(
                 'Academy Awards (Oscars)',
                 'Academy of Motion Picture Arts and Sciences',
-                'March',
+                'March 2, 2025',
                 true
               )}
               {renderTableRow(
                 'Golden Globe Awards',
                 'Hollywood Foreign Press Association',
-                'January',
+                'January 5, 2025',
                 false
               )}
               {renderTableRow(
                 'BAFTA Awards',
                 'British Academy of Film and Television Arts',
-                'February',
+                'February 16, 2025',
                 true
               )}
               {renderTableRow(
                 'Screen Actors Guild (SAG)',
                 'SAG-AFTRA',
-                'February',
+                'February 23, 2025',
                 false
+              )}
+              {renderTableRow(
+                'Critics Choice Awards',
+                'Critics Choice Association',
+                'January 12, 2025',
+                true
               )}
               {renderTableRow(
                 'Directors Guild (DGA)',
                 'Directors Guild of America',
-                'February',
-                true
+                'February 8, 2025',
+                false
               )}
               {renderTableRow(
                 'Producers Guild (PGA)',
                 'Producers Guild of America',
-                'February',
-                false
+                'February 22, 2025',
+                true
               )}
               {renderTableRow(
                 'Writers Guild (WGA)',
                 'Writers Guild of America',
-                'February',
-                true
+                'February 24, 2025',
+                false
               )}
             </tbody>
           </table>
