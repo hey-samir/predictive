@@ -6,6 +6,9 @@ import { HistoricalAccuracy } from '../../../lib/types';
 /**
  * Native Next.js API route handler for historical accuracy data
  * Using real 2025 Oscar data (movies from 2024)
+ * 
+ * Note: This directly uses the data from real-data-2025.ts instead of the database
+ * due to compatibility issues with the Prisma client in this environment
  */
 export async function GET(request: NextRequest) {
   try {
