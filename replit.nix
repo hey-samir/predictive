@@ -1,5 +1,8 @@
 {pkgs}: {
   deps = [
+    pkgs.nodejs
+    pkgs.openssl_1_1
+    pkgs.postgresql
     pkgs.openssl
     pkgs.tk
     pkgs.tcl

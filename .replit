@@ -5,7 +5,7 @@ channel = "stable-24_05"
 
 [deployment]
 deploymentTarget = "autoscale"
-run = ["sh", "-c", "npx next start -p 5000 -H 0.0.0.0"]
+run = ["sh", "-c", "npx next dev -p 5000"]
 build = ["sh", "-c", "npx next build"]
 
 [workflows]
@@ -20,14 +20,6 @@ author = "agent"
 task = "workflow.run"
 args = "Next.js App"
 
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Database Push"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Seed Database"
-
 [[workflows.workflow]]
 name = "Next.js App"
 author = "agent"
@@ -40,36 +32,8 @@ task = "packager.installForAll"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npx next dev -p 5000 -H 0.0.0.0"
+args = "npx next dev -p 5000"
 waitForPort = 5000
-
-[[workflows.workflow]]
-name = "Database Push"
-author = "agent"
-
-[workflows.workflow.metadata]
-agentRequireRestartOnSave = false
-
-[[workflows.workflow.tasks]]
-task = "packager.installForAll"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npx prisma db push --force-reset"
-
-[[workflows.workflow]]
-name = "Seed Database"
-author = "agent"
-
-[workflows.workflow.metadata]
-agentRequireRestartOnSave = false
-
-[[workflows.workflow.tasks]]
-task = "packager.installForAll"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "node prisma/seed-direct.js"
 
 [[ports]]
 localPort = 3000
